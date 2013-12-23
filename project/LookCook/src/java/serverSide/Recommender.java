@@ -6,10 +6,17 @@
 
 package serverSide;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author Asier
  */
 public class Recommender {
     
+    private ArrayList <Recipe> recipe;
+    
+    public Recommender (ArrayList recipe) {
+        this.recipe = recipe;
+    }
 }

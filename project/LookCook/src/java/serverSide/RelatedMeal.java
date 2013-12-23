@@ -12,19 +12,11 @@ import java.util.ArrayList;
  *
  * @author Asier
  */
-public class Controller {
+public class RelatedMeal {
     
-    private ArrayList <User> user;
-    private Parser parser;
-    private DB db;
+    private ArrayList <Recipe> recipe;
     
-    public Controller () {
-        user = new ArrayList ();
-        user.clear ();
-        
-        parser = new Parser ();
-        
-        db = new DB ();
+    public RelatedMeal (ArrayList recipe) {
+        this.recipe = recipe;
     }
-    
 }

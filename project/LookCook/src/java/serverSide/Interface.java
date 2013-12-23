@@ -69,6 +69,7 @@ public class Interface {
     @Consumes(MIME)
     public void newUser (String content) {
         //un nuevo cliente requiere nuevas recomendaciones
+        //el cliente nos enviará el id del usuario.
     }
     
     @PUT
