@@ -18,6 +18,8 @@ public class User {
     private Object id;
     private ArrayList <String> ingredient;
     private ArrayList <Recipe> recipe;
+    private Recommender recommender;
+    private RelatedMeal relatedMeal;
     
     public User (Object id) {
         this.id = id;
@@ -27,6 +29,9 @@ public class User {
         
         recipe = new ArrayList ();
         recipe.clear ();
+        
+        recommender = new Recommender (recipe);
+        relatedMeal = new RelatedMeal (recipe);
         
     }
     
