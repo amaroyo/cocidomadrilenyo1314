@@ -15,13 +15,13 @@ import java.util.ArrayList;
 public class User {
     
     
-    private Object id;
+    private int id;
     private ArrayList <String> ingredient;
-    private ArrayList <Recipe> recipe;
+    private ArrayList <Recipe> recipe; //Any recipe that the querys return
     private Recommender recommender;
     private RelatedMeal relatedMeal;
     
-    public User (Object id) {
+    public User (int id) {
         this.id = id;
         
         ingredient = new ArrayList ();
@@ -36,7 +36,9 @@ public class User {
     }
     
     protected ArrayList getIngredients () {
+        
         return ingredient;
     }
+    
     
 }
