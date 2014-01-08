@@ -7,9 +7,32 @@
 package serverSide;
 
 /**
- *
+ * This class is oriented to perform the related meals task.
+ * Every ingredient has a counter to indicate how many times it has been loook 
+ * for, and this is taken into acount to search for new recipes
  * @author Plasavall
  */
 public class Ingredient {
     
+    private String ingName;
+    private int count;
+    
+    
+    public Ingredient(String name){
+        this.ingName = name;
+        this.count = 0;
+    }
+    /**
+     * 
+     * @return the String of the ingredient
+     */
+    public String getIngredient(){
+        return ingName;        
+    }
+    /**
+     * Increments the number of times this ingredient has been introduced
+     */
+    public void increment(){
+        this.count++;
+    }
 }
