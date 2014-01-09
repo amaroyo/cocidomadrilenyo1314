@@ -50,21 +50,21 @@ public class User {
     /**
      * Checks if the ingredient introduced exists in dbpedia.
      * It makes a search for recipes containing that ingredient.
-     * @param ingredient
+     * @param ing
      * @return true if there exists at least one recipe with the given ingredient
      */
     public boolean ingredientExists(String ing){
         ArrayList<String> temp = new ArrayList<>();
         temp.clear();
         temp.add(ing);
-        ArrayList<Recipe> recipes=queryRecipes(temp);
+        ArrayList<Recipe> recipes = queryRecipes(temp);
         
         return !recipes.isEmpty();
     }
     
     /**
      * Queries a list of recipes given a list of ingredients.
-     * It's exclusive (Only the recipes containing at leastthat exact 
+     * It's exclusive (Only the recipes containing at least that exact 
      * ingredients are retrieved.
      * @param ingredients
      * @return a ResultSet of recipes containing the given list of ingredients
