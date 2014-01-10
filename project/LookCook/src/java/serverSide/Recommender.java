@@ -14,9 +14,12 @@ import java.util.ArrayList;
  */
 public class Recommender {
     
-    private ArrayList <Recipe> recipe;
+    private ArrayList <Recipe> recipes;
+    private ArrayList <Ingredient> ingredients;
     
-    public Recommender (ArrayList recipe) {
-        this.recipe = recipe;
+    public void updateIngredients(ArrayList <Ingredient> ingredients){
+        this.ingredients = ingredients;
     }
+    
+    
 }

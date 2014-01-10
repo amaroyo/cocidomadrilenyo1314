@@ -24,7 +24,7 @@ public class User {
     
     private int id;
     private ArrayList <Ingredient> ingredient;
-    private ArrayList <Recipe> recipe; //Any recipe that the querys return
+    private ArrayList <Recipe> recipe; 
     private Recommender recommender;
     private RelatedMeal relatedMeal;
     
@@ -37,14 +37,57 @@ public class User {
         recipe = new ArrayList ();
         recipe.clear ();
         
-        recommender = new Recommender (recipe);
-        relatedMeal = new RelatedMeal (recipe);
+        recommender = new Recommender ();
+        relatedMeal = new RelatedMeal ();
         
     }
     
     protected ArrayList getIngredients () {
         
         return ingredient;
+    }
+    /**
+     * Adds the given ingredients to the user's personal list of most used
+     * ingredients.
+     * 
+     * It also updates the recommenders list of ingredients.
+     * 
+     * @param ingredients 
+     * @seeAlso addNewIngredient
+     */
+    public void addNewIngredients(ArrayList <String> ingredients){
+        for(int i = 0; i<ingredients.size(); i++){
+            addNewIngredient(ingredients.get(i));
+        }
+        this.recommender.updateIngredients(this.ingredient);
+    }
+    /**
+     * Adds one ingredient to user's personal list of most used ingredients
+     * @param newIngredient 
+     */
+    public void addNewIngredient(String newIngredient){
+        boolean exists = false;
+        for(int i = 0; i < this.ingredient.size(); i++){
+            if(ingredient.get(i).getIngredient().equals(newIngredient)){
+                ingredient.get(i).increment();
+                exists = true;
+            }
+        }
+        if(!exists) ingredient.add(new Ingredient(newIngredient));
+    }
+    /**
+     * This method is called every time a client sends new ingredients.
+     * @param clientIngredients 
+     */
+    public void lookFor(ArrayList <String> clientIngredients){
+        //First thing we add the new ingredients to the personal list.
+        addNewIngredients(clientIngredients);
+        //Now we update the recipes section of the user using queryRecipes
+        ArrayList <Recipe> recipesFound = new ArrayList<>();
+        recipesFound.clear();
+        
+        recipesFound = queryRecipes(clientIngredients);
+        
     }
     
     /**
@@ -61,6 +104,11 @@ public class User {
         
         return !recipes.isEmpty();
     }
+    
+    
+    
+    
+    //Below this line there are the methods that make direct queries to dbPedia.
     
     /**
      * Queries a list of recipes given a list of ingredients.
@@ -93,20 +141,56 @@ public class User {
         return recipes;
     }
     public ArrayList <Recipe> queryRecipes(ArrayList<String> ingredients, int hits){
+        
         if(hits > ingredients.size()) return null;
-        else if(hits == ingredients.size()) return queryRecipes(ingredients);
+        if(hits == ingredients.size()) return queryRecipes(ingredients);
+        ArrayList <Recipe> recipesFound = new ArrayList<>();
+        ArrayList <String> auxIngr = new ArrayList<>();
+        if(hits == 1){
+            recipesFound.clear();
+            for(int i = 0; i < ingredients.size(); i++){
+                auxIngr.clear();
+                auxIngr.add(ingredients.get(i));
+                recipesFound.addAll(queryRecipes(auxIngr));
+            }
+            return recipesFound;
+        }
         else{
             ArrayList <Recipe> recipes = new ArrayList<>();
             recipes.clear();
             ArrayList <String> tmpIng = new ArrayList<>();
             tmpIng.clear();
-            
-            /**
+            int i,j;
+            for (i = 0; i < ingredients.size() - hits + 1; i++){
+             /**
              * Code goes here.
              * We use queryRecipes(ArrayList<String> ingredients) with all the 
              * possible combinations of as many ingredients as int hints 
              * indicates.
              */
+            }
+            
+            //Example of algorithm defined recursively in javascript:
+//var i, j, combs(recipes), head, tailcombs, set (ingredients), k (hits);
+//            if (k == 1) {
+//                    combs = [];
+//                    for (i = 0; i < set.length; i++) {
+//                            combs.push([set[i]]);
+//                    }
+//                    return combs;
+//            }
+//
+//            // Assert {1 < k < set.length}
+//
+//            combs = [];
+//            for (i = 0; i < set.length - k + 1; i++) {
+//                    head = set.slice(i, i+1);
+//                    tailcombs = k_combinations(set.slice(i + 1), k - 1);
+//                    for (j = 0; j < tailcombs.length; j++) {
+//                            combs.push(head.concat(tailcombs[j]));
+//                    }
+//            }
+//            return combs;
             
             return recipes;
         }

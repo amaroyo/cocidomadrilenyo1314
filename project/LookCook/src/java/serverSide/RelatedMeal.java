@@ -15,8 +15,7 @@ import java.util.ArrayList;
 public class RelatedMeal {
     
     private ArrayList <Recipe> recipe;
+    private ArrayList <Ingredient> ingredient;
     
-    public RelatedMeal (ArrayList recipe) {
-        this.recipe = recipe;
-    }
+    
 }
