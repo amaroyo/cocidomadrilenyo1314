@@ -7,6 +7,11 @@
 package serverSide;
 
 import java.util.ArrayList;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 
 /**
  *
@@ -25,6 +30,38 @@ public class Controller {
         parser = new Parser ();
         
         db = new DB ();
+    }
+    
+    public String setIngredient (String content) {
+        parser.unmarshal(content);
+        return null;
+    }
+    
+    public String setRecipe (String content) {
+        parser.unmarshal(content);
+        return null;
+    }
+    
+    public String getRecommendations (String content) {
+        
+        return null;
+    }
+    
+    public String getRelatedMeals (String content) {
+        
+        return null;
+    }
+    
+    public void newUser (String content) {
+        //un nuevo cliente requiere nuevas recomendaciones
+        //el cliente nos enviará el id del usuario.
+    }
+    
+    
+    @Path("/db/")
+    
+    public void doSomethingWithDB (String content) {
+        
     }
     
 }
