@@ -25,7 +25,7 @@ public class Interface {
 
     //@Context
     //private UriInfo context;
-    private final String MIME = "application/xml";
+    private final String XML_MIME = "application/xml";
     private final static Controller controller = new Controller ();
 
     public Interface() {
@@ -33,48 +33,74 @@ public class Interface {
     }
     
     @GET
-    @Path("/ingredient/")
-    @Produces(MIME)
-    public String getIngredient (String content) {
-        
-        return null;
+    @Path("/ingredient/{id}")
+    @Produces(XML_MIME)
+    public String getIngredient (@PathParam ("id") String userID) {
+        System.out.println("get ingredient");
+        return "get ingredient done";
+    }
+    
+    @PUT
+    @Path("/ingredient/{id}")
+    @Consumes(XML_MIME)
+    public void setIngredient(@PathParam ("id") String userID,
+                              String content) {
+        controller.setIngredient(content);
+    }
+    @GET
+    @Path("/recipe/{id}")
+    @Produces(XML_MIME)
+    public String getRecipe (@PathParam ("id") String userID) {
+        return "get recipe done";
+    }
+    
+    @PUT
+    @Path("/recipe/{id}")
+    @Consumes(XML_MIME)
+    public void setRecipe (@PathParam ("id") String userID,
+                           String content) {
+        controller.setRecipe(content);
     }
     
     @GET
-    @Path("/recipe/")
-    @Produces(MIME)
-    public String getRecipe (String content) {
-        
-        return null;
-    }
-    
-    @GET
-    @Path("/recommendations/")
-    @Produces(MIME)
+    @Path("/recommendations/{id}")
+    @Produces(XML_MIME)
     public String getRecommendations (String content) {
         
         return null;
     }
     
-    @GET
-    @Path("/related/")
-    @Produces(MIME)
-    public String getRelatedMeals (String content) {
+    @PUT
+    @Path("/recommendations/{id}")
+    @Consumes(XML_MIME)
+    public void setRecommendations (@PathParam ("id") String userID) {
         
+    }
+    
+    @GET
+    @Path("/related/{id}")
+    @Produces(XML_MIME)
+    public String getRelatedMeals (@PathParam ("id") String userID) {
         return null;
     }
     
     @PUT
+    @Path("/related/{id}")
+    @Consumes(XML_MIME)
+    public void setRelatedMeals (@PathParam ("id") String userID,
+                                 String content) {
+        
+    }
+    @PUT
     @Path("/newUser/")
-    @Consumes(MIME)
+    @Consumes(XML_MIME)
     public void newUser (String content) {
-        //un nuevo cliente requiere nuevas recomendaciones
         //el cliente nos enviará el id del usuario.
     }
     
     @PUT
     @Path("/db/")
-    @Consumes(MIME)
+    @Consumes(XML_MIME)
     public void doSomethingWithDB (String content) {
         
     }
