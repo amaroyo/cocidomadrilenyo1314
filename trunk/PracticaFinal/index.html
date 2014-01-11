@@ -21,10 +21,13 @@
 <div id="wrapper">
 
 	<div id="header"> 
-		<a href="index.html"><img src="Resources/images/logo.png" width="468" height="100" alt="logo" /></a>
+		<a href="index.html"><img src="Resources/images/logo.png" width="180" height="240" alt="logo" />
+        </a>
         
+        
+        <p><b><center>Top 10 recipes</center></b></p>
     	<!--Carousel!-->
-		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+		<div id="carousel-example-generic" class="carousel slide" data-ride="carousel" data-pause="hover">
           <!-- Indicators -->
           <ol class="carousel-indicators">
             <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
@@ -61,69 +64,72 @@
         </div>
         <!--Carousel!-->
         
+        
+        <div id="history">
+        <p><center><b>Last searches</b></center></p> 
+    	<ul>
+      		<li><p>Búsqueda1</p></li>
+      		<li><p>Búsqueda2</p></li>
+      		<li><p>Búsqueda3</p></li>
+      		<li><p>Búsqueda4</p></li>
+    	</ul>
+  		</div>
+        
+        
     </div>
    
+    <hr style="display: block; border:solid #000 1px; box-shadow: 3px 3px 6px #000; background-color: #000"/>
     
-    <div id="history">
-    	<ul>
-      		<li><p>Presentacion</p></li>
-      		<li><p>Galería de Imágenes</p></li>
-      		<li><p>Detalles</p></li>
-      		<li><p>Encargo</p></li>
-    	</ul>
-  	</div>
     
-    <hr style="display: block; border:solid #000000 1px; box-shadow: 3px 3px 6px #000000; background-color: #000000"/>
     
 	<div id="content">
         <div id="search">
-            <p><left>Advanced Search</left></p>
+            <p><left><b>Advanced Search</b></left></p>
             <br />
             <div id="ingredients">
-              <form id="form1" method="post" action="">
-                <p></p>
-                <p>
-                  <label>
-                    <input type="radio" name="Choices" value="radio" id="Choices_0" />
-                    I like it!</label>
-                  <label>
-                    <input type="radio" name="Choices" value="radio" id="Choices_1" />
-                    Maybe</label>
-                  
-                  <label>
-                    <input type="radio" name="Choices" value="radio" id="Choices_2" />
-                    I hate it!</label>                  
-                </p>
-                <p></p>
+            	<form class="navbar-search pull-left" style="margin-left:60px">
+					<input type="text" class="search-query" placeholder="Search">
+				</form>
+              	<form id="form1" method="post" action="" style="margin-left:200px">
+                    <p>
+                      <label style="margin-left:50px">
+                        <input type="radio" name="Choices" value="radio" id="Choices_0" />
+                        I like it!
+                      </label>
+                      <label style="margin-left:50px">
+                        <input type="radio" name="Choices" value="radio" id="Choices_1" />
+                        Maybe
+                      </label>
+                      <label style="margin-left:50px">
+                        <input type="radio" name="Choices" value="radio" id="Choices_2" />
+                        I hate it!
+                      </label>                  
+                    </p>
               </form>
              
-              
-            <form class="navbar-search pull-left">
-  				<input type="text" class="search-query" placeholder="Search">
-			</form>
             	
                 
              </div> 
-             <br /><br /><br />
+             <br /><br />
              
              
              
-            <div id="results"><p>resultado de recetas</p></div> 
+            <div id="results"><p>Resultados de recetas</p></div> 
         </div>
         
-        <hr style="display: block; border:solid #000000 1px; box-shadow: 3px 3px 6px #000000; background-color: #000000"/>
+        <hr style="display: block; border:solid #000 1px; box-shadow: 3px 3px 6px #000; background-color: #000"/>
         
-        <div id="recommended"><p>recomendadas</p></div>
+        <div id="recommended"><p>Recomendadas</p></div>
         
-        <hr style="display: block; border:solid #000000 1px; box-shadow: 3px 3px 6px #000000; background-color: #000000"/>
+        <hr style="display: block; border:solid #000 1px; box-shadow: 3px 3px 6px #000; background-color: #000"/>
         
-        <div id="related"><p>relacionadas</p></div>
+        <div id="related"><p>Relacionadas</p></div>
     </div>
     
-	<hr style="display: block; border:solid #000000 1px; box-shadow: 3px 3px 6px #000000; background-color: #000000"/>    
+	<hr style="display: block; border:solid #000 1px; box-shadow: 3px 3px 6px #000; background-color: #000"/>    
 
 
-	<div id="footer">mi pie de pagina</div>
+	<div id="footer"><strong>@Nuestro pie de página<strong></div>
 </div>
 
 </body>
