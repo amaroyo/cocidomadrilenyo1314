@@ -165,5 +165,9 @@ public class Query {
             if(ing.getPriority()==priority) result.add(ing.getIngredientName());
         }
         return result;
-    } 
+    }
+    
+    protected int StringToInt (String content) {
+        return Integer.parseInt(content);
+    }
 }

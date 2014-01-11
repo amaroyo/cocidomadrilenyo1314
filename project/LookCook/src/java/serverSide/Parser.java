@@ -52,7 +52,7 @@ public class Parser {
     }
     
     private void unmarshalIngredient (Element ingredient, boolean hasPriority, ArrayList <Ingredient> holder) {
-        int priority;
+        int priority = 0;
         
         if(hasPriority) {
             String priorityValue = ingredient.getAttribute("PRIORITY").trim();
