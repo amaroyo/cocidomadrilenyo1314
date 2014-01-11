@@ -27,9 +27,20 @@ public class RelatedMeals {
          * 
          * De momento voy a hacer esta ultima y ya veremos si la cambiamos o no
          */
-    //public void updateRecipes(ArrayList <String> ingredients, int hits){ //Esta linea es paa la opcion 1 o 2
-    public void updateRecipes(ArrayList<Recipe> newRecipes){
-       this.relatedRecipes = newRecipes;
+    /**
+     * This functions uses the list of ingredients from the last search to 
+     * calculate a list of related recipes to the ones stored in User.
+     * For this, it uses startHits, which is the next biggest combination of
+     * ingredients to the one calculated in the user.
+     * 
+     * @param ingredients
+     * @param startHits 
+     */
+    public void updateRecipes(ArrayList <Ingredient> ingredients, int startHits){ 
+        for(int hits = startHits; hits>0;hits--){
+            //This is supposed to concatenate both ArrayLists.
+            relatedRecipes.addAll(Query.recipes(ingredients,hits));
+        }
     }
     
 }
