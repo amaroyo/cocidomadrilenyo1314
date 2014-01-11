@@ -51,7 +51,7 @@ public class Interface {
     @Consumes(XML_MIME)
     public void putRecipe (@PathParam ("id") String userID,
                            String content) {
-        controller.putRecipe(content);
+        controller.putRecipe(userID, content);
     }
     
     @GET
