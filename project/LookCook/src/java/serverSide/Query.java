@@ -166,8 +166,5 @@ public class Query {
         }
         return result;
     }
-    
-    protected static int StringToInt (String content) {
-        return Integer.parseInt(content);
-    }
+
 }

@@ -49,4 +49,7 @@ public class Ingredient {
     public int getPriority(){
         return priority;
     }
+    public int getCount(){
+        return count;
+    }
 }
