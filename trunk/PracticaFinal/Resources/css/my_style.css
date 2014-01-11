@@ -63,11 +63,10 @@ body {
 	border-left-color: #333;
 	min-width: 1000px;
 	max-width: 1400px;
-	background-image: url(../images/fondo-contenido.png);
 	background-position: right bottom;
 	background-repeat: no-repeat;
 	background-attachment: scroll;
-	background-color: #000;
+	background-color: #fff;
 }
 .enlacePag {
 	text-align: right;
@@ -205,6 +204,7 @@ table {
 }
 
 p{
-	color: #FFF;
+	color: #000;
 }
+
 
