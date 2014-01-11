@@ -17,8 +17,6 @@ import java.util.ArrayList;
 public class User {
     
     
-    
-    
     private int id;
     private ArrayList <Recipe> recipe; 
     private Recommender recommender;
@@ -78,13 +76,13 @@ public class User {
     /**
      * Checks if the ingredient introduced exists in dbpedia.
      * It makes a search for recipes containing that ingredient.
-     * @param ingName
+     * @param ing
      * @return true if there exists at least one recipe with the given ingredient
      */
-    public boolean ingredientExists(String ingName){
+    public boolean ingredientExists(Ingredient ing){
         ArrayList<Ingredient> temp = new ArrayList<>();
         temp.clear();
-        temp.add(new Ingredient(ingName, 0));
+        temp.add(ing);
         ArrayList<Recipe> recipes = Query.recipes(temp);
         
         return !recipes.isEmpty();
