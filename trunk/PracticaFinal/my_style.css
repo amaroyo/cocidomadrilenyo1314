@@ -13,7 +13,7 @@ body {
 #header {
 	margin: 0px;
 	padding: 0px;
-	height: 100px;
+	height: 200px;
 	background-color: #000;
 	background-image: url(Resources/fondo-titulo.png);
 	background-repeat: repeat-y;
