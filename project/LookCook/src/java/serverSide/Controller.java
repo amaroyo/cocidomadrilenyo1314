@@ -35,13 +35,24 @@ public class Controller {
     public String putIngredient (String userID, String content) {
         Ingredient ingr;
         ingr = parser.unmarshal(content, false).get(0);
-        
-        return null;
+        int id = Integer.parseInt(userID);
+        boolean existence = user.get(id).ingredientExists(ingr);
+        //marshal ingredient
+        return parser.marshalIngredient(ingr.getIngredientName(), existence);
     }
     
-    public String putRecipe (String content) {
-        parser.unmarshal(content, true);
-        return null;
+    public void putRecipe (String userID, String content) {
+        ArrayList <Ingredient> ingrList;
+        ingrList = parser.unmarshal(content, true);
+        //user.get(id).new recipes(ingrList)
+    }
+    
+    public String getRecipe (String userID) {
+        ArrayList <Recipe> recipes;
+        int id = Integer.parseInt(userID);
+        recipes = user.get(id).getRecipes();
+        
+        return parser.marshalRecipe(recipes);
     }
     
     public String getRecommendations (String content) {
@@ -58,9 +69,6 @@ public class Controller {
         //un nuevo cliente requiere nuevas recomendaciones
         //el cliente nos enviará el id del usuario.
     }
-    
-    
-    @Path("/db/")
     
     public void doSomethingWithDB (String content) {
         

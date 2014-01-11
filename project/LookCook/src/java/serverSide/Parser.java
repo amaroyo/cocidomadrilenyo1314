@@ -22,6 +22,7 @@ import org.xml.sax.InputSource;
  */
 public class Parser {
     
+    private final String _LINE_SEPARATOR = "line.separator";
     
     public Parser () {
         
@@ -38,6 +39,7 @@ public class Parser {
             
             NodeList ingrNodeList = document.getElementsByTagName("INGREDIENT");
             ArrayList <Ingredient> ingrList = new ArrayList ();
+            
             for(int i = 0; i < ingrNodeList.getLength(); i++) {
                 Element ingredient = (Element) ingrNodeList.item(i);
                 
@@ -65,4 +67,42 @@ public class Parser {
         holder.add(new Ingredient(product, priority));
     }
     
+    
+    protected String marshalRecipe (ArrayList <Recipe> recipes) {
+        StringBuilder sb = new StringBuilder ();
+        sb.append("<USER>").append(_LINE_SEPARATOR);
+        for(int i = 0; i < recipes.size(); i++) {
+            Recipe singleRecipe = recipes.get(i);
+            sb.append("<RECIPE NAME=\"");
+            
+            String recipeName = recipes.get(i).getRecipeName();
+            sb.append(recipeName).append("\">").append(_LINE_SEPARATOR);
+            sb.append("<INGREDIENT>").append(_LINE_SEPARATOR);
+            sb.append(marshalProduct(singleRecipe));
+        }
+        
+        return sb.toString();
+    }
+        
+    private String marshalProduct (Recipe recipe) {
+        StringBuilder sb = new StringBuilder();
+        ArrayList <String> recipeProducts;
+        recipeProducts = recipe.getRecipeIngredients();
+        for(String product: recipeProducts) 
+            ;//<PRODUCT>+product</PRODUCT> LINE SEPARATOR
+        
+        return sb.toString();
+    }
+    
+    protected String marshalIngredient (String product, boolean existence) {
+        StringBuilder sb = new StringBuilder ();
+        sb.append("<USER>").append(_LINE_SEPARATOR);
+        sb.append("<INGREDIENT>").append(_LINE_SEPARATOR);
+        sb.append("<PRODUCT>");
+        sb.append((existence)?product:"invalid");
+        sb.append("</PRODUCT>").append(_LINE_SEPARATOR);
+        sb.append("</INGREDIENT>").append(_LINE_SEPARATOR);
+        sb.append("</USER>");
+        return sb.toString();
+    }
 }
