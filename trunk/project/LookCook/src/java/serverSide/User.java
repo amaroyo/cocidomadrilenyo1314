@@ -33,7 +33,13 @@ public class User {
         
     }
     
-
+    /**
+     * 
+     * @return 
+     */
+    public ArrayList <Recipe> getRecipes(){
+        return recipe;
+    }
     /**
      * This method is called every time a client sends new ingredients.
      * @param clientIngredients 
