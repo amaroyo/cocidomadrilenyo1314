@@ -6,8 +6,6 @@
 
 package serverSide;
 
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
@@ -34,19 +32,13 @@ public class Interface {
     
     @GET
     @Path("/ingredient/{id}")
+    @Consumes(XML_MIME)
     @Produces(XML_MIME)
-    public String getIngredient (@PathParam ("id") String userID) {
-        System.out.println("get ingredient");
-        return "get ingredient done";
+    public String checkIngredient (@PathParam ("id") String userID, String content) {
+        
+        return "check asdf";
     }
     
-    @PUT
-    @Path("/ingredient/{id}")
-    @Consumes(XML_MIME)
-    public void setIngredient(@PathParam ("id") String userID,
-                              String content) {
-        controller.setIngredient(content);
-    }
     @GET
     @Path("/recipe/{id}")
     @Produces(XML_MIME)
@@ -57,9 +49,9 @@ public class Interface {
     @PUT
     @Path("/recipe/{id}")
     @Consumes(XML_MIME)
-    public void setRecipe (@PathParam ("id") String userID,
+    public void putRecipe (@PathParam ("id") String userID,
                            String content) {
-        controller.setRecipe(content);
+        controller.putRecipe(content);
     }
     
     @GET
@@ -73,7 +65,7 @@ public class Interface {
     @PUT
     @Path("/recommendations/{id}")
     @Consumes(XML_MIME)
-    public void setRecommendations (@PathParam ("id") String userID) {
+    public void putRecommendations (@PathParam ("id") String userID) {
         
     }
     
@@ -87,7 +79,7 @@ public class Interface {
     @PUT
     @Path("/related/{id}")
     @Consumes(XML_MIME)
-    public void setRelatedMeals (@PathParam ("id") String userID,
+    public void putRelatedMeals (@PathParam ("id") String userID,
                                  String content) {
         
     }

@@ -27,33 +27,42 @@ public class Parser {
         
     }
     
-    protected void unmarshal (String content) {
+    protected ArrayList <Ingredient> unmarshal (String content, boolean hasAttr) {
         try {
             DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             InputSource is = new InputSource (new StringReader(content));
-            Document doc = builder.parse(is);
+            Document document = builder.parse(is);
             
-            /* validate xml */
+            /* validate xml(content, hasAttr*/
             
-            NodeList ingList = doc.getElementsByTagName("ingredient");
-            ArrayList <Ingredient> ingredients = new ArrayList ();
-            for(int i = 0; i < ingList.getLength(); i++) {
-                Element ingredient = (Element) ingList.item(i);
-                NodeList nameList = ingredient.getElementsByTagName("name");
-                Element nameElement = (Element) nameList.item(0);
-                String name = nameElement.getTextContent().trim();
-                NodeList statusList = ingredient.getElementsByTagName("priority");
-                Element statusElement = (Element) statusList.item(0);
-                String status = statusElement.getTextContent().trim();
-                //ingredients.add(new Ingredient(name, status));
-                System.out.println("Ing: "+name+"\nStatus:"+status);
+            NodeList ingrNodeList = document.getElementsByTagName("INGREDIENT");
+            ArrayList <Ingredient> ingrList = new ArrayList ();
+            for(int i = 0; i < ingrNodeList.getLength(); i++) {
+                Element ingredient = (Element) ingrNodeList.item(i);
+                
+                unmarshalIngredient(ingredient, hasAttr, ingrList);
             }
-            
-            
-        } catch (Exception ex) {
+            return ingrList;
+        } catch(Exception ex) {
             
         }
+        
+        return null;
+    }
+    
+    private void unmarshalIngredient (Element ingredient, boolean hasPriority, ArrayList <Ingredient> holder) {
+        int priority;
+        
+        if(hasPriority) {
+            String priorityValue = ingredient.getAttribute("PRIORITY").trim();
+            priority = Integer.parseInt(priorityValue);
+        }
+        NodeList productNodeList = ingredient.getElementsByTagName("PRODUCT");
+        Node productNode = productNodeList.item(0);
+        String product = productNode.getTextContent().trim();
+        
+        holder.add(new Ingredient(product, priority));
     }
     
 }

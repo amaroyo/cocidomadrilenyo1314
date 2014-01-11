@@ -32,13 +32,15 @@ public class Controller {
         db = new DB ();
     }
     
-    public String setIngredient (String content) {
-        parser.unmarshal(content);
+    public String putIngredient (String userID, String content) {
+        Ingredient ingr;
+        ingr = parser.unmarshal(content, false).get(0);
+        
         return null;
     }
     
-    public String setRecipe (String content) {
-        parser.unmarshal(content);
+    public String putRecipe (String content) {
+        parser.unmarshal(content, true);
         return null;
     }
     
