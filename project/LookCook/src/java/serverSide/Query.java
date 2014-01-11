@@ -19,12 +19,17 @@ import java.util.ArrayList;
  * @author Plasavall
  */
 public class Query {
+    private final static int MUST=1;
     private final static int CAN=0;
-    private final static int DENY=-1;
+    private final static int NOT=-1;
     static String SERVICE = "http://dbpedia.org/sparql";
     static String PREFIXES = "PREFIX dbo:<http://dbpedia.org/ontology/> "
                       +"PREFIX dbres: <http://dbpedia.org/resource/> "
                       +"PREFIX dbpprop: <http://dbpedia.org/property/> ";
+    
+    
+
+    
     
     /**
      * Queries a list of recipes given a list of ingredients.
@@ -37,19 +42,15 @@ public class Query {
         String i;
         ArrayList <Recipe> recipes = new ArrayList<>();
         ArrayList <String> auxIngr = new ArrayList<>();
-        ArrayList <String> nonDesired = new ArrayList<>();
+        ArrayList <String> nonDesired = getIByP(ingredients,NOT);
+        ArrayList <String> mandatory = getIByP(ingredients,MUST);
         recipes.clear();
         auxIngr.clear();
-        nonDesired.clear();
-        
-        for(Ingredient ing : ingredients){
-            if(ing.getPriority()==DENY) nonDesired.add(ing.getIngredientName());
-        }
         
         String query=PREFIXES+"select ?recipe ?name_of_recipe where{";
         for (Ingredient ing : ingredients) {
             i=ing.getIngredientName();
-            if(ing.getPriority() != DENY){
+            if(ing.getPriority() != NOT){
                 query += "?recipe dbo:ingredient dbres:" + ing + ".\n";
             }
         }
@@ -64,7 +65,9 @@ public class Query {
             Literal nameOfRecipe = s.getLiteral("?name_of_recipe");
             auxIngr = ingredientsOfRecipe(recipeFound);
             auxRec = new Recipe(nameOfRecipe.getString(), auxIngr);
-            if(!auxRec.hasIngredients(nonDesired))recipes.add(auxRec);
+            if(!auxRec.hasIngredients(nonDesired) && auxRec.hasIngredients(mandatory)){
+                recipes.add(auxRec);
+            }
         }
         return recipes;
     }
@@ -145,4 +148,22 @@ public class Query {
         return ingredients;
             
     }
+    
+    
+    /**
+     * getIByP stands for Get ingredients by priority.
+     * It returns a list of the ingredient names in that list that have the
+     * given priority
+     * @param ingredients
+     * @param priority
+     * @return 
+     */
+    private static ArrayList <String> getIByP(ArrayList<Ingredient> ingredients, int priority){
+        ArrayList <String> result = new ArrayList<>();
+        result.clear();
+        for(Ingredient ing : ingredients){
+            if(ing.getPriority()==priority) result.add(ing.getIngredientName());
+        }
+        return result;
+    } 
 }
