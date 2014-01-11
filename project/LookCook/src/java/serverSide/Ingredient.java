@@ -14,19 +14,24 @@ package serverSide;
  */
 public class Ingredient {
     
+    private final int CAN=0;
+    private final int DENY=-1;
+    
     private String ingName;
     private int count;
+    private int priority;
     
     
-    public Ingredient(String name){
+    public Ingredient(String name, int priority){
         this.ingName = name;
         this.count = 0;
+        this.priority = priority;
     }
     /**
      * 
      * @return the String of the ingredient
      */
-    public String getIngredient(){
+    public String getIngredientName(){
         return ingName;        
     }
     /**
@@ -34,5 +39,8 @@ public class Ingredient {
      */
     public void increment(){
         this.count++;
+    }
+    public int getPriority(){
+        return priority;
     }
 }

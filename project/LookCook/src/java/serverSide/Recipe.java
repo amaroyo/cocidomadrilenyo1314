@@ -51,7 +51,16 @@ public class Recipe {
     public void setRecipeName(String name){
         this.recipeName = name;
     }
-    
+    public boolean hasIngredients(ArrayList <String> ing){
+        for(int i = 0; i< this.ingredient.size(); i++){
+            for(int j=0;j<ing.size();j++){
+                if(ing.get(j).equals(this.ingredient.get(i))){
+                return true;
+                }
+            }
+        }
+        return false;        
+    }
     
     
 }
