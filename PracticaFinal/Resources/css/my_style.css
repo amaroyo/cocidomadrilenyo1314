@@ -14,35 +14,49 @@ body {
 	margin: 0px;
 	padding: 0px;
 	height: 250px;
-	width: 1200px;
+	
 	background-color: #fff;
 }
 #content {
 	padding: 0px;
 	margin-top: 0px;
-	margin-right: 250px;
+	
 	margin-bottom: 0px;
 	margin-left: auto;
 	color: #FFF;
 }
 #history {
-	margin: 0px;
-	padding: 0px;
-	float: right;
-	width: 200px;
+	padding: 10px;
+	width: 250px;
 	background-color: #CCC;
+	margin: 0px;
+	float: right;
+	background-image: url(../images/searches.jpg);
+	background-repeat: repeat-y;
+	border-top-width: medium;
+	border-bottom-width: medium;
+	border-left-width: medium;
+	border-top-style: outset;
+	border-right-style: outset;
+	border-bottom-style: outset;
+	border-left-style: outset;
+	border-top-color: #000;
+	border-right-color: #000;
+	border-bottom-color: #000;
+	border-left-color: #000;
+	border-right-width: thin;
 }
 #footer {
 	margin: 0px;
 	padding: 0px;
-	height: 55px;
+	height: 170px;
 	color: #000;
 	background-color: #FFF;
 	text-align: center;
 }
 #content p {
 	text-align: justify;
-	text-indent: 5ex;
+	text-indent: 2ex;
 }
 #wrapper {
 	width: 90%;
@@ -134,13 +148,11 @@ ol {
 }
 #footer a {
 	text-decoration: none;
-	color: #39F;
-	font-style: italic;
+	color: #000;
+	font-style:normal
 	font-weight: bold;
 }
-#footer a:hover {
-	text-decoration: underline;
-}
+
 .polaroid {
 	background-color: #CCC;
 	height: 150px;
@@ -223,3 +235,164 @@ p{
 	font-size: 14px;
 	font-weight: lighter;
 }
+
+
+
+
+/*LETRAAASS!!!!!!----------*/
+
+ul.flipboard{
+margin:0;
+padding:0;
+list-style:none;
+-webkit-perspective: 10000px; /* larger the value, the less pronounced the 3D effect */
+-moz-perspective: 10000px;
+-o-perspective: 10000px;
+perspective: 10000px;
+}
+
+ul.flipboard li{
+display: inline-block;
+width: 80px; /* dimensions of buttons. Do not add padding/margins inside this rule */
+height: 80px;
+margin-right: 10px; /* spacing between buttons */
+background: white;
+font: bold 36px Arial; /* font size */
+text-transform: uppercase;
+text-align: center;
+cursor: pointer;
+}
+
+ul.flipboard li a{
+display:block;
+width: 100%;
+height: 100%;
+color: black;
+text-decoration: none;
+outline: none;
+-webkit-transition:all 300ms ease-out 0.1s; /* CSS3 transition. Last value is pause before transition play */
+-moz-transition:all 300ms ease-out 0.1s;
+-o-transition:all 300ms ease-out 0.1s;
+transition:all 300ms ease-out 0.1s;
+}
+
+ul.flipboard li a span{
+-moz-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+padding-top: 15px; /* Add top padding to "center" content */
+display:block;
+width: 100%;
+height: 100%;
+-webkit-transition:all 300ms ease-out 0.1s; /* CSS3 transition. Last value is pause before transition play */
+-moz-transition:all 300ms ease-out 0.1s;
+-o-transition:all 300ms ease-out 0.1s;
+transition:all 300ms ease-out 0.1s;
+}
+
+ul.flipboard li a img{
+border-width: 0;
+}
+
+ul.flipboard li:hover a{
+-moz-transform: rotateY(180deg); /* flip horizontally 180deg*/
+-webkit-transform: rotateY(180deg);
+transform: rotateY(180deg);
+background: #cef1ff; /* background color of button onmouseover */
+-webkit-border-radius:7px;
+-moz-border-radius:7px;
+border-radius:7px;
+-webkit-box-shadow:0 0 5px #eee inset;
+-moz-box-shadow:0 0 5px #eee inset;
+box-shadow:0 0 5px #eee inset;
+}
+
+ul.flipboard li:hover a span{
+-moz-transform: rotateY(180deg); /* flip horizontally 180deg*/
+-webkit-transform: rotateY(180deg);
+transform: rotateY(180deg);
+}
+
+
+
+/*ICONOS Q ROTAN............------------------------------------*/
+
+
+p#socialicons img{ /* 1st set of icons. Rotate them 360deg onmouseover and out */
+-moz-transition: all 0.8s ease-in-out;
+-webkit-transition: all 0.8s ease-in-out;
+-o-transition: all 0.8s ease-in-out;
+-ms-transition: all 0.8s ease-in-out;
+transition: all 0.8s ease-in-out;
+}
+
+p#socialicons img:hover{
+-moz-transform: rotate(360deg);
+-webkit-transform: rotate(360deg);
+-o-transform: rotate(360deg);
+-ms-transform: rotate(360deg);
+transform: rotate(360deg);
+}
+
+
+/*BUSQUEDA CHUUULAAA--------------------------------------*/
+
+form div.dynamiclabel{ /* div container for each form field with pop up label */
+	display: block;
+	font: 16px;
+	margin-top: 0px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	margin-left: 15px;	
+}
+
+
+form div.dynamiclabel input[type="text"], form div.dynamiclabel textarea{
+  width: 290px;
+  padding: 10px;
+  border: 1px solid #c3c3c3;
+  border-radius: 7px;
+}
+
+form div.dynamiclabel textarea{
+  height: 200px;
+}
+
+
+form div.dynamiclabel label{ /* pop up label style */
+  position: absolute;
+  left: 0;
+  background: lightyellow;
+  border: 1px solid yellow;
+  border-radius: 2px;
+  padding: 3px 10px;
+  box-shadow: 4px 1px 5px gray;
+  font-weight: bold;
+  -webkit-backface-visibility: hidden;
+  top: 10px; /* initial top position of label relative to dynamiclabel container */
+  -moz-transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  -webkit-transition: all 0.4s ease-in-out; /* Safari doesn't seem to support cubic-bezier values beyond 0 to 1, so use keyword value instead */
+  -o-transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  opacity: 0;
+  z-index: -1;
+}
+
+
+form div.dynamiclabel > *:focus{ /* when user focuses on child element inside div.dynamiclabel */
+  border: 1px solid #45bcd2;
+  box-shadow: 0 0 8px 2px #98d865;
+}
+
+
+form div.dynamiclabel > *:focus + label{ /* label style when user focuses on child element inside div.dynamiclabel */
+  opacity: 1;
+  z-index:100;
+  top: -35px; /* Post top position of label on focus relative to dynamiclabel container */
+  -ms-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -webkit-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+
