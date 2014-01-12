@@ -1,0 +1,18 @@
+<USER>
+	<RECIPE NAME="patatas y tomate y arroz">
+		<INGREDIENT>
+			<PRODUCT>potato</PRODUCT>
+			<PRODUCT>tomato</PRODUCT>
+			<PRODUCT>rice</PRODUCT>
+		</INGREDIENT>
+		<SNIPPET>Breve descripción de la receta</SNIPPET>
+	</RECIPE>
+	
+	<RECIPE NAME="calamares en su tinta">
+		<INGREDIENT>
+			<PRODUCT>onion</PRODUCT>
+			<PRODUCT>calamari</PRODUCT>
+		</INGREDIENT>
+		<SNIPPET>Breve descripción de la receta</SNIPPET>
+	</RECIPE>
+</USER>
