@@ -28,6 +28,11 @@ public class Ingredient {
         this.count = 0;
         this.priority = priority;
     }
+    /**
+     * This constructor is developed for when the ingedients priority is not of
+     * relevance.
+     * @param name 
+     */
     public Ingredient(String name){
         this.ingName = name;
         this.count = 0;

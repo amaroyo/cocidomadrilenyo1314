@@ -15,7 +15,8 @@ import com.hp.hpl.jena.rdf.model.Resource;
 import java.util.ArrayList;
 
 /**
- *
+ * Class to use all the query methods from all the project.
+ * 
  * @author Plasavall
  */
 public class Query {

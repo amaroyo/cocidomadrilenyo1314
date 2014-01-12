@@ -17,15 +17,15 @@ public class RelatedMeals {
     private ArrayList <Recipe> relatedRecipes;
     
         /**
-         * Vamos a copiar y pegar las funciones de query a esta clase?
+         * 1 Vamos a copiar y pegar las funciones de query a esta clase?
          * 
-         * ¿Creamos una clase a parte para llamar a todos los query methods 
+         * 2 ¿Creamos una clase a parte para llamar a todos los query methods 
          * estaticamente?
          * 
-         * ¿Updateamos la lista de recetas en el user y la mandamos directamente
+         * 3 ¿Updateamos la lista de recetas en el user y la mandamos directamente
          * aqui sin guardar copia en el user?
          * 
-         * De momento voy a hacer esta ultima y ya veremos si la cambiamos o no
+         * Ahora está desarrollada la opcion 2.
          */
     /**
      * This functions uses the list of ingredients from the last search to 

@@ -34,7 +34,7 @@ public class User {
     }
     
     /**
-     * 
+     * Function to use from the interface to get the curent list of recipes.
      * @return 
      */
     public ArrayList <Recipe> getRecipes(){
