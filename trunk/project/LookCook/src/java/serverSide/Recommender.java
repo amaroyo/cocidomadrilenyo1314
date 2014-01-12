@@ -66,8 +66,8 @@ public class Recommender {
         ArrayList <Ingredient> newList = new ArrayList<>();
         newList.clear();
         Ingredient mostCommon = ingredients.get(0);
-        for(int i=0;i<ingredients.size();i++){
-            for(int j=0;j<ingredients.size();j++){ //cambiar j=0 por j=i?
+        for(int i=0;i<ingredients.size()-1;i++){
+            for(int j=i+1;j<ingredients.size();j++){ 
                 if(i != j) {
                     if(ingredients.get(j).getCount()>mostCommon.getCount()){
                         mostCommon=ingredients.get(j);
