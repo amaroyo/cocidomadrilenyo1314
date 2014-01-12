@@ -48,11 +48,12 @@ public class Recommender {
      * @param newIngredient 
      */
     private void addNewIngredient(String newIngredient){
-        boolean exists = false; 
+        boolean exists = false;
         for(int i = 0; i < this.ingredients.size(); i++){
             if(ingredients.get(i).getIngredientName().equals(newIngredient)){
                 ingredients.get(i).increment();
                 exists = true;
+                break;
             }
         }
         if(!exists) ingredients.add(new Ingredient(newIngredient, 0));
@@ -66,9 +67,11 @@ public class Recommender {
         newList.clear();
         Ingredient mostCommon = ingredients.get(0);
         for(int i=0;i<ingredients.size();i++){
-            for(int j=0;j<ingredients.size();j++){
-                if(ingredients.get(j).getCount()>mostCommon.getCount()){
-                    mostCommon=ingredients.get(j);
+            for(int j=0;j<ingredients.size();j++){ //cambiar j=0 por j=i?
+                if(i != j) {
+                    if(ingredients.get(j).getCount()>mostCommon.getCount()){
+                        mostCommon=ingredients.get(j);
+                    }
                 }
             }
             newList.add(mostCommon);
