@@ -86,8 +86,9 @@ public class Interface {
     @PUT
     @Path("/newUser/")
     @Consumes(XML_MIME)
-    public void newUser (String content) {
-        //el cliente nos enviará el id del usuario.
+    @Produces(XML_MIME)
+    public String newUser () {
+        return controller.newUser();
     }
     
     @PUT

@@ -37,7 +37,7 @@ public class Parser {
             
             /* validate xml(content, hasAttr*/
             
-            NodeList ingrNodeList = document.getElementsByTagName("INGREDIENT");
+            NodeList ingrNodeList = document.getElementsByTagName("INGREDIENTS");
             ArrayList <Ingredient> ingrList = new ArrayList ();
             
             for(int i = 0; i < ingrNodeList.getLength(); i++) {
@@ -74,13 +74,15 @@ public class Parser {
         for(int i = 0; i < recipes.size(); i++) {
             Recipe singleRecipe = recipes.get(i);
             sb.append("<RECIPE NAME=\"");
-            
-            String recipeName = recipes.get(i).getRecipeName();
+            String recipeName = singleRecipe.getRecipeName();
             sb.append(recipeName).append("\">").append(_LINE_SEPARATOR);
-            sb.append("<INGREDIENT>").append(_LINE_SEPARATOR);
+            sb.append("<INGREDIENTS>").append(_LINE_SEPARATOR);
             sb.append(marshalProduct(singleRecipe));
+            String snippet = singleRecipe.getSnippet();
+            sb.append("<SNIPPET>").append(snippet).append("</SNIPPET>");
+            sb.append("</RECIPE>");
         }
-        
+        sb.append("</USER>");
         return sb.toString();
     }
         
@@ -89,19 +91,28 @@ public class Parser {
         ArrayList <String> recipeProducts;
         recipeProducts = recipe.getRecipeIngredients();
         for(String product: recipeProducts) 
-            ;//<PRODUCT>+product</PRODUCT> LINE SEPARATOR
-        
+            sb.append("<PRODUCT>").append(product).append("</PRODUCT>").append(_LINE_SEPARATOR);
+            //<PRODUCT>+product</PRODUCT> LINE SEPARATOR
+        sb.append("</INGREDIENTS>");
         return sb.toString();
     }
     
     protected String marshalIngredient (String product, boolean existence) {
         StringBuilder sb = new StringBuilder ();
         sb.append("<USER>").append(_LINE_SEPARATOR);
-        sb.append("<INGREDIENT>").append(_LINE_SEPARATOR);
+        sb.append("<INGREDIENTS>").append(_LINE_SEPARATOR);
         sb.append("<PRODUCT>");
         sb.append((existence)?product:"invalid");
         sb.append("</PRODUCT>").append(_LINE_SEPARATOR);
-        sb.append("</INGREDIENT>").append(_LINE_SEPARATOR);
+        sb.append("</INGREDIENTS>").append(_LINE_SEPARATOR);
+        sb.append("</USER>");
+        return sb.toString();
+    }
+    
+    protected String newUser (int id) {
+        StringBuilder sb = new StringBuilder ();
+        sb.append("<USER>");
+        sb.append("<ID>").append(id).append("</ID>");
         sb.append("</USER>");
         return sb.toString();
     }
