@@ -13,7 +13,7 @@ body {
 #header {
 	margin: 0px;
 	padding: 0px;
-	height: 250px;	
+	height: 230px;	
 	background-color: #fff;
 }
 #content {
@@ -133,12 +133,7 @@ a:hover {
 	padding-bottom: 0px;
 	padding-left: 0px;
 }
-ol {
-	font-style: italic;
-	color: #FFF;
-	list-style-image: none;
-	list-style-type: decimal;
-}
+
 #footer a {
 	text-decoration: none;
 	color: #000;
