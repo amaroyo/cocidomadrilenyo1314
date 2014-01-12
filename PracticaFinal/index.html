@@ -32,11 +32,14 @@
 		  {
 		  if (xmlhttp.readyState==4 && xmlhttp.status==200)
 			{
-			txt='<div id="receta">';
+			
 			x=xmlhttp.responseXML.documentElement.getElementsByTagName("RECIPE");
+			txt='<div id="receta">';
 			for (i=0;i<x.length;i++)
 			  {
-				txt=txt + x[i];
+				txt=txt + x[i].innerHTML;
+				/*xx=x[i].getElementsByTagName("INGREDIENT");
+				xxx=xx[0].getElementsByTagName("PRODUCT");*/
 			  //txt=txt + "<tr>";
 			  /*xx=x[i].getElementsByTagName("NAME");
 				{
@@ -71,8 +74,8 @@
 				  txt=txt + "<br />";
 				  }
 				}*/
-			  txt=txt + "</div>";
 			  }
+			  txt=txt + '</div>';
 			//txt=txt + "</table>";
 			document.getElementById('txtRecetas').innerHTML=txt;
 			}
