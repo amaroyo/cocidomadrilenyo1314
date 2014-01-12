@@ -19,7 +19,7 @@
 		function loadXMLDoc(url)
 		{
 		var xmlhttp;
-		var txt,x,xx,i;
+		var txt,x,i;
 		if (window.XMLHttpRequest)
 		  {// code for IE7+, Firefox, Chrome, Opera, Safari
 		  xmlhttp=new XMLHttpRequest();
@@ -59,32 +59,32 @@
 
 
 <script>
-	function showHint(str)
-	{
-	var xmlhttp;
-	if (str.length==0)
-	  { 
-	  document.getElementById("txtHint").innerHTML="";
-	  return;
-	  }
-	if (window.XMLHttpRequest)
-	  {// code for IE7+, Firefox, Chrome, Opera, Safari
-	  xmlhttp=new XMLHttpRequest();
-	  }
-	else
-	  {// code for IE6, IE5
-	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	  }
-	xmlhttp.onreadystatechange=function()
-	  {
-	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
-		{
-		document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
-		}
-	  }
-	xmlhttp.open("GET","gethint.php"+"?q="+str,true);
-	xmlhttp.send();
-	}
+function showHint(str)
+{
+var xmlhttp;
+if (str.length==0)
+  { 
+  document.getElementById("txtHint").innerHTML="";
+  return;
+  }
+if (window.XMLHttpRequest)
+  {// code for IE7+, Firefox, Chrome, Opera, Safari
+  xmlhttp=new XMLHttpRequest();
+  }
+else
+  {// code for IE6, IE5
+  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+  }
+xmlhttp.onreadystatechange=function()
+  {
+  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+    {
+    document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+    }
+  }
+xmlhttp.open("GET","gethint.php?q="+str,true);
+xmlhttp.send();
+}
 </script>
 	
 </head>
@@ -236,12 +236,16 @@
 					<input type="text" class="search-query" placeholder="Search">
 				</form> -->
                 
-               <form id="form1" method="post" action="" >
+               <form id="form1" action="" method="post" autocomplete='off'>
                   <div class="dynamiclabel">
-                    <input id="search" placeholder="Search me" type="text">
+                    <input id="search" placeholder="Search me" type="text" onkeyup="showHint(this.value)" />
                     <label for="search"><p><strong>Search for some ingredients!</strong></p></label>
                   </div>
-                  <p>Suggestions: <span id="txtHint"></span></p>
+                  <p><span id="txtHint"></span></p>
+
+
+
+
 
                   
                     <p>
@@ -261,8 +265,9 @@
                  
               </form>
               
-              <div id="resultado">
-                  <div id="gusta">
+              
+              <div class="row" id="resultado">
+                  <div id="gusta" class="col-xs-4">
                     <ul>
                       <li>Presentacion</li>
                       <li>Galería de Imágenes</li>
@@ -271,8 +276,7 @@
                     </ul>
                   </div>
                   
-                  
-                  <div id="puede">
+                  <div id="puede" class="col-xs-4">
                     <ul>
                       <li>Presentacion</li>
                       <li>Galería de Imágenes</li>
@@ -280,9 +284,8 @@
                       <li>Encargo</li>
                     </ul>
                   </div>
-               </div>
                
-               <div id="noGusta">
+               	  <div id="noGusta" class="col-xs-4">
                     <ul>
                       <li>Presentacion</li>
                       <li>Galería de Imágenes</li>
