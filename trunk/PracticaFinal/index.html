@@ -36,8 +36,9 @@
 			x=xmlhttp.responseXML.documentElement.getElementsByTagName("RECIPE");
 			for (i=0;i<x.length;i++)
 			  {
+				txt=txt + x[i];
 			  //txt=txt + "<tr>";
-			  xx=x[i].getElementsByTagName("NAME");
+			  /*xx=x[i].getElementsByTagName("NAME");
 				{
 				try
 				  {
@@ -69,16 +70,46 @@
 				  {
 				  txt=txt + "<br />";
 				  }
-				}
+				}*/
 			  txt=txt + "</div>";
 			  }
 			//txt=txt + "</table>";
-			document.getElementById('txtReceptas').innerHTML=txt;
+			document.getElementById('txtRecetas').innerHTML=txt;
 			}
 		  }
 		xmlhttp.open("GET",url,true);
 		xmlhttp.send();
 		}
+</script>
+
+
+<script>
+	function showHint(str)
+	{
+	var xmlhttp;
+	if (str.length==0)
+	  { 
+	  document.getElementById("txtHint").innerHTML="";
+	  return;
+	  }
+	if (window.XMLHttpRequest)
+	  {// code for IE7+, Firefox, Chrome, Opera, Safari
+	  xmlhttp=new XMLHttpRequest();
+	  }
+	else
+	  {// code for IE6, IE5
+	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	  }
+	xmlhttp.onreadystatechange=function()
+	  {
+	  if (xmlhttp.readyState==4 && xmlhttp.status==200)
+		{
+		document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
+		}
+	  }
+	xmlhttp.open("GET","gethint.php"+"?q="+str,true);
+	xmlhttp.send();
+	}
 </script>
 	
 </head>
@@ -235,6 +266,7 @@
                     <input id="search" placeholder="Search me" type="text">
                     <label for="search"><p><strong>Search for some ingredients!</strong></p></label>
                   </div>
+                  <p>Suggestions: <span id="txtHint"></span></p>
 
                   
                     <p>
@@ -253,7 +285,37 @@
                     </p>
                  
               </form>
-   	
+              
+              <div id="resultado">
+                  <div id="gusta">
+                    <ul>
+                      <li>Presentacion</li>
+                      <li>Galería de Imágenes</li>
+                      <li>Detalles</li>
+                      <li>Encargo</li>
+                    </ul>
+                  </div>
+                  
+                  
+                  <div id="puede">
+                    <ul>
+                      <li>Presentacion</li>
+                      <li>Galería de Imágenes</li>
+                      <li>Detalles</li>
+                      <li>Encargo</li>
+                    </ul>
+                  </div>
+               </div>
+               
+               <div id="noGusta">
+                    <ul>
+                      <li>Presentacion</li>
+                      <li>Galería de Imágenes</li>
+                      <li>Detalles</li>
+                      <li>Encargo</li>
+                    </ul>
+                  </div>
+
                 
           </div> 
              <br /><br />
@@ -262,7 +324,7 @@
              
             <div id="results"><p><strong>Resultados de recetas</strong></p>
             
-            	<div id="txtReceptas">
+            	<div id="txtRecetas">
 					<button onclick="loadXMLDoc('xml/receta.xml')">Get Recipe</button>
            		</div>
                 

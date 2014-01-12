@@ -224,6 +224,22 @@ p{
 	font-weight: lighter;
 }
 
+#gusta ul{
+	list-style-image: url(../lists/yes.png);
+	
+	
+}
+
+#noGusta ul{
+	list-style-image: url(../lists/no.png);
+	
+}
+
+#puede ul{
+	list-style-image: url(../lists/maybe.png);
+	
+	
+}
 
 
 
