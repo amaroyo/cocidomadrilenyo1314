@@ -7,11 +7,6 @@
 package serverSide;
 
 import java.util.ArrayList;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
 
 /**
  *
@@ -44,30 +39,42 @@ public class Controller {
     public void putRecipe (String userID, String content) {
         ArrayList <Ingredient> ingrList;
         ingrList = parser.unmarshal(content, true);
-        //user.get(id).new recipes(ingrList)
+        int id = Integer.parseInt(userID);
+        user.get(id).lookFor(ingrList);
     }
     
     public String getRecipe (String userID) {
-        ArrayList <Recipe> recipes;
         int id = Integer.parseInt(userID);
+        ArrayList <Recipe> recipes;
         recipes = user.get(id).getRecipes();
         
         return parser.marshalRecipe(recipes);
     }
     
-    public String getRecommendations (String content) {
-        
-        return null;
+    public String getRecommendations (String userID) {
+        int id = Integer.parseInt(userID);
+        ArrayList <Recipe> recommendations;
+        recommendations = user.get(id).getRecommendations();
+        return parser.marshalRecipe(recommendations);
     }
     
-    public String getRelatedMeals (String content) {
-        
-        return null;
+    public String getRelatedMeals (String userID) {
+        int id = Integer.parseInt(userID);
+        ArrayList <Recipe> relatedMeals;
+        relatedMeals = user.get(id).getRelatedMeals();
+        return parser.marshalRecipe(relatedMeals);
     }
     
-    public void newUser (String content) {
-        //un nuevo cliente requiere nuevas recomendaciones
-        //el cliente nos enviará el id del usuario.
+    public String newUser () {
+        int pos = user.size();
+        String content = parser.newUser(pos);
+        user.add(new User(pos));
+        return content;
+    }
+    
+    public void deleteUser (String userID) {
+        int id = Integer.parseInt(userID);
+        user.remove(id);//save db with this particular user's content?
     }
     
     public void doSomethingWithDB (String content) {
