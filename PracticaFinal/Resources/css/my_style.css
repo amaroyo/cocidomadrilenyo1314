@@ -241,11 +241,20 @@ p{
 	
 }
 
-
-#receta {
-	color: #F00;	
+#txtRecetas h4{
+	text-decoration: underline;	
 }
 
+#txtRecetas h5{
+	font-size: 12px;
+	font-style: italic;
+}
+
+#txtRecetas p{
+	font-family: "Comic Sans MS", cursive;
+	font-size: 12px;
+	font-weight: normal;	
+}
 
 /*LETRAAASS!!!!!!----------*/
 
