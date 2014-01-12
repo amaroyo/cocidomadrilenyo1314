@@ -34,49 +34,21 @@
 			{
 			
 			x=xmlhttp.responseXML.documentElement.getElementsByTagName("RECIPE");
-			txt='<div id="receta">';
+			txt='<ul class="media-list">';
 			for (i=0;i<x.length;i++)
 			  {
-				txt=txt + x[i].innerHTML;
-				/*xx=x[i].getElementsByTagName("INGREDIENT");
-				xxx=xx[0].getElementsByTagName("PRODUCT");*/
-			  //txt=txt + "<tr>";
-			  /*xx=x[i].getElementsByTagName("NAME");
-				{
-				try
-				  {
-				  txt=txt  + "<h4>" + xx[0].firstChild.nodeValue + "</h4>";
-				  }
-				catch (er)
-				  {
-				  txt=txt + "<br />";
-				  }
-				}
-			  xx=x[i].getElementsByTagName("PRODUCT");
-				{
-				try
-				  {
-				  txt=txt + "<p>" + xx[0].firstChild.nodeValue + "</p>";
-				  }
-				catch (er)
-				  {
-				  txt=txt + "<br />";
-				  }
-				}
-				xx=x[i].getElementsByTagName("SNIPPET");
-				{
-				try
-				  {
-				  txt=txt + "<p><strong>" + xx[0].firstChild.nodeValue + "</strong></p>";
-				  }
-				catch (er)
-				  {
-				  txt=txt + "<br />";
-				  }
-				}*/
+				txt=txt + '<li class="media">';
+				txt=txt + '<a class="pull-left" href="#">' +
+						'<img class="media-object" src="Resources/icons/64x64/images.jpg">' + 
+						'</a><div class="media-body">' +
+						'<h4 class="media-heading">' +
+						x[i].getAttribute('NAME') + '</h4>' +
+						'<h5>'+ x[i].getElementsByTagName("INGREDIENT")[0].innerHTML +'</h5>'+		
+						'<p>' + x[i].getElementsByTagName("SNIPPET")[0].innerHTML + '</p>' +
+						'</div></li>';
+				
 			  }
-			  txt=txt + '</div>';
-			//txt=txt + "</table>";
+			txt=txt + '</ul>';
 			document.getElementById('txtRecetas').innerHTML=txt;
 			}
 		  }
@@ -328,7 +300,7 @@
             <div id="results"><p><strong>Resultados de recetas</strong></p>
             
             	<div id="txtRecetas">
-					<button onclick="loadXMLDoc('xml/receta.xml')">Get Recipe</button>
+					<button onclick="loadXMLDoc('xml/receta.xml')">Get Recipes</button>
            		</div>
                 
             </div> 
