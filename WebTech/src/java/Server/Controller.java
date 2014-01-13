@@ -67,12 +67,12 @@ public class Controller {
         return parser.marshalRecipe(relatedMeals);
     }
     
-    public String newUser () {
+    public /*String*/ void newUser () {
         int pos = user.size();
         String content = parser.newUser(pos);
         variable = content;
         user.add(new User(pos));
-        return content;
+        //return content;
     }
     
     public void deleteUser (String userID) {
