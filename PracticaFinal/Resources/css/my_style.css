@@ -52,6 +52,7 @@ body {
 	color: #000;
 	background-color: #FFF;
 	text-align: center;
+	alignment-adjust:central;
 }
 #content p {
 	text-align: justify;
@@ -111,14 +112,7 @@ h2 {
 	border-left-style: none;
 }
 
-a {
-	font-style: italic;
-	text-decoration: none;
-	color: #F63;
-}
-a:hover {
-	text-decoration: underline;
-}
+
 #wrapper #header h1 {
 	font-size: 36px;
 	font-weight: bold;
@@ -137,8 +131,9 @@ a:hover {
 #footer a {
 	text-decoration: none;
 	color: #000;
-	font-style:normal
+	font-style: normal;
 	font-weight: bold;
+	text-align: center;
 }
 
 .polaroid {
@@ -260,8 +255,12 @@ p{
 	text-indent: 5px;
 }
 
-#ingredients p{
-	text-indent: 5px;
+#footer p{
+	text-decoration: none;
+	color: #000;
+	font-style: normal;
+	font-weight: bold;
+	text-align: center;
 }
 
 /*LETRAAASS!!!!!!----------*/
