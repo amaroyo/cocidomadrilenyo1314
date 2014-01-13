@@ -18,6 +18,8 @@ public class Controller {
     private Parser parser;
     private DB db;
     
+    public String variable = "";
+    
     public Controller () {
         user = new ArrayList ();
         user.clear ();
@@ -68,6 +70,7 @@ public class Controller {
     public String newUser () {
         int pos = user.size();
         String content = parser.newUser(pos);
+        variable = content;
         user.add(new User(pos));
         return content;
     }
