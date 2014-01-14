@@ -1,5 +1,5 @@
 <%@ page contentType="xhtml; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
-<%! String RAQ=""; %>
+<%! String INGREDIENTE=""; %>
 
 <jsp:useBean id="ser" class="Server.Controller" scope="application"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -94,12 +94,12 @@ xmlhttp.send();
 
 
 <script>
-function newUser() {
+function putIngredient() {
 	<%      
-                RAQ = ser.newUser();
+                INGREDIENTE = ser.putIngredient(userID, content);
 		
 	%>
-            document.getElementById("micaca").innerHTML="<%=RAQ%>";    
+            document.getElementById("micaca").innerHTML="<%=INGREDIENTE%>";    
 }
 
 </script>
@@ -257,6 +257,8 @@ function newUser() {
                   <div class="dynamiclabel">
                     <input id="search" placeholder="Search me" type="text" onkeyup="showHint(this.value)" />
                     <label for="search"><p><strong>Search for some ingredients!</strong></p></label>
+                    <button id="ingredient" onclick="putIngredient(document.getElementById('search').value)">Search ingredient</button>
+
                   </div>
                   <p><span id="txtHint"></span></p>
 
@@ -283,7 +285,7 @@ function newUser() {
               </form>
               
               
-              <div class="row" id="resultado">
+              <div class="row" id="ingredientesValidos">
                   <div id="gusta" class="col-xs-4">
                     <ul>
                       <li>Presentacion</li>
@@ -320,9 +322,8 @@ function newUser() {
             <div id="results"><p><strong>Resultados de recetas</strong></p>
             
             	<div id="txtRecetas">
-					<!--<button onclick="loadXMLDoc('xml/receta.xml')">Get Recipes</button>-->
-                    <button id = "micaca" onclick="newUser()">Get User</button>
-           		</div>
+                    <button id="recipes" onclick="loadXMLDoc('xml/receta.xml')">Get Recipes</button>
+           	</div>
                 
             </div> 
         </div>
