@@ -59,16 +59,7 @@ function showHint(str) {
 		{
 		document.getElementById("txtHint").innerHTML=xmlhttp.responseText;
 		}
-	  }
+	  };
 	xmlhttp.open("GET","gethint.php?q="+str,true);
 	xmlhttp.send();
-}
-
-function putIngredient() {
-	      
-                //INGREDIENTE = ser.putIngredient(userID, content);
-		
-
-           // document.getElementById("searchBotton").innerHTML="<%=INGREDIENTE%>";   
-           document.getElementById("searchBotton").innerHTML=s;
 }
