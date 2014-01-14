@@ -78,7 +78,7 @@ public class Parser {
             sb.append(recipeName).append("\">").append(_LINE_SEPARATOR);
             sb.append("<INGREDIENTS>").append(_LINE_SEPARATOR);
             sb.append(marshalProduct(singleRecipe));
-            String snippet = singleRecipe.getSnippet();
+            String snippet = singleRecipe.getRecipeSnippet();
             sb.append("<SNIPPET>").append(snippet).append("</SNIPPET>");
             sb.append("</RECIPE>");
         }
