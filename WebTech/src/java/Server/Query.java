@@ -42,11 +42,9 @@ public class Query {
     public static ArrayList <Recipe> recipes(ArrayList<Ingredient> ingredients){
         String i;
         ArrayList <Recipe> recipes = new ArrayList<>();
-        ArrayList <String> auxIngr = new ArrayList<>();
         ArrayList <String> nonDesired = getIByP(ingredients,NOT);
         ArrayList <String> mandatory = getIByP(ingredients,MUST);
         recipes.clear();
-        auxIngr.clear();
         
         String query=PREFIXES+"select ?recipe ?name_of_recipe where{";
         for (Ingredient ing : ingredients) {
@@ -64,8 +62,7 @@ public class Query {
             QuerySolution s=rs.nextSolution();
             Resource recipeFound = s.getResource("?recipe");
             Literal nameOfRecipe = s.getLiteral("?name_of_recipe");
-            auxIngr = ingredientsOfRecipe(recipeFound);
-            auxRec = new Recipe(nameOfRecipe.getString(), auxIngr);
+            auxRec = new Recipe(nameOfRecipe.getString(), ingredientsOfRecipe(recipeFound), snippetOfRecipe(recipeFound));
             if(!auxRec.hasIngredients(nonDesired) && auxRec.hasIngredients(mandatory)){
                 recipes.add(auxRec);
             }
@@ -128,6 +125,22 @@ public class Query {
         }
         return ingredients;
             
+    }
+    
+    public static String snippetOfRecipe(Resource recipe){
+        String snippet = "No description available.";
+        String query=PREFIXES+"select ?snippet where{"
+                + recipe.toString() + "dbo:abstract ?snippet.\n"
+                + "FILTER (langMatches(lang(?snippet),\"en\"))\n"
+                + "}";
+        QueryExecution qe=QueryExecutionFactory.sparqlService(SERVICE, query);
+        ResultSet rs=qe.execSelect();
+        while(rs.hasNext()){
+            QuerySolution s=rs.nextSolution();
+            Literal snipLiteral = s.getLiteral("?snippet");
+            snippet = snipLiteral.getString();
+        }
+        return snippet;
     }
     
     
