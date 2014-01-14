@@ -72,6 +72,7 @@ public class Controller {
         String content = parser.newUser(pos);
         variable = content;
         user.add(new User(pos));
+        System.out.println("Micacota");
         //return content;
     }
     
