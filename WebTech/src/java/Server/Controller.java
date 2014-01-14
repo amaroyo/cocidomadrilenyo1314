@@ -18,7 +18,6 @@ public class Controller {
     private Parser parser;
     private DB db;
     
-    public String variable = "";
     
     public Controller () {
         user = new ArrayList ();
@@ -67,13 +66,12 @@ public class Controller {
         return parser.marshalRecipe(relatedMeals);
     }
     
-    public /*String*/ void newUser () {
+    public String newUser () {
         int pos = user.size();
         String content = parser.newUser(pos);
-        variable = content;
         user.add(new User(pos));
-        System.out.println("Micacota");
-        //return content;
+        
+        return content;
     }
     
     public void deleteUser (String userID) {

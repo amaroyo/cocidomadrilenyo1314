@@ -1,5 +1,5 @@
-<%@ page contentType="text/html; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
-
+<%@ page contentType="xhtml; charset=utf-8" language="java" import="java.sql.*" errorPage="" %>
+<%! String RAQ=""; %>
 
 <jsp:useBean id="ser" class="Server.Controller" scope="application"/>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -95,11 +95,13 @@ xmlhttp.send();
 
 <script>
 function newUser() {
-	<%
-		ser.newUser();
-		out.println(ser.variable);
+	<%      
+                RAQ = ser.newUser();
+		
 	%>
+            document.getElementById("micaca").innerHTML="<%=RAQ%>";    
 }
+
 </script>
 	
 </head>
@@ -319,7 +321,7 @@ function newUser() {
             
             	<div id="txtRecetas">
 					<!--<button onclick="loadXMLDoc('xml/receta.xml')">Get Recipes</button>-->
-                    <button onclick="newUser()">Get User</button>
+                    <button id = "micaca" onclick="newUser()">Get User</button>
            		</div>
                 
             </div> 
