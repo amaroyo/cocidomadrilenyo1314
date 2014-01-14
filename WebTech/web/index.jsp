@@ -1,10 +1,6 @@
-<%--@page contentType="text/html" pageEncoding="UTF-8"--%>
-<%--@ page contentType="xhtml; charset=UTF-8" language="java" import="java.sql.*" errorPage="" --%>
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%--! String INGREDIENTE=""; --%>
-
-
-<%--jsp:useBean id="ser" class="Server.Controller" scope="application"/--%>
+<%@ page contentType="xhtml; charset=UTF-8" language="java" import="java.sql.*" errorPage="" %>
+<%! String INGREDIENTE=""; %>
+<jsp:useBean id="ser" class="Server.Controller" scope="application"/>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
