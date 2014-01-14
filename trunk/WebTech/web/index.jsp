@@ -1,5 +1,5 @@
 <%@ page contentType="xhtml; charset=UTF-8" language="java" import="java.sql.*" errorPage="" %>
-<%! String INGREDIENTE=""; %>
+<%! String INGREDIENT=""; %>
 <jsp:useBean id="ser" class="Server.Controller" scope="application"/>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
@@ -18,6 +18,20 @@
 
 
 <title>Welcome to Look &amp; Cook</title>
+
+
+
+<!-- SCRIIIPTS -->
+
+<script>
+    function newUser() {
+        <% INGREDIENT = ser.newUser(); %>
+        document.getElementById("ingredientButton").innerHTML="<%=INGREDIENT%>";
+    }
+
+</script>
+
+
 
 
 </head>
@@ -151,7 +165,10 @@
                 	<div class="dynamiclabel">
                     	<input id="ingredientInput" placeholder="Search me" type="text" onkeyup="showHint(this.value)" />
                     	<label for="searchLabel"><p><strong>Search for some ingredients!</strong></p></label>
-                    	<button id="ingredientButton" onclick="putIngredient(document.getElementById('ingredientInput').value)">Search ingredient</button>
+                    <!--	<button id="ingredientButton" 
+                    onclick="putIngredient(document.getElementById('ingredientInput').value)">Search ingredient</button> -->
+                                <button id="ingredientButton" onclick="newUser()">Search ingredient</button>
+                                <p id="IngredientButtonResult">A</p>
 
                   	</div> <!-- end div dynamiclabel -->
                     
@@ -175,7 +192,7 @@
               	<div class="row" id="ingredientesValidos">
                 	<div id="gusta" class="col-xs-4">
                         <ul>
-                        	<li>Presentacion</li>
+                            <li>Presentacion</li>
                             <li>Galería de Imágenes</li>
                             <li>Detalles</li>
                             <li>Encargo</li>
