@@ -263,6 +263,13 @@ p{
 	text-align: center;
 }
 
+#IngredientButtonResult{
+    font-style: italic;
+    font-weight: bold;
+    color: #F00;
+}
+
+
 /*LETRAAASS!!!!!!----------*/
 
 ul.flipboard{
