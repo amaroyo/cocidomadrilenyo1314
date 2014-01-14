@@ -13,6 +13,8 @@ import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Literal;
 import com.hp.hpl.jena.rdf.model.Resource;
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Class to use all the query methods from all the project.
@@ -29,7 +31,7 @@ public class Query {
                       +"PREFIX dbpprop: <http://dbpedia.org/property/> ";
     
     
-
+    private static Combination combination = new Combination();
     
     
     /**
@@ -169,9 +171,29 @@ public class Query {
      * @return 
      */
     private static ArrayList<int[]> giveCombinations(int elements, int hits) {
+        ArrayList <String> temp = new ArrayList <String> ();
+        for(int i = 0; i < hits; i++)
+            temp.add(i+"");
         
+        Iterator s = combination.iterator();  
+        ArrayList<List<String>>  l2 = new ArrayList();  
+
+        while (s.hasNext()) {  
+            List<String> listares = (List<String>) s.next();  
+            l2.add(listares);
+        }
         
-        return null;
+        ArrayList <int[]> al = new ArrayList <int[]> ();
+		  for(int i = 0; i < l2.size(); i++) {
+			  int[] pos = new int[l2.get(i).size()];
+			  for(int j = 0; j < l2.get(i).size(); j++) {
+				  pos[j] = Integer.parseInt(l2.get(i).get(j));
+			  }
+			  al.add(pos);
+		  }
+
+        
+        return al;
     }
 
 }
