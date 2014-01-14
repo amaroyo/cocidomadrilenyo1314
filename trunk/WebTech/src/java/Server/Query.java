@@ -170,6 +170,7 @@ public class Query {
      */
     private static ArrayList<int[]> giveCombinations(int elements, int hits) {
         
+        
         return null;
     }
 
