@@ -33,6 +33,14 @@ public class User {
         
     }
     
+    ArrayList<Recipe> getRecommendations() {
+        return this.recommender.getRecommendedRecipes();
+    }
+
+    ArrayList<Recipe> getRelatedMeals() {
+        return this.relatedMeal.getRelatedMeals();
+    }
+    
     /**
      * Function to use from the interface to get the curent list of recipes.
      * @return 
@@ -92,13 +100,5 @@ public class User {
         ArrayList<Recipe> recipes = Query.recipes(temp);
         
         return !recipes.isEmpty();
-    }
-
-    ArrayList<Recipe> getRecommendations() {
-        return this.recommender.getRecommendedRecipes();
-    }
-
-    ArrayList<Recipe> getRelatedMeals() {
-        return this.relatedMeal.getRelatedMeals();
     }
 }

@@ -23,9 +23,10 @@ public class Recipe {
         this.ingredient.clear ();
     }
     
-    public Recipe(String name, ArrayList <String> ingredient){
+    public Recipe(String name, ArrayList <String> ingredient, String snippet){
         this.recipeName = name;
         this.ingredient = ingredient;
+        this.snippet = snippet;
     }
     
     public ArrayList getRecipeIngredients () {
