@@ -1,4 +1,4 @@
-/*
+    /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -72,14 +72,22 @@ public class Query {
         }
         return recipes;
     }
+    /**
+     * This method returns the recipes of the result of querying with the combinations
+     * of 'hits' ingredients.
+     * 
+     * @param ingredients
+     * @param hits
+     * @return 
+     */
     public static ArrayList <Recipe> recipes(ArrayList<Ingredient> ingredients, int hits){
         
         if(hits > ingredients.size()) return null;
         if(hits == ingredients.size()) return recipes(ingredients);
         ArrayList <Recipe> recipesFound = new ArrayList<>();
         ArrayList <Ingredient> auxIngr = new ArrayList<>();
+        recipesFound.clear();
         if(hits == 1){
-            recipesFound.clear();
             for(int i = 0; i < ingredients.size(); i++){
                 auxIngr.clear();
                 auxIngr.add(ingredients.get(i));
@@ -88,43 +96,15 @@ public class Query {
             return recipesFound;
         }
         else{
-            ArrayList <Recipe> recipes = new ArrayList<>();
-            recipes.clear();
-            ArrayList <Ingredient> tmpIng = new ArrayList<>();
-            tmpIng.clear();
-            int i,j;
-            for (i = 0; i < ingredients.size() - hits + 1; i++){
-             /**
-             * Code goes here.
-             * We use queryRecipes(ArrayList<String> ingredients) with all the 
-             * possible combinations of as many ingredients as int hints 
-             * indicates.
-             */
+            ArrayList <int []> indexes = giveCombinations(ingredients.size(), hits);
+            for(int i = 0; i < indexes.size();i++){
+                auxIngr.clear();
+                for(int j = 0; j < indexes.get(i).length;j++){
+                    auxIngr.add(ingredients.get(indexes.get(i)[j]));
+                }
+                recipesFound.addAll(recipes(auxIngr));
             }
-            
-            //Example of algorithm defined recursively in javascript:
-//var i, j, combs(recipes), head, tailcombs, set (ingredients), k (hits);
-//            if (k == 1) {
-//                    combs = [];
-//                    for (i = 0; i < set.length; i++) {
-//                            combs.push([set[i]]);
-//                    }
-//                    return combs;
-//            }
-//
-//            // Assert {1 < k < set.length}
-//
-//            combs = [];
-//            for (i = 0; i < set.length - k + 1; i++) {
-//                    head = set.slice(i, i+1);
-//                    tailcombs = k_combinations(set.slice(i + 1), k - 1);
-//                    for (j = 0; j < tailcombs.length; j++) {
-//                            combs.push(head.concat(tailcombs[j]));
-//                    }
-//            }
-//            return combs;
-            
-            return recipes;
+            return recipesFound;
         }
     }
     /**
@@ -166,6 +146,18 @@ public class Query {
             if(ing.getPriority()==priority) result.add(ing.getIngredientName());
         }
         return result;
+    }
+
+    /**
+     * It returns the indexes of the ingredients in each combination.
+     * 
+     * @param elements number of ingredients
+     * @param hits number of elements per combination
+     * @return 
+     */
+    private static ArrayList<int[]> giveCombinations(int elements, int hits) {
+        
+        return null;
     }
 
 }

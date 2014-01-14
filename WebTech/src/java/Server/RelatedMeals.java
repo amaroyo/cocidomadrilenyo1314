@@ -42,5 +42,9 @@ public class RelatedMeals {
             relatedRecipes.addAll(Query.recipes(ingredients,hits));
         }
     }
+
+    ArrayList<Recipe> getRelatedMeals() {
+        return this.relatedRecipes;
+    }
     
 }

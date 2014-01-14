@@ -93,4 +93,12 @@ public class User {
         
         return !recipes.isEmpty();
     }
+
+    ArrayList<Recipe> getRecommendations() {
+        return this.recommender.getRecommendedRecipes();
+    }
+
+    ArrayList<Recipe> getRelatedMeals() {
+        return this.relatedMeal.getRelatedMeals();
+    }
 }

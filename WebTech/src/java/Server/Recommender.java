@@ -22,7 +22,9 @@ public class Recommender {
     private ArrayList <Recipe> recipes;
     private ArrayList <Ingredient> ingredients;
     
-    
+    public ArrayList <Recipe> getRecommendedRecipes(){
+        return recipes;
+    }
   
     
         /**
