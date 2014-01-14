@@ -191,8 +191,6 @@ public class Query {
 			  }
 			  al.add(pos);
 		  }
-
-        
         return al;
     }
 
