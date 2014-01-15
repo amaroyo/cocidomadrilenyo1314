@@ -72,6 +72,13 @@ public class Controller {
         return content;
     }
     
+    
+    public String getTops () {
+        ArrayList <String> tops = new ArrayList <> ();
+        tops = db.getTops();
+        return parser.marshalTops(tops);
+    }
+    
     public void deleteUser (String userID) {
         int id = Integer.parseInt(userID);
         user.remove(id);//save db with this particular user's content?
@@ -79,7 +86,10 @@ public class Controller {
     
     public void likedRecipe (String content) {
         String recipeName = parser.likedRecipe(content);
-        
+        if(!recipeName.equals("")) {
+            db.setRecipeName(recipeName);
+            db.accessDataBase();
+        }
     }
     
 }
