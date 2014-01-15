@@ -13,36 +13,40 @@ function initRequest() {
 
 function assignUser() {
     if (xmlhttp.readyState===4) {
-        if(xmlhttp.status===200)
+        if(xmlhttp.status===200) //GET returning a response
           {
           user=xmlhttp.responseXML.getElementsByTagName("ID")[0].firstChild.nodeValue;
-          alert(user);
           }
     }
 }
 
 function getUser(url) {   
-    initRequest(url);
+    initRequest();
     xmlhttp.onreadystatechange=assignUser;
     xmlhttp.open("GET",url,true);
     xmlhttp.send(null);
 }
 
 function addIngredient() {
+    var x,xx;
     if (xmlhttp.readyState===4) {
-        if(xmlhttp.status===200)
+        alert(xmlhttp.status);
+        if(xmlhttp.status===200) //PUT returning a response
           {
-          user=xmlhttp.responseXML.getElementsByTagName("ID")[0].firstChild.nodeValue;
-          alert(user);
+          x=xmlhttp.responseXML.getElementsByTagName("INGREDIENT")[0];
+          xx=x.getElementsByTagName("PRODUCT")[0].firstChild.nodeValue;
+          document.getElementById("prueba").innerHTML=xx;
           }
     }
 }
 
-function putIngredient(url,ing) {   
-    initRequest(url);
+function putIngredient(url,ing) { 
+    var xml = "<USER><INGREDIENT><PRODUCT>"+ing+"</PRODUCT></INGREDIENT></USER>";
+    initRequest();
     xmlhttp.onreadystatechange=addIngredient;
-    xmlhttp.open("GET",url,true);
-    xmlhttp.send(null);
+    xmlhttp.open("PUT",url,true);
+    xmlhttp.setRequestHeader("Content-type","application/xml");
+    xmlhttp.send(xml);
 }
 
 
