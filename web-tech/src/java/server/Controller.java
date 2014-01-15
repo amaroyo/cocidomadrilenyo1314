@@ -77,7 +77,8 @@ public class Controller {
         user.remove(id);//save db with this particular user's content?
     }
     
-    public void doSomethingWithDB (String content) {
+    public void likedRecipe (String content) {
+        String recipeName = parser.likedRecipe(content);
         
     }
     
