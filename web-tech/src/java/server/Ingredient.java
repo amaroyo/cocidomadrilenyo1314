@@ -14,9 +14,9 @@ package server;
  */
 public class Ingredient {
     
-    private final static int MUST=1;
-    private final static int CAN=0;
-    private final static int NOT=-1;
+    private final int MUST=1;
+    private final int CAN=0;
+    private final int NOT=-1;
     
     private String ingName;
     private int count;
