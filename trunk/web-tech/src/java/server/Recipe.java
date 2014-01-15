@@ -37,6 +37,10 @@ public class Recipe {
         return image;
     }
     
+    public void setRecipeImage (String image) {
+        this.image = image;
+    }
+    
     public ArrayList getRecipeIngredients () {
         return ingredient;
     }

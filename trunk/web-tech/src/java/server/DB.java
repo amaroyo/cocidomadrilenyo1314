@@ -11,6 +11,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 /**
  *
@@ -18,7 +19,12 @@ import java.sql.Statement;
  */
 public class DB {
     
-    String recipeName;
+    private String recipeName;
+    
+    private final String userName = "";
+    private final String passWord = "";
+    private final String dataBase = "";
+
     
     public DB () {
         
@@ -31,9 +37,7 @@ public class DB {
     protected void accessDataBase () {
         Connection conn = null;
             try {
-                    String userName = "root";
-                    String passWord = "";
-                    String dataBase = "test";
+
 
                     Class.forName("com.mysql.jdbc.Driver").newInstance();
 
@@ -65,5 +69,37 @@ public class DB {
                         }
                     } catch (SQLException e){ }
             }
+    }
+    
+    protected ArrayList <String> getTops () {
+        Connection conn = null;
+        try {
+                Class.forName("com.mysql.jdbc.Driver").newInstance();
+
+                conn = DriverManager.getConnection("jdbc:mysql:///"+dataBase, userName, passWord);
+                ArrayList <String> tops = new ArrayList <> ();
+                if (!conn.isClosed()) {
+                        Statement s = conn.createStatement ( );
+                        s.executeQuery ("SELECT * FROM recipe ORDER BY likes DESC");
+                        ResultSet rs = s.getResultSet ( );
+                        int i = 0;
+                        if(rs.next() && i != 10) {
+                            tops.add(rs.getString("recipeName"));
+                        }
+                        rs.close(); // close result set
+                        s.close(); // close statement
+                }
+                return tops;
+        }
+        catch (Exception e) {
+                System.err.println("Exception: " + e.getMessage());
+        } finally {
+                try {
+                    if (conn != null) {
+                            conn.close();
+                    }
+                } catch (SQLException e){ }
+        }
+        return null;
     }
 }

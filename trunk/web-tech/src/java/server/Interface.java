@@ -100,4 +100,11 @@ public class Interface {
         controller.likedRecipe(content);
     }
     
+    @GET
+    @Path("top")
+    @Produces(XML_MIME) 
+    public String getTop () {
+        return controller.getTops();
+    }
+    
 }

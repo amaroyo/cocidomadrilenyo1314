@@ -140,4 +140,13 @@ public class Parser {
         return "";
     }
     
+    protected String marshalTops (ArrayList <String> tops) {
+        StringBuilder sb = new StringBuilder ();
+        sb.append("<USER>").append(_LINE_SEPARATOR);
+        for(int i = 0; i < tops.size(); i++) 
+            sb.append("<RECIPE>").append(tops.get(i)).append("</RECIPE>");
+        sb.append("</USER>");
+        return sb.toString();
+    }
+    
 }
