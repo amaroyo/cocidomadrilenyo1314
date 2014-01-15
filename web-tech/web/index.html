@@ -28,7 +28,7 @@
 
 
 </head>
-<body>
+<body onload="getUser('http://localhost:8080/web-tech/webresources/lookandcook/newUser')">
 
 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 <script src="https://code.jquery.com/jquery.js"></script>
@@ -157,9 +157,7 @@
 		<form id="formIngredient" autocomplete='off'>
                 	<div class="dynamiclabel">
                         <input id="ingredientInput" placeholder="Search me" type="text" onkeyup="getHint(this.value)"/>
-                        <!-- <input id="ingredientInput" placeholder="Search me" type="text" onkeyup="getHint(this.value)" onKeyPressed="if(event.which==13) newUser()"/>-->
-                        <input type="button" id="ingredientButton" 
-                    onclick="newUser();" value="Search ingredient"></input>
+                        <input type="button" id="ingredientButton" onclick="getUser('http://localhost:8080/web-tech/webresources/lookandcook/newUser')" value="Search ingredient"></input>
                     	<label for="searchLabel"><p><strong>Search for some ingredients!</strong></p></label>
                         <!--<button id="ingredientButton" 
                     onclick="putIngredient(document.getElementById('ingredientInput').value)">Search ingredient</button>-->

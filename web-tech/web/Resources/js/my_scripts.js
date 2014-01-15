@@ -1,7 +1,8 @@
 var xmlhttp;
 var isIE;
+var user;
 
-function initRequest(url) {
+function initRequest() {
     if (window.XMLHttpRequest) {
         xmlhttp = new XMLHttpRequest();
     } else if (window.ActiveXObject) {
@@ -10,21 +11,38 @@ function initRequest(url) {
     }
 }
 
-function loadXMLDoc() {
-    //alert("loadXML");
-	  if (xmlhttp.readyState==4) {
-              if(xmlhttp.status==200)
-		{
-		document.getElementById('prueba').innerHTML=xmlhttp.responseXML;
-		}
-	  }
+function asignUser() {
+    if (xmlhttp.readyState===4) {
+        if(xmlhttp.status===200)
+          {
+          user=xmlhttp.responseXML.getElementsByTagName("ID")[0].firstChild.nodeValue;
+          alert(user);
+          }
+    }
 }
 
-function newUser() {   
-        initRequest("http://localhost:8080/web-tech/webresources/lookandcook/newUser");
-          xmlhttp.onreadystatechange=loadXMLDoc;
-          xmlhttp.open("GET","http://localhost:8080/web-tech/webresources/lookandcook/newUser",true);
-        xmlhttp.send(null);
+function getUser(url) {   
+    initRequest(url);
+    xmlhttp.onreadystatechange=asignUser;
+    xmlhttp.open("GET",url,true);
+    xmlhttp.send(null);
+}
+
+function asignUser() {
+    if (xmlhttp.readyState===4) {
+        if(xmlhttp.status===200)
+          {
+          user=xmlhttp.responseXML.getElementsByTagName("ID")[0].firstChild.nodeValue;
+          alert(user);
+          }
+    }
+}
+
+function putIngredient(url,ing) {   
+    initRequest(url);
+    xmlhttp.onreadystatechange=addIngredient;
+    xmlhttp.open("GET",url,true);
+    xmlhttp.send(null);
 }
 
 
