@@ -128,7 +128,11 @@ public class Query {
         return ingredients;
             
     }
-    
+    /**
+     * Returns the description (in english) of the requested recipe.
+     * @param recipe
+     * @return the description in a String form.
+     */
     public static String snippetOfRecipe(Resource recipe){
         String snippet = "No description available.";
         String query=PREFIXES+"select ?snippet where{"
@@ -171,10 +175,11 @@ public class Query {
      * @return 
      */
     private static ArrayList<int[]> giveCombinations(int elements, int hits) {
-        ArrayList <String> temp = new ArrayList <String> ();
+        ArrayList <String> temp = new ArrayList <> ();
         for(int i = 0; i < hits; i++)
             temp.add(i+"");
         
+        combination.setter(temp, hits);
         Iterator s = combination.iterator();  
         ArrayList<List<String>>  l2 = new ArrayList();  
 
@@ -183,7 +188,7 @@ public class Query {
             l2.add(listares);
         }
         
-        ArrayList <int[]> al = new ArrayList <int[]> ();
+        ArrayList <int[]> al = new ArrayList <> ();
 		  for(int i = 0; i < l2.size(); i++) {
 			  int[] pos = new int[l2.get(i).size()];
 			  for(int j = 0; j < l2.get(i).size(); j++) {
