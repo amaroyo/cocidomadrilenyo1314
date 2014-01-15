@@ -33,7 +33,7 @@ public class Interface {
      */
     public Interface() {
     }
-@GET
+    @GET
     @Path("/ingredient/{id}")
     @Consumes(XML_MIME)
     @Produces(XML_MIME)
@@ -85,9 +85,8 @@ public class Interface {
                                  String content) {
         
     }
-    @PUT
+    @GET
     @Path("/newUser/")
-    @Consumes(XML_MIME)
     @Produces(XML_MIME)
     public String newUser () {
         return controller.newUser();

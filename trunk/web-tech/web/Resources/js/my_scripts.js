@@ -1,4 +1,34 @@
-function loadXMLDoc(url) {
+var xmlhttp;
+var isIE;
+
+function initRequest(url) {
+    if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+    } else if (window.ActiveXObject) {
+        isIE = true;
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+}
+
+function loadXMLDoc() {
+    //alert("loadXML");
+	  if (xmlhttp.readyState==4) {
+              if(xmlhttp.status==200)
+		{
+		document.getElementById('prueba').innerHTML=xmlhttp.responseXML;
+		}
+	  }
+}
+
+function newUser() {   
+        initRequest("http://localhost:8080/web-tech/webresources/lookandcook/newUser");
+          xmlhttp.onreadystatechange=loadXMLDoc;
+          xmlhttp.open("GET","http://localhost:8080/web-tech/webresources/lookandcook/newUser",true);
+        xmlhttp.send(null);
+}
+
+
+/*function loadXMLDoc(url) {
 	var xmlhttp;
 	var txt,x,i;
 	if (window.XMLHttpRequest)
@@ -35,9 +65,9 @@ function loadXMLDoc(url) {
 	  };
 	xmlhttp.open("GET",url,true);
 	xmlhttp.send();
-}
+}*/
 
-function newUser() {
+/*function newUser() {
         
         var xmlhttp;
 	if (window.XMLHttpRequest)
@@ -58,7 +88,7 @@ function newUser() {
 	  };
         xmlhttp.open("GET","http://localhost:8080/web-tech/webresources/lookandcook/user",true);
 	xmlhttp.send();
-}
+}*/
 
 
 var ingredients = ["almonds",
