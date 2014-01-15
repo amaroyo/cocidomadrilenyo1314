@@ -41,9 +41,9 @@ public class Parser {
             ArrayList <Ingredient> ingrList = new ArrayList ();
             
             for(int i = 0; i < ingrNodeList.getLength(); i++) {
-                Element ingredient = (Element) ingrNodeList.item(i);
+                Element ingredientElement = (Element) ingrNodeList.item(i);
                 
-                unmarshalIngredient(ingredient, hasAttr, ingrList);
+                unmarshalIngredient(ingredientElement, hasAttr, ingrList);
             }
             return ingrList;
         } catch(Exception ex) {
@@ -53,14 +53,14 @@ public class Parser {
         return null;
     }
     
-    private void unmarshalIngredient (Element ingredient, boolean hasPriority, ArrayList <Ingredient> holder) {
+    private void unmarshalIngredient (Element ingredientElement, boolean hasPriority, ArrayList <Ingredient> holder) {
         int priority = 0;
         
         if(hasPriority) {
-            String priorityValue = ingredient.getAttribute("PRIORITY").trim();
+            String priorityValue = ingredientElement.getAttribute("PRIORITY").trim();
             priority = Integer.parseInt(priorityValue);
         }
-        NodeList productNodeList = ingredient.getElementsByTagName("PRODUCT");
+        NodeList productNodeList = ingredientElement.getElementsByTagName("PRODUCT");
         Node productNode = productNodeList.item(0);
         String product = productNode.getTextContent().trim();
         
@@ -80,6 +80,8 @@ public class Parser {
             sb.append(marshalProduct(singleRecipe));
             String snippet = singleRecipe.getRecipeSnippet();
             sb.append("<SNIPPET>").append(snippet).append("</SNIPPET>");
+            String imgUrl = singleRecipe.getRecipeImage();
+            sb.append("<IMG>").append(imgUrl).append("</IMG>");
             sb.append("</RECIPE>");
         }
         sb.append("</USER>");
@@ -116,4 +118,26 @@ public class Parser {
         sb.append("</USER>");
         return sb.toString();
     }
+    
+    protected String likedRecipe (String content) {
+        try {
+            DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder builder = factory.newDocumentBuilder();
+            InputSource is = new InputSource (new StringReader(content));
+            Document document = builder.parse(is);
+            
+            /* validate xml(content, hasAttr*/
+            
+            NodeList recipeNodeList = document.getElementsByTagName("RECIPE");
+            Node recipeNode = recipeNodeList.item(0);
+            String recipeName = recipeNode.getTextContent().trim();
+            
+            return recipeName;
+        } catch(Exception ex) {
+            
+        }
+        
+        return "";
+    }
+    
 }
