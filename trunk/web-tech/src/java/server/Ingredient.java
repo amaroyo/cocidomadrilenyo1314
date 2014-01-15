@@ -45,6 +45,9 @@ public class Ingredient {
     public String getIngredientName(){
         return ingName;        
     }
+    public void setIngredientName(String name){
+        this.ingName = name;
+    }
     /**
      * Increments the number of times this ingredient has been introduced
      */

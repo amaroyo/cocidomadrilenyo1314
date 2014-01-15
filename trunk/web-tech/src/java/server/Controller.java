@@ -30,6 +30,7 @@ public class Controller {
     public String putIngredient (String userID, String content) {
         Ingredient ingr;
         ingr = parser.unmarshal(content, false).get(0);
+        ingr.setIngredientName(upperCaseFirst(ingr.getIngredientName()));
         int id = Integer.parseInt(userID);
         boolean existence = user.get(id).ingredientExists(ingr);
         //marshal ingredient
@@ -91,5 +92,7 @@ public class Controller {
             db.accessDataBase();
         }
     }
-    
+    public String upperCaseFirst(String input){
+        return input.substring(0, 1).toUpperCase() + input.substring(1);
+    }
 }
