@@ -1,4 +1,34 @@
-function loadXMLDoc(url) {
+var xmlhttp;
+var isIE;
+
+function initRequest(url) {
+    if (window.XMLHttpRequest) {
+        xmlhttp = new XMLHttpRequest();
+    } else if (window.ActiveXObject) {
+        isIE = true;
+        xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+}
+
+function loadXMLDoc() {
+    //alert("loadXML");
+	  if (xmlhttp.readyState==4) {
+              if(xmlhttp.status==200)
+		{
+		document.getElementById('prueba').innerHTML=xmlhttp.responseXML;
+		}
+	  }
+}
+
+function newUser() {   
+        initRequest("http://localhost:8080/web-tech/webresources/lookandcook/newUser");
+          xmlhttp.onreadystatechange=loadXMLDoc;
+          xmlhttp.open("GET","http://localhost:8080/web-tech/webresources/lookandcook/newUser",true);
+        xmlhttp.send(null);
+}
+
+
+/*function loadXMLDoc(url) {
 	var xmlhttp;
 	var txt,x,i;
 	if (window.XMLHttpRequest)
@@ -35,9 +65,9 @@ function loadXMLDoc(url) {
 	  };
 	xmlhttp.open("GET",url,true);
 	xmlhttp.send();
-}
+}*/
 
-function newUser() {
+/*function newUser() {
         
         var xmlhttp;
 	if (window.XMLHttpRequest)
@@ -58,7 +88,7 @@ function newUser() {
 	  };
         xmlhttp.open("GET","http://localhost:8080/web-tech/webresources/lookandcook/user",true);
 	xmlhttp.send();
-}
+}*/
 
 
 var ingredients = ["almonds",
@@ -193,7 +223,57 @@ var ingredients = ["almonds",
 "wheat",
 "winter squash",
 "yams",
-"yogurt"];
+"yogurt",
+"udo",
+"udon noodles",
+"ugli fruit",
+"umeboshi",
+"unsweetened chocolate",
+"urad dal",
+"ice cream",
+"ice wine",
+"icing sugar",
+"indienne",
+"coffee",
+"irish cream liqueur",
+"irish mist",
+"isinglass",
+"jack cheese",
+"jaggery",
+"jambalaya",
+"jamon serrano",
+"jamun",
+"jelly beans",
+"jelly roll",
+"jelly tots",
+"Jerusalem artichokes",
+"jicama",
+"joint",
+"jowl",
+"za'atar",
+"zabaglione",
+"zest",
+"zinfandel wine",
+"vanilla",
+"vanilla bean",
+"veal",
+"vegemite",
+"vegetable marrow",
+"veloute",
+"velveeta",
+"venison",
+"vermouth",
+"vidalia onions",
+"vincotto",
+"vinegar",
+"vital wheat gluten",
+"nasturtium",
+"navy beans",
+"nectarines",
+"nigella seeds",
+"nopales",
+"nori"
+];
 
 function getHint(input) {
     // get the q parameter from URL
@@ -205,7 +285,8 @@ function getHint(input) {
         input.toLowerCase(); 
         for(var i=0;i<ingredients.length;i++) {
             ingredient = ingredients[i];
-            if (ingredient.indexOf(input) !== -1) {
+            if (ingredient.indexOf(input) === 0 ) { 
+              
                 if (hint === ""){
                     hint = "  Suggestions: ";
                     hint =hint + ingredient;
@@ -219,7 +300,7 @@ function getHint(input) {
 
     // Output "no suggestion" if no hint were found
     // or output the correct values
-    if(hint === "") {
+    if(hint === "" && input!=="") { //NUEVO
         hint = "  No suggestions";
     }
     document.getElementById("txtHint").innerHTML=hint;
