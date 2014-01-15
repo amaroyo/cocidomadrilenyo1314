@@ -193,7 +193,57 @@ var ingredients = ["almonds",
 "wheat",
 "winter squash",
 "yams",
-"yogurt"];
+"yogurt",
+"udo",
+"udon noodles",
+"ugli fruit",
+"umeboshi",
+"unsweetened chocolate",
+"urad dal",
+"ice cream",
+"ice wine",
+"icing sugar",
+"indienne",
+"coffee",
+"irish cream liqueur",
+"irish mist",
+"isinglass",
+"jack cheese",
+"jaggery",
+"jambalaya",
+"jamon serrano",
+"jamun",
+"jelly beans",
+"jelly roll",
+"jelly tots",
+"Jerusalem artichokes",
+"jicama",
+"joint",
+"jowl",
+"za'atar",
+"zabaglione",
+"zest",
+"zinfandel wine",
+"vanilla",
+"vanilla bean",
+"veal",
+"vegemite",
+"vegetable marrow",
+"veloute",
+"velveeta",
+"venison",
+"vermouth",
+"vidalia onions",
+"vincotto",
+"vinegar",
+"vital wheat gluten",
+"nasturtium",
+"navy beans",
+"nectarines",
+"nigella seeds",
+"nopales",
+"nori"
+];
 
 function getHint(input) {
     // get the q parameter from URL
@@ -205,7 +255,8 @@ function getHint(input) {
         input.toLowerCase(); 
         for(var i=0;i<ingredients.length;i++) {
             ingredient = ingredients[i];
-            if (ingredient.indexOf(input) !== -1) {
+            if (ingredient.indexOf(input) === 0 ) { 
+              
                 if (hint === ""){
                     hint = "  Suggestions: ";
                     hint =hint + ingredient;
@@ -219,7 +270,7 @@ function getHint(input) {
 
     // Output "no suggestion" if no hint were found
     // or output the correct values
-    if(hint === "") {
+    if(hint === "" && input!=="") { //NUEVO
         hint = "  No suggestions";
     }
     document.getElementById("txtHint").innerHTML=hint;
