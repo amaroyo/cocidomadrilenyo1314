@@ -37,7 +37,7 @@ public class Parser {
             
             /* validate xml(content, hasAttr*/
             
-            NodeList ingrNodeList = document.getElementsByTagName("INGREDIENTS");
+            NodeList ingrNodeList = document.getElementsByTagName("INGREDIENT");
             ArrayList <Ingredient> ingrList = new ArrayList ();
             
             for(int i = 0; i < ingrNodeList.getLength(); i++) {

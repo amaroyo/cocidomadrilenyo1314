@@ -33,7 +33,7 @@ public class Interface {
      */
     public Interface() {
     }
-    @GET
+    @PUT
     @Path("/ingredient/{id}")
     @Consumes(XML_MIME)
     @Produces(XML_MIME)
