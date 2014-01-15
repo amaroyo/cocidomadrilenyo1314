@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
 
-
+<title>Welcome to Look &amp; Cook</title>
 <meta http-equiv="Content-Type" content="xhtml; charset=UTF-8" />
 
 <!-- MyStyleSheet -->
@@ -12,8 +12,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <link href="Resources/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
 
+<!-- highslide -->
 
-<title>Welcome to Look &amp; Cook</title>
+<script type="text/javascript" src="highslide/highslide/highslide-with-html.js"></script>
+<link rel="stylesheet" type="text/css" href="highslide/highslide/highslide.css" />
+
+
+
+<script type="text/javascript">
+	hs.graphicsDir = 'highslide/highslide/graphics/';
+	hs.outlineType = 'rounded-white';
+	hs.wrapperClassName = 'draggable-header';
+</script>
+
 
 
 </head>
@@ -209,6 +220,33 @@
 					<div id="txtRecetas">
 						<button id="recipes" onclick="loadXMLDoc('xml/receta.xml')">Get Recipes</button>
                 	</div> <!-- end div txtRecetas -->
+                    
+                    
+                    
+                    
+                    <div id="pruebaAjaxDinamico">
+                    	<button id="aj" onclick="">PruebaMe</button>
+                        <a class="highslide " onclick="return hs.htmlExpand(this, { contentId: 'highslide-html-ajax', wrapperClassName: 'highslide-white', 
+                                    outlineType: 'rounded-white', outlineWhileAnimating: true, objectType: 'ajax', preserveContent: true } )" 
+                                        href="highslide/examples/includes/ajax.htm#dynamic"> Dynamic AJAX content </a>
+                    </div>
+                    
+                    <div>
+                        
+                        <br/>
+                        
+                        AJAX requesting a specific id in an external HTML page,
+                        <a href="highslide/examples/includes/ajax.htm#intro" onclick="return hs.htmlExpand(this, { objectType: 'ajax'} )">
+                            intro</a>,
+                        <a href="highslide/examples/includes/ajax.htm#div3" onclick="return hs.htmlExpand(this, { objectType: 'ajax'} )">
+                            div3</a>.
+                        
+                        
+                      </div>
+                    
+                    
+                    
+                    
 				</div> <!-- end div results -->
 			</div> <!-- end div ingreients -->
         
