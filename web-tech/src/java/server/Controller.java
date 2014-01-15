@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package Server;
+package server;
 
 import java.util.ArrayList;
 
@@ -17,7 +17,6 @@ public class Controller {
     private ArrayList <User> user;
     private Parser parser;
     private DB db;
-    
     
     public Controller () {
         user = new ArrayList ();
@@ -70,7 +69,6 @@ public class Controller {
         int pos = user.size();
         String content = parser.newUser(pos);
         user.add(new User(pos));
-        
         return content;
     }
     
