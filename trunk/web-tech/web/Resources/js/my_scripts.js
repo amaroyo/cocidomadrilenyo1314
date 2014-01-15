@@ -11,7 +11,7 @@ function initRequest() {
     }
 }
 
-function asignUser() {
+function assignUser() {
     if (xmlhttp.readyState===4) {
         if(xmlhttp.status===200)
           {
@@ -23,12 +23,12 @@ function asignUser() {
 
 function getUser(url) {   
     initRequest(url);
-    xmlhttp.onreadystatechange=asignUser;
+    xmlhttp.onreadystatechange=assignUser;
     xmlhttp.open("GET",url,true);
     xmlhttp.send(null);
 }
 
-function asignUser() {
+function addIngredient() {
     if (xmlhttp.readyState===4) {
         if(xmlhttp.status===200)
           {
