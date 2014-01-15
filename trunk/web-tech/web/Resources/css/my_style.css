@@ -1,0 +1,431 @@
+@charset "UTF-8";
+body {
+	margin: auto;
+	background-image: url(../images/mi_fondo.png);
+	background-repeat: repeat-x;
+	padding: 0px;
+	height: auto;
+	width: auto;
+	background-position: bottom;
+	background-color: #000;
+	background-attachment: fixed;
+}
+#header {
+	margin: 0px;
+	padding: 0px;
+	height: 230px;	
+	background-color: #fff;
+}
+#content {
+	padding: 0px;
+	margin-top: 0px;
+	
+	margin-bottom: 0px;
+	margin-left: auto;
+	color: #000;
+}
+#history {
+	padding: 10px;
+	width: 250px;
+	background-color: #CCC;
+	margin: 0px;
+	float: right;
+	background-image: url(../images/searches.jpg);
+	background-repeat: repeat-y;
+	border-top-width: medium;
+	border-bottom-width: medium;
+	border-left-width: medium;
+	border-top-style: outset;
+	border-right-style: outset;
+	border-bottom-style: outset;
+	border-left-style: outset;
+	border-top-color: #000;
+	border-right-color: #000;
+	border-bottom-color: #000;
+	border-left-color: #000;
+	border-right-width: thin;
+}
+#footer {
+	margin: 0px;
+	padding: 0px;
+	height: 170px;
+	color: #000;
+	background-color: #FFF;
+	text-align: center;
+	alignment-adjust:central;
+}
+#content p {
+	text-align: justify;
+	text-indent: 2ex;
+}
+#wrapper {
+	width: 90%;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+	border-top-width: 0px;
+	border-right-width: 4px;
+	border-bottom-width: 0px;
+	border-left-width: 4px;
+	border-top-style: none;
+	border-right-style: solid;
+	border-bottom-style: none;
+	border-left-style: solid;
+	border-top-color: #333;
+	border-right-color: #333;
+	border-bottom-color: #333;
+	border-left-color: #333;
+	min-width: 1000px;
+	max-width: 1400px;
+	background-position: right bottom;
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	background-color: #fff;
+}
+
+h3 {
+	font-size: 18px;
+	font-weight: bold;
+	color: #000;
+}
+
+#content h2 img {
+	float: right;
+	margin: 0px;
+	padding: 0px;
+}
+h2 {
+	font-size: 24px;
+}
+#wrapper #header img {
+	margin: 5px;
+	padding: 5px;
+	float: left;
+	border-top-width: 0px;
+	border-right-width: 0px;
+	border-bottom-width: 0px;
+	border-left-width: 0px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: none;
+	border-left-style: none;
+}
+
+
+#wrapper #header h1 {
+	font-size: 36px;
+	font-weight: bold;
+	color: #FFF;
+	text-align: left;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	margin-left: 0px;
+	padding-top: 30px;
+	padding-right: 0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+}
+
+#footer a {
+	text-decoration: none;
+	color: #000;
+	font-style: normal;
+	font-weight: bold;
+	text-align: center;
+}
+
+.polaroid {
+	background-color: #CCC;
+	height: 150px;
+	width: auto;
+	padding-top: 1em;
+	padding-right: 1em;
+	padding-bottom: 2em;
+	padding-left: 1em;
+	border-top-color: #FFF;
+	border-right-color: #FFF;
+	border-bottom-color: #FFF;
+	border-left-color: #FFF;
+	border-top-width: 2px;
+	border-right-width: 2px;
+	border-bottom-width: 30px;
+	border-left-width: 2px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	margin: 0.5em;
+	text-indent: 0px;
+}
+table th {
+	font-weight: bold;
+	color: #FFF;
+	text-align: center;
+	background-color: #03F;
+}
+table td {
+	font-family: Georgia, "Times New Roman", Times, serif;
+	color: #FFF;
+	background-color: #006699;
+	text-align: center;
+	font-weight: normal;
+}
+table {
+	margin-right: auto;
+	margin-left: auto;
+}
+.centraImg {
+	clear: none;
+	padding: 0px;
+	margin-top: 0px;
+	margin-right: auto;
+	margin-bottom: 0px;
+	margin-left: auto;
+}
+#content form p {
+	text-indent: 0px;
+	font-weight: normal;
+}
+.comentario {
+	font-size: 0.9em;
+	font-style: italic;
+	color: #F63;
+}
+.titulo_campo {
+	font-style: italic;
+	font-weight: bold;
+	color: #39F;
+}
+
+p{
+	color: #000;
+}
+
+#carousel-example-generic {
+	margin-top: 0px;
+	margin-right: 255px;
+	margin-bottom: 0px;
+	margin-left: 200px;
+	vertical-align: middle;
+	text-align: center;
+}
+
+
+#ingredients p label{
+	color: #000;
+	font-size: 14px;
+	font-weight: lighter;
+}
+
+#gusta ul{
+	list-style-image: url(../lists/yes.png);	
+	
+}
+
+#noGusta ul{
+	list-style-image: url(../lists/no.png);
+	
+}
+
+#puede ul{
+	list-style-image: url(../lists/maybe.png);
+	
+	
+}
+
+#txtRecetas h4{
+	text-decoration: underline;	
+}
+
+#txtRecetas h5{
+	font-size: 12px;
+	font-style: italic;
+}
+
+#txtRecetas p{
+	font-family: "Comic Sans MS", cursive;
+	font-size: 12px;
+	font-weight: normal;	
+}
+
+#txtHint{
+	font-style: italic;
+	text-indent: 5px;
+}
+
+#footer p{
+	text-decoration: none;
+	color: #000;
+	font-style: normal;
+	font-weight: bold;
+	text-align: center;
+}
+
+#IngredientButtonResult{
+    font-style: italic;
+    font-weight: bold;
+    color: #F00;
+}
+
+
+/*LETRAAASS!!!!!!----------*/
+
+ul.flipboard{
+margin:0;
+padding:0;
+list-style:none;
+-webkit-perspective: 10000px; /* larger the value, the less pronounced the 3D effect */
+-moz-perspective: 10000px;
+-o-perspective: 10000px;
+perspective: 10000px;
+}
+
+ul.flipboard li{
+display: inline-block;
+width: 80px; /* dimensions of buttons. Do not add padding/margins inside this rule */
+height: 80px;
+margin-right: 10px; /* spacing between buttons */
+background: white;
+font: bold 36px Arial; /* font size */
+text-transform: uppercase;
+text-align: center;
+cursor: pointer;
+}
+
+
+ul.flipboard li a{
+display:block;
+width: 100%;
+height: 100%;
+color: black;
+text-decoration: none;
+outline: none;
+-webkit-transition:all 300ms ease-out 0.1s; /* CSS3 transition. Last value is pause before transition play */
+-moz-transition:all 300ms ease-out 0.1s;
+-o-transition:all 300ms ease-out 0.1s;
+transition:all 300ms ease-out 0.1s;
+}
+
+ul.flipboard li a span{
+-moz-box-sizing: border-box;
+-webkit-box-sizing: border-box;
+box-sizing: border-box;
+padding-top: 15px; /* Add top padding to "center" content */
+display:block;
+width: 100%;
+height: 100%;
+-webkit-transition:all 300ms ease-out 0.1s; /* CSS3 transition. Last value is pause before transition play */
+-moz-transition:all 300ms ease-out 0.1s;
+-o-transition:all 300ms ease-out 0.1s;
+transition:all 300ms ease-out 0.1s;
+}
+
+
+ul.flipboard li a img{
+border-width: 0;
+}
+
+ul.flipboard li:hover a{
+-moz-transform: rotateY(180deg); /* flip horizontally 180deg*/
+-webkit-transform: rotateY(180deg);
+transform: rotateY(180deg);
+background: #cef1ff; /* background color of button onmouseover */
+-webkit-border-radius:7px;
+-moz-border-radius:7px;
+border-radius:7px;
+-webkit-box-shadow:0 0 5px #eee inset;
+-moz-box-shadow:0 0 5px #eee inset;
+box-shadow:0 0 5px #eee inset;
+}
+
+ul.flipboard li:hover a span{
+-moz-transform: rotateY(180deg); /* flip horizontally 180deg*/
+-webkit-transform: rotateY(180deg);
+transform: rotateY(180deg);
+}
+
+
+
+/*ICONOS Q ROTAN............------------------------------------*/
+
+
+p#socialicons img{ /* 1st set of icons. Rotate them 360deg onmouseover and out */
+-moz-transition: all 0.8s ease-in-out;
+-webkit-transition: all 0.8s ease-in-out;
+-o-transition: all 0.8s ease-in-out;
+-ms-transition: all 0.8s ease-in-out;
+transition: all 0.8s ease-in-out;
+}
+
+p#socialicons img:hover{
+-moz-transform: rotate(360deg);
+-webkit-transform: rotate(360deg);
+-o-transform: rotate(360deg);
+-ms-transform: rotate(360deg);
+transform: rotate(360deg);
+}
+
+
+/*BUSQUEDA CHUUULAAA--------------------------------------*/
+
+form div.dynamiclabel{ /* div container for each form field with pop up label */
+	display: block;
+	font: 16px;
+	margin-top: 0px;
+	margin-right: 5px;
+	margin-bottom: 5px;
+	margin-left: 15px;	
+}
+
+
+form div.dynamiclabel input[type="text"], form div.dynamiclabel textarea{
+  width: 290px;
+  padding: 10px;
+  border: 1px solid #c3c3c3;
+  border-radius: 7px;
+}
+
+form div.dynamiclabel textarea{
+  height: 200px;
+}
+
+
+form div.dynamiclabel label{ /* pop up label style */
+  position: relative;
+  left: 0;
+  background: lightyellow;
+  border: 1px solid yellow;
+  border-radius: 2px;
+  padding: 3px 10px;
+  box-shadow: 4px 1px 5px gray;
+  font-weight: bold;
+  -webkit-backface-visibility: hidden;
+  top: 10px; /* initial top position of label relative to dynamiclabel container */
+  -moz-transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  -webkit-transition: all 0.4s ease-in-out; /* Safari doesn't seem to support cubic-bezier values beyond 0 to 1, so use keyword value instead */
+  -o-transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  opacity: 0;
+  z-index: -1;
+}
+
+
+form div.dynamiclabel > *:focus{ /* when user focuses on child element inside div.dynamiclabel */
+  border: 1px solid #45bcd2;
+  box-shadow: 0 0 8px 2px #98d865;
+}
+
+
+form div.dynamiclabel > *:focus + label{ /* label style when user focuses on child element inside div.dynamiclabel */
+  opacity: 1;
+  z-index:100;
+  top: -35px; /* Post top position of label on focus relative to dynamiclabel container */
+  -ms-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -webkit-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+
+
