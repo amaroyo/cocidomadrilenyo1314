@@ -6,6 +6,8 @@
 
 package server;
 
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
@@ -18,25 +20,25 @@ import javax.ws.rs.Produces;
  *
  * @author Asier
  */
-@Path("server")
+@Path("lookandcook")
 public class Interface {
 
-    //@Context
-    //private UriInfo context;
+//    @Context
+//    private UriInfo context;
     private final String XML_MIME = "application/xml";
-    private final static OldController controller = new OldController ();
+    private final static Controller controller = new Controller ();
 
+    /**
+     * Creates a new instance of Interface
+     */
     public Interface() {
-        
     }
-    
-    @GET
+@GET
     @Path("/ingredient/{id}")
     @Consumes(XML_MIME)
     @Produces(XML_MIME)
     public String checkIngredient (@PathParam ("id") String userID, String content) {
-        
-        return "check asdf";
+        return controller.putIngredient(userID, content);
     }
     
     @GET
