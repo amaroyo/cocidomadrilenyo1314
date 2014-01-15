@@ -64,7 +64,7 @@ public class Query {
             QuerySolution s=rs.nextSolution();
             Resource recipeFound = s.getResource("?recipe");
             Literal nameOfRecipe = s.getLiteral("?name_of_recipe");
-            auxRec = new Recipe(nameOfRecipe.getString(), ingredientsOfRecipe(recipeFound), snippetOfRecipe(recipeFound));
+            auxRec = new Recipe(nameOfRecipe.getString(), ingredientsOfRecipe(recipeFound), snippetOfRecipe(recipeFound), imageOfRecipe(recipeFound));
             if(!auxRec.hasIngredients(nonDesired) && auxRec.hasIngredients(mandatory)){
                 recipes.add(auxRec);
             }
@@ -147,6 +147,25 @@ public class Query {
             snippet = snipLiteral.getString();
         }
         return snippet;
+    }
+    /**
+     * Returns the image of the requested recipe.
+     * @param recipe
+     * @return the image link in a String form.
+     */    
+    public static String imageOfRecipe(Resource recipe){
+        String image = "No image available.";
+        String query=PREFIXES+"select ?image where{"
+                + recipe.toString() + "dbo:thumbnail ?image.\n"
+                + "}";
+        QueryExecution qe=QueryExecutionFactory.sparqlService(SERVICE, query);
+        ResultSet rs=qe.execSelect();
+        while(rs.hasNext()){
+            QuerySolution s=rs.nextSolution();
+            Literal imLiteral = s.getLiteral("?image");
+            image = imLiteral.getString();
+        }
+        return image;
     }
     
     
