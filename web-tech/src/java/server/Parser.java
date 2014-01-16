@@ -22,7 +22,7 @@ import org.xml.sax.InputSource;
  */
 public class Parser {
     
-    private final String _LINE_SEPARATOR = "line.separator";
+    private final String _LINE_SEPARATOR = System.getProperty("line.separator");
     
     public Parser () {
         

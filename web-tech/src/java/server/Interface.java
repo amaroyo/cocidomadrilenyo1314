@@ -59,17 +59,17 @@ public class Interface {
     @GET
     @Path("/recommendations/{id}")
     @Produces(XML_MIME)
-    public String getRecommendations (String content) {
+    public String getRecommendations () {
         
         return null;
     }
     
-    @PUT
-    @Path("/recommendations/{id}")
-    @Consumes(XML_MIME)
-    public void putRecommendations (@PathParam ("id") String userID) {
-        
-    }
+//    @PUT
+//    @Path("/recommendations/{id}")
+//    @Consumes(XML_MIME)
+//    public void putRecommendations (@PathParam ("id") String userID) {
+//        
+//    }
     
     @GET
     @Path("/related/{id}")
@@ -78,13 +78,13 @@ public class Interface {
         return null;
     }
     
-    @PUT
-    @Path("/related/{id}")
-    @Consumes(XML_MIME)
-    public void putRelatedMeals (@PathParam ("id") String userID,
-                                 String content) {
-        
-    }
+//    @PUT
+//    @Path("/related/{id}")
+//    @Consumes(XML_MIME)
+//    public void putRelatedMeals (@PathParam ("id") String userID,
+//                                 String content) {
+//        
+//    }
     @GET
     @Path("/newUser/")
     @Produces(XML_MIME)
