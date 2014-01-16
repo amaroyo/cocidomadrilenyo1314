@@ -52,7 +52,7 @@ public class Query {
         for (Ingredient ing : ingredients) {
             i=ing.getIngredientName();
             if(ing.getPriority() != NOT){
-                query += "?recipe dbo:ingredient dbres:" + ing + ".\n";
+                query += "?recipe dbo:ingredient dbres:" + i + ".\n";
             }
         }
         query+="?recipe dbpprop:name ?name_of_recipe.\n";
