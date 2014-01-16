@@ -76,7 +76,7 @@ public class Parser {
             sb.append("<RECIPE NAME=\"");
             String recipeName = singleRecipe.getRecipeName();
             sb.append(recipeName).append("\">").append(_LINE_SEPARATOR);
-            sb.append("<INGREDIENTS>").append(_LINE_SEPARATOR);
+            sb.append("<INGREDIENT>").append(_LINE_SEPARATOR);
             sb.append(marshalProduct(singleRecipe));
             String snippet = singleRecipe.getRecipeSnippet();
             sb.append("<SNIPPET>").append(snippet).append("</SNIPPET>");
@@ -94,19 +94,18 @@ public class Parser {
         recipeProducts = recipe.getRecipeIngredients();
         for(String product: recipeProducts) 
             sb.append("<PRODUCT>").append(product).append("</PRODUCT>").append(_LINE_SEPARATOR);
-            //<PRODUCT>+product</PRODUCT> LINE SEPARATOR
-        sb.append("</INGREDIENTS>");
+        sb.append("</INGREDIENT>");
         return sb.toString();
     }
     
     protected String marshalIngredient (String product, boolean existence) {
         StringBuilder sb = new StringBuilder ();
         sb.append("<USER>").append(_LINE_SEPARATOR);
-        sb.append("<INGREDIENTS>").append(_LINE_SEPARATOR);
+        sb.append("<INGREDIENT>").append(_LINE_SEPARATOR);
         sb.append("<PRODUCT>");
         sb.append((existence)?product:"invalid");
         sb.append("</PRODUCT>").append(_LINE_SEPARATOR);
-        sb.append("</INGREDIENTS>").append(_LINE_SEPARATOR);
+        sb.append("</INGREDIENT>").append(_LINE_SEPARATOR);
         sb.append("</USER>");
         return sb.toString();
     }
