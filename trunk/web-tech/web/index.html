@@ -157,8 +157,9 @@
 		<form id="formIngredient" autocomplete='off'>
                 	<div class="dynamiclabel">
                         <input id="ingredientInput" placeholder="Search me" type="text" onkeyup="getHint(this.value)"/>
-                        <input type="button" id="ingredientButton" onclick="putIngredient('http://localhost:8080/web-tech/webresources/lookandcook/ingredient/'+user,ingredientInput.value)" value="Search ingredient"></input>
-                    	<label for="searchLabel"><p><strong>Search for some ingredients!</strong></p></label>
+                        <label for="searchLabel"><p><strong>Search for some ingredients!</strong></p></label>
+                        
+                    	
                         <!--<button id="ingredientButton" 
                     onclick="putIngredient(document.getElementById('ingredientInput').value)">Search ingredient</button>-->
                
@@ -166,8 +167,8 @@
                   	</div> <!-- end div dynamiclabel -->
                         
                        
-
-                        <p><span id="InvalidIngredient"></span></p>
+                
+                        <p><span id="InvalidIngredient"></span></p>                       
                   	<p><span id="txtHint"></span></p>
                         
                     
@@ -182,7 +183,7 @@
                         	<input type="radio" name="Choices" value="radio" id="Choices_2" />I hate it!
                         </label>                  
                     </p>
-                 
+                    <input type="button" id="ingredientButton" onclick="putIngredient('http://localhost:8080/web-tech/webresources/lookandcook/ingredient/'+user,ingredientInput.value)" value="Search ingredient"></input>
 				</form> <!-- end formIngredient -->
               
               
