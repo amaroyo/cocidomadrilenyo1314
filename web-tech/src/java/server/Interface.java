@@ -59,9 +59,8 @@ public class Interface {
     @GET
     @Path("/recommendations/{id}")
     @Produces(XML_MIME)
-    public String getRecommendations () {
-        
-        return null;
+    public String getRecommendations (@PathParam ("id") String userID) {
+        return controller.getRecommendations(userID);
     }
     
 //    @PUT
@@ -75,7 +74,7 @@ public class Interface {
     @Path("/related/{id}")
     @Produces(XML_MIME)
     public String getRelatedMeals (@PathParam ("id") String userID) {
-        return null;
+        return controller.getRelatedMeals(userID);
     }
     
 //    @PUT
