@@ -146,7 +146,7 @@
     
 	<div id="content">
     	<div id="search">
-            <p><left><b>Advanced Search</b></left></p>
+            <p><left><b>Ingredient Search</b></left></p>
             <br />
             <div id="ingredients">
             
@@ -212,9 +212,10 @@
              
            		<hr style="display: block; border:solid #000 1px; box-shadow: 3px 3px 6px #000; background-color: #000"/>  
              
-                <div id="results"><p><strong>Resultados de recetas</strong></p>
-					<div id="txtRecetas">
-						<button id="recipes" onclick="loadXMLDoc('xml/receta.xml')">Get Recipes</button>
+                <div id="results"><p><strong>Recipe search</strong></p>
+                    <br />
+		<div id="txtRecetas">
+                    <input type="button" id="recipes" onclick="searchRecipes('http://localhost:8080/web-tech/webresources/lookandcook/recipe/'+user)" value="Get Recipes"></input>
                 	</div> <!-- end div txtRecetas -->
                     
                         <div id="NoLoToQues">
