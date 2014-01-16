@@ -93,6 +93,8 @@ public class Controller {
         }
     }
     public String upperCaseFirst(String input){
-        return input.substring(0, 1).toUpperCase() + input.substring(1);
+        String a = input.substring(0, 1).toUpperCase();
+        String b = input.substring(1);
+        return a.concat(b);
     }
 }
