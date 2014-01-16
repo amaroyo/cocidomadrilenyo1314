@@ -45,7 +45,7 @@ public class Interface {
     @Path("/recipe/{id}")
     @Produces(XML_MIME)
     public String getRecipe (@PathParam ("id") String userID) {
-        return "get recipe done";
+        return controller.getRecipe(userID);
     }
     
     @PUT
