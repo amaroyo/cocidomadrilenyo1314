@@ -21,9 +21,9 @@ public class DB {
     
     private String recipeName;
     
-    private final String userName = "";
+    private final String userName = "root";
     private final String passWord = "";
-    private final String dataBase = "";
+    private final String dataBase = "lookAndCook";
 
     
     public DB () {
@@ -49,8 +49,8 @@ public class DB {
                             ResultSet rs = s.getResultSet ( );
                             String query;
                             if(rs.first()) {
-                                int points = rs.getInt("likes");
-                                query = "UPDATE recipe SET likes="+(points+1)+" WHERE recipeName='"+recipeName+"'";
+                                int points = rs.getInt("points");
+                                query = "UPDATE recipe SET points="+(points+1)+" WHERE recipeName='"+recipeName+"'";
                                 s.executeUpdate(query);
                             } else {
                                 query = "INSERT INTO recipe VALUES ('"+recipeName+"', "+(1)+")";
@@ -80,7 +80,7 @@ public class DB {
                 ArrayList <String> tops = new ArrayList <> ();
                 if (!conn.isClosed()) {
                         Statement s = conn.createStatement ( );
-                        s.executeQuery ("SELECT * FROM recipe ORDER BY likes DESC");
+                        s.executeQuery ("SELECT * FROM recipe ORDER BY points DESC");
                         ResultSet rs = s.getResultSet ( );
                         int i = 0;
                         if(rs.next() && i != 10) {
