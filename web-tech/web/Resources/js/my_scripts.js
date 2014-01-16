@@ -29,12 +29,19 @@ function getUser(url) {
 
 function addIngredient() {
     var x,xx;
+    
+    var caca = "<div class='alert alert-warning alert-danger'><button type='button'" +
+                "class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Warning!</strong>"+
+                        " That ingredient does not exist in DBPedia. Please, try again."+
+        "</div>";
+    
+    
     if (xmlhttp.readyState===4) {
         if(xmlhttp.status===200) {//PUT returning a response
           x=xmlhttp.responseXML.getElementsByTagName("INGREDIENT")[0];
           xx=x.getElementsByTagName("PRODUCT")[0].firstChild.nodeValue;
           if(xx === "invalid") {
-              document.getElementById("InvalidIngredient").innerHTML = "Sorry that ingredient does not exist in DBPedia."
+              document.getElementById("InvalidIngredient").innerHTML = caca;
           }
           else {
             document.getElementById("InvalidIngredient").innerHTML=xx;
