@@ -1,6 +1,7 @@
 var xmlhttp;
 var isIE;
 var user;
+var megusta="";
 
 function initRequest() {
     if (window.XMLHttpRequest) {
@@ -42,12 +43,23 @@ function addIngredient() {
           xx=x.getElementsByTagName("PRODUCT")[0].firstChild.nodeValue;
           if(xx === "invalid") {
               document.getElementById("InvalidIngredient").innerHTML = caca;
+            //prueba..esto sobraria.. deberia ir todo abajo q es el valor bueno!!
+                megusta = megusta.concat("<li>");
+                megusta = megusta.concat(xx);
+                megusta = megusta.concat("</li>");
+                document.getElementById("meGustaUL").innerHTML=megusta;
           }
           else {
             document.getElementById("InvalidIngredient").innerHTML=xx;
+            megusta = megusta.concat("<li>");
+            megusta = megusta.concat(xx);
+            megusta = megusta.concat("</li>");
+            document.getElementById("meGustaUL").innerHTML=megusta;
           }
         }
     }
+    
+    
 }
 
 function putIngredient(url,ing) { 
