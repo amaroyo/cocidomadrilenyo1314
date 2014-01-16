@@ -58,16 +58,21 @@ public class Query {
         query+="?recipe dbpprop:name ?name_of_recipe.\n";
         query+="}";
         QueryExecution qe=QueryExecutionFactory.sparqlService(SERVICE, query);
-        ResultSet rs=qe.execSelect();
-        Recipe auxRec;
-        while(rs.hasNext()){
-            QuerySolution s=rs.nextSolution();
-            Resource recipeFound = s.getResource("?recipe");
-            Literal nameOfRecipe = s.getLiteral("?name_of_recipe");
-            auxRec = new Recipe(nameOfRecipe.getString(), ingredientsOfRecipe(recipeFound), snippetOfRecipe(recipeFound), imageOfRecipe(recipeFound));
-            if(!auxRec.hasIngredients(nonDesired) && auxRec.hasIngredients(mandatory)){
-                recipes.add(auxRec);
+        System.out.println("antes de query exec select");
+        try {
+            ResultSet rs=qe.execSelect();
+            Recipe auxRec;
+            while(rs.hasNext()){
+                QuerySolution s=rs.nextSolution();
+                Resource recipeFound = s.getResource("?recipe");
+                Literal nameOfRecipe = s.getLiteral("?name_of_recipe");
+                auxRec = new Recipe(nameOfRecipe.getString(), ingredientsOfRecipe(recipeFound), snippetOfRecipe(recipeFound), imageOfRecipe(recipeFound));
+                if(!auxRec.hasIngredients(nonDesired) && auxRec.hasIngredients(mandatory)){
+                    recipes.add(auxRec);
+                }
             }
+        } catch(Exception ex) { //ex.printStackTrace();
+            
         }
         return recipes;
     }
