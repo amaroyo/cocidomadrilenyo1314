@@ -2,6 +2,11 @@ var xmlhttp;
 var isIE;
 var user;
 var megusta="";
+var nomegusta="";
+var quiza="";
+var invalido = "<div id='mialerta' class='alert alert-warning alert-danger'><button type='button'" +
+                "class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Warning!</strong>"+
+                        " That ingredient does not exist in DBPedia. Please, try again."+"</div>";
 
 function initRequest() {
     if (window.XMLHttpRequest) {
@@ -31,36 +36,43 @@ function getUser(url) {
 function addIngredient() {
     var x,xx;
     
-    var caca = "<div id='mialerta' class='alert alert-warning alert-danger'><button type='button'" +
-                "class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Warning!</strong>"+
-                        " That ingredient does not exist in DBPedia. Please, try again."+
-        "</div>";
-    
-    
     if (xmlhttp.readyState===4) {
         if(xmlhttp.status===200) {//PUT returning a response
           x=xmlhttp.responseXML.getElementsByTagName("INGREDIENT")[0];
           xx=x.getElementsByTagName("PRODUCT")[0].firstChild.nodeValue;
           if(xx === "invalid") {
-              document.getElementById("InvalidIngredient").innerHTML = caca;
-            //prueba..esto sobraria.. deberia ir todo abajo q es el valor bueno!!
-                megusta = megusta.concat("<li>");
-                megusta = megusta.concat(xx);
-                megusta = megusta.concat("</li>");
-                document.getElementById("meGustaUL").innerHTML=megusta;
+              document.getElementById("InvalidIngredient").innerHTML = invalido;
           }
           else {
-            document.getElementById("InvalidIngredient").innerHTML=xx;
-            megusta = megusta.concat("<li>");
-            megusta = megusta.concat(xx);
-            megusta = megusta.concat("</li>");
-            document.getElementById("meGustaUL").innerHTML=megusta;
-          }
-        }
-    }
-    
-    
-}
+                if(document.getElementById('Choices_0').checked) {
+                    //Like radio button is checked
+                    megusta = megusta.concat("<li>");
+                    megusta = megusta.concat(xx);
+                    megusta = megusta.concat("</li>");
+                    document.getElementById("meGustaUL").innerHTML=megusta;
+                }
+                else {
+                    if(document.getElementById('Choices_1').checked) {
+                        //Maybe radio button is checked
+                        quiza = quiza.concat("<li>");
+                        quiza = quiza.concat(xx);
+                        quiza = quiza.concat("</li>");
+                        document.getElementById("puedeUL").innerHTML=quiza;
+                    }
+                    else {
+                        if(document.getElementById('Choices_2').checked) {
+                            //Dislike radio button is checked
+                            nomegusta = nomegusta.concat("<li>");
+                            nomegusta = nomegusta.concat(xx);
+                            nomegusta = nomegusta.concat("</li>");
+                            document.getElementById("noMeGustaUL").innerHTML=nomegusta;
+                        }
+                    }//else
+                }//else
+          }//else valid ingredient
+        }//if status
+    }//if ready
+}//function
 
 function putIngredient(url,ing) { 
     var xml = "<USER><INGREDIENT><PRODUCT>"+ing+"</PRODUCT></INGREDIENT></USER>";
