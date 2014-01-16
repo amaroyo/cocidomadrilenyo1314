@@ -1,7 +1,8 @@
 var xmlhttp;
 var isIE;
+var user;
 
-function initRequest(url) {
+function initRequest() {
     if (window.XMLHttpRequest) {
         xmlhttp = new XMLHttpRequest();
     } else if (window.ActiveXObject) {
@@ -10,21 +11,42 @@ function initRequest(url) {
     }
 }
 
-function loadXMLDoc() {
-    //alert("loadXML");
-	  if (xmlhttp.readyState==4) {
-              if(xmlhttp.status==200)
-		{
-		document.getElementById('prueba').innerHTML=xmlhttp.responseXML;
-		}
-	  }
+function assignUser() {
+    if (xmlhttp.readyState===4) {
+        if(xmlhttp.status===200) //GET returning a response
+          {
+          user=xmlhttp.responseXML.getElementsByTagName("ID")[0].firstChild.nodeValue;
+          }
+    }
 }
 
-function newUser() {   
-        initRequest("http://localhost:8080/web-tech/webresources/lookandcook/newUser");
-          xmlhttp.onreadystatechange=loadXMLDoc;
-          xmlhttp.open("GET","http://localhost:8080/web-tech/webresources/lookandcook/newUser",true);
-        xmlhttp.send(null);
+function getUser(url) {   
+    initRequest();
+    xmlhttp.onreadystatechange=assignUser;
+    xmlhttp.open("GET",url,true);
+    xmlhttp.send(null);
+}
+
+function addIngredient() {
+    var x,xx;
+    if (xmlhttp.readyState===4) {
+        alert(xmlhttp.status);
+        if(xmlhttp.status===200) //PUT returning a response
+          {
+          x=xmlhttp.responseXML.getElementsByTagName("INGREDIENT")[0];
+          xx=x.getElementsByTagName("PRODUCT")[0].firstChild.nodeValue;
+          document.getElementById("prueba").innerHTML=xx;
+          }
+    }
+}
+
+function putIngredient(url,ing) { 
+    var xml = "<USER><INGREDIENT><PRODUCT>"+ing+"</PRODUCT></INGREDIENT></USER>";
+    initRequest();
+    xmlhttp.onreadystatechange=addIngredient;
+    xmlhttp.open("PUT",url,true);
+    xmlhttp.setRequestHeader("Content-type","application/xml");
+    xmlhttp.send(xml);
 }
 
 

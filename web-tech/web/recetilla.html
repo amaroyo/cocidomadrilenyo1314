@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Untitled Document</title>
+
+<script type="text/javascript" src="../highslide/highslide-with-gallery.js"></script>
+<link rel="stylesheet" type="text/css" href="../highslide/highslide.css" />
+
+
+<script type="text/javascript">
+hs.graphicsDir = '../highslide/graphics/';
+hs.align = 'center';
+hs.transitions = ['expand', 'crossfade'];
+hs.outlineType = 'rounded-white';
+hs.fadeInOut = true;
+//hs.dimmingOpacity = 0.75;
+
+// Add the controlbar
+hs.addSlideshow({
+	//slideshowGroup: 'group1',
+	interval: 5000,
+	repeat: false,
+	useControls: true,
+	fixedControls: 'fit',
+	overlayOptions: {
+		opacity: 0.75,
+		position: 'bottom center',
+		hideOnMouseOut: true
+	}
+});
+</script>
+
+</head>
+
+<body>
+
+<div id="miRecetaDinamica">
+
+<div class="highslide-gallery">
+	<a href="highslide/images/gallery1.jpg" class="highslide" onclick="return hs.expand(this)">
+	<img src="highslide/images/gallery1.thumb.jpg" alt="Highslide JS"
+		title="Click to enlarge" />
+</a>
+
+<div class="highslide-caption">
+	Caption for the first image. This caption can be styled using CSS.
+</div>
+</div>
+
+
+	<h3>Dynamic content</h3>
+	<p>Highslide HTML allows the popup size to be recalculated after the content has been
+	changed, either through internal scripts or through external AJAX calls.</p>
+	<p>This example also has <code>hs.preserveContent</code> set to <code>true</code>. Try updating
+	the content and move the popup, then close it and open it again.</p>
+	<div>
+	<!--	<a href="javascript:;" onclick="var r=hs.getElementByClass(this.parentNode,'div','readmore').style;r.display=(r.display=='none')?'':'none';this.innerHTML=(r.display=='none')?'Read more':'Hide';try {hs.getExpander(this).reflow();} catch(e){};return false;">Read more</a>
+		<div class="readmore" style="display:none"> -->
+			Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aliquam dapibus leo quis nisl. In lectus. Vivamus consectetuer pede in nisl. Mauris cursus pretium mauris. Suspendisse condimentum mi ac tellus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec sed enim. Ut vel ipsum. Cras consequat velit et justo. Donec mollis, mi at tincidunt vehicula, nisl mi luctus risus, quis scelerisque arcu nibh ac nisi. Sed risus. Curabitur urna. Aliquam vitae nisl. Quisque imperdiet semper justo. Pellentesque nonummy pretium tellus.</div>
+	</div>
+</div>
+
+</body>
+</html>
