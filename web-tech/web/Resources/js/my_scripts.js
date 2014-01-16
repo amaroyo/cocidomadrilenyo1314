@@ -30,7 +30,7 @@ function getUser(url) {
 function addIngredient() {
     var x,xx;
     
-    var caca = "<div class='alert alert-warning alert-danger'><button type='button'" +
+    var caca = "<div id='mialerta' class='alert alert-warning alert-danger'><button type='button'" +
                 "class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Warning!</strong>"+
                         " That ingredient does not exist in DBPedia. Please, try again."+
         "</div>";
