@@ -7,6 +7,7 @@ var quiza="";
 var invalido = "<div id='mialerta' class='alert alert-warning alert-danger'><button type='button'" +
                 "class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Warning!</strong>"+
                         " That ingredient does not exist in DBPedia. Please, try again."+"</div>";
+var products ="";
 
 function initRequest() {
     if (window.XMLHttpRequest) {
@@ -44,28 +45,26 @@ function addIngredient() {
               document.getElementById("InvalidIngredient").innerHTML = invalido;
           }
           else {
+                var li=formatLi(xx);
                 if(document.getElementById('Choices_0').checked) {
                     //Like radio button is checked
-                    megusta = megusta.concat("<li>");
-                    megusta = megusta.concat(xx);
-                    megusta = megusta.concat("</li>");
+                    megusta = megusta.concat(li);
                     document.getElementById("meGustaUL").innerHTML=megusta;
+                    products = products.concat(formatIngredientRated(formatProduct(xx),1));
                 }
                 else {
                     if(document.getElementById('Choices_1').checked) {
                         //Maybe radio button is checked
-                        quiza = quiza.concat("<li>");
-                        quiza = quiza.concat(xx);
-                        quiza = quiza.concat("</li>");
+                        quiza = quiza.concat(li);
                         document.getElementById("puedeUL").innerHTML=quiza;
+                        products = products.concat(formatIngredientRated(formatProduct(xx),0));
                     }
                     else {
                         if(document.getElementById('Choices_2').checked) {
                             //Dislike radio button is checked
-                            nomegusta = nomegusta.concat("<li>");
-                            nomegusta = nomegusta.concat(xx);
-                            nomegusta = nomegusta.concat("</li>");
+                            nomegusta = nomegusta.concat(li);
                             document.getElementById("noMeGustaUL").innerHTML=nomegusta;
+                            products = products.concat(formatIngredientRated(formatProduct(xx),-1));
                         }
                     }//else
                 }//else
@@ -75,7 +74,7 @@ function addIngredient() {
 }//function
 
 function putIngredient(url,ing) { 
-    var xml = "<USER><INGREDIENT><PRODUCT>"+ing+"</PRODUCT></INGREDIENT></USER>";
+    var xml = formatUser(formatIngredient(formatProduct(ing)));
     initRequest();
     xmlhttp.onreadystatechange=addIngredient;
     xmlhttp.open("PUT",url,true);
@@ -83,6 +82,65 @@ function putIngredient(url,ing) {
     xmlhttp.send(xml);
 }
 
+
+function bla() {
+    if (xmlhttp.readyState===4) {
+        if(xmlhttp.status===200) //GET returning a response
+          {
+          getRecipe(url);
+          }
+    }
+}
+
+function bla2() {
+    if (xmlhttp.readyState===4) {
+        if(xmlhttp.status===200) //GET returning a response
+          {
+          
+          }
+    }
+}
+
+function getRecipe(url) {
+    initRequest();
+    xmlhttp.onreadystatechange=bla2;
+    xmlhttp.open("GET",url,true);
+    xmlhttp.send();
+}
+
+function searchRecipes(url) { 
+    var xml = formatUser(products);
+    initRequest();
+    xmlhttp.onreadystatechange=bla;
+    xmlhttp.open("PUT",url,true);
+    xmlhttp.setRequestHeader("Content-type","application/xml");
+    xmlhttp.send(xml);
+}
+
+function formatIngredient(ings) {
+    var xml="<INGREDIENT>"+ings+"</INGREDIENT>";
+    return xml;
+}
+
+function formatIngredientRated(ing,rate) {
+    var xml="<INGREDIENT PRIORITY="+rate+">"+ing+"</INGREDIENT>";
+    return xml;
+}
+
+function formatProduct(ing) {
+    var xml="<PRODUCT>"+ing+"</PRODUCT>";
+    return xml;
+}
+
+function formatLi(ing) {
+    var xml="<li id="+ing+">"+ing+"</li>";
+    return xml;
+}
+
+function formatUser(something) {
+    var xml="<USER>"+something+"</USER>";
+    return xml;
+}
 
 var ingredients = ["almonds",
 "apple",
