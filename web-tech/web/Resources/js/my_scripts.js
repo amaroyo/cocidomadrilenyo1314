@@ -93,13 +93,27 @@ function bla() {
 }
 
 function bla2() {
+    var att,img,ing,sni,xml;
     if (xmlhttp.readyState===4) {
         if(xmlhttp.status===200) //GET returning a response
           {
-          
-          }
-    }
-}
+          x=xmlhttp.responseXML.getElementsByTagName("RECIPE");
+          xml='<ul class="media-list">';
+          for(var i=0;i<x.length;i++) {
+               att=x[i].getAttribute("NAME");
+              //img=x[i].getElementsByTagName("IMG")[0].firstChild.nodeValue;
+              ing=x[i].getElementsByTagName("INGREDIENT");
+              //sni=x[i].getElementsByTagName("SNIPPET")[0].firstChild.nodeValue;
+              xml=xml+'<li class="media">'+'<a class="pull-left" href="#">'+
+                      '<img class="media-object" src="Resources/icons/64x64/images.jpg">'+
+                        '</a><div class="media-body"><h4 class="media-heading">'+att+'</h4><h5>'+ing+'</h5></div></li>';
+             
+         }//for
+         xml=xml+'</ul>';
+         document.getElementById("misrecetas").innerHTML=xml;
+         }//if status
+    }//if state
+}//function
 
 function getRecipe(url) {
     initRequest();
