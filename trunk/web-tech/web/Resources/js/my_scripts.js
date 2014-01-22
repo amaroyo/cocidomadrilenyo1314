@@ -34,40 +34,43 @@ function getUser(url) {
     xmlhttp.send(null);
 }
 
-function addIngredient(entrada) {
-    var x,xx;
+function addIngredient() {
+    var x,ing;
     
-    
-          if(entrada === "invalid") {
+    if (xmlhttp.readyState===4) {
+        if(xmlhttp.status===200) {//PUT returning a response
+          x=xmlhttp.responseXML.getElementsByTagName("INGREDIENT")[0];
+          ing=x.getElementsByTagName("PRODUCT")[0].firstChild.nodeValue;
+          if(ing === "invalid") {
               document.getElementById("InvalidIngredient").innerHTML = invalido;
           }
           else {
-                var li=formatLi(entrada);
+                var li=formatLi(ing);
                 if(document.getElementById('Choices_0').checked) {
                     //Like radio button is checked
                     megusta = megusta.concat(li);
                     document.getElementById("meGustaUL").innerHTML=megusta;
-                    products = products.concat(formatIngredientRated(formatProduct(entrada),1));
+                    products = products.concat(formatIngredientRated(formatProduct(ing),1));
                 }
                 else {
                     if(document.getElementById('Choices_1').checked) {
                         //Maybe radio button is checked
                         quiza = quiza.concat(li);
                         document.getElementById("puedeUL").innerHTML=quiza;
-                        products = products.concat(formatIngredientRated(formatProduct(entrada),0));
+                        products = products.concat(formatIngredientRated(formatProduct(ing),0));
                     }
                     else {
                         if(document.getElementById('Choices_2').checked) {
                             //Dislike radio button is checked
                             nomegusta = nomegusta.concat(li);
                             document.getElementById("noMeGustaUL").innerHTML=nomegusta;
-                            products = products.concat(formatIngredientRated(formatProduct(entrada),-1));
+                            products = products.concat(formatIngredientRated(formatProduct(ing),-1));
                         }
                     }//else
                 }//else
           }//else valid ingredient
-       
-   
+        }//if status
+    }//if ready
 }//function
 
 function putIngredient(url,ing) { 
@@ -79,50 +82,94 @@ function putIngredient(url,ing) {
     xmlhttp.send(xml);
 }
 
-
-function bla() {
-    if (xmlhttp.readyState===4) {
-        if(xmlhttp.status===200) //GET returning a response
-          {
-          getRecipe(url);
-          }
-    }
+function resultados(recipes,file,div) {
+    var att,img,ing,sni,xml,html,ingsaux;
+    xml='<ul class="media-list">';
+    html="";
+    for(var i=0;i<recipes.length;i++) {
+        att=recipes[i].getAttribute("NAME");
+        img=recipes[i].getElementsByTagName("IMG")[0].firstChild.nodeValue;
+        sni=x[i].getElementsByTagName("SNIPPET")[0].firstChild.nodeValue;
+        ing=recipes[i].getElementsByTagName("INGREDIENT").getElementsByTagName("PRODUCT");
+        ingsaux="";
+        for(var j=0;j<ing.length;j++) {
+            ings=ings+' '+ing[j].firstChild.nodeValue;
+            ingsaux=ingsaux+'<li>'+ing+'</li>';
+        }//for
+        xml=xml+'<li class="media"><a class="pull-left" href="'+img+'">'+
+                '<img class="media-object" src="Resources/icons/64x64/images.jpg">'+
+                        '</a><div class="media-body"><h4 class="media-heading">'+
+                        '<a class="highslide" onclick="return hs.htmlExpand(this, { contentId:'+"'highslide-html-ajax', wrapperClassName: 'highslide-white',"+ 
+                                    "outlineType: 'rounded-white', outlineWhileAnimating: true, objectType: 'ajax', preserveContent: true } )"+'"'+ 
+                                        'href="'+file+'#receta'+i+'">'+att+'</a></h4><h5>'+ings+'</h5></div></li>'+
+                        '<img src="Resources/icons/36x36/like.png" onclick="likeRecipe()"/>I Like it!';
+        html=html+'<div id="receta'+i+'"><div><div class="highslide-gallery">'+
+                  '<div id="imgReceta"><a href='+img+' class="highslide" onclick="return hs.expand(this)"></div>'+
+                  '<img src="Resources/icons/64x64/imageLoadRecipe.png" alt="Highslide JS" title="Click to enlarge" />'+
+                  '<div class="highslide-caption"></div></div>'+
+                  '<h2><div id="titleReceta">'+att+'</div></h2><p>'+
+                  '<div id="snippetReceta">'+sni+'</div></p>'+
+                  '<div><h3>Ingredients</h3><ul><div id="ingredientsReceta">'+ingsaux+'</div></ul></div>'+
+                  '<img src="Resources/icons/36x36/like.png" onclick="likeRecipe()"/>I Like it!';
+   }//for
+   xml=xml+'</ul>';
+   document.getElementById(div).innerHTML=xml;
+   document.getElementById("resultadosRecetas").innerHTML=html;
 }
 
-function bla2() {
-    var att,img,ing,sni,xml;
+function likeRecipe() {
+    initRequest();
+    xmlhttp.open("PUT",url,true);
+    xmlhttp.setRequestHeader("Content-type","application/xml");
+    xmlhttp.send(xml);
+}
+
+function showRecipes(file,div) {
     if (xmlhttp.readyState===4) {
         if(xmlhttp.status===200) //GET returning a response
           {
-          x=xmlhttp.responseXML.getElementsByTagName("RECIPE");
-          xml='<ul class="media-list">';
-          for(var i=0;i<x.length;i++) {
-               att=x[i].getAttribute("NAME");
-              //img=x[i].getElementsByTagName("IMG")[0].firstChild.nodeValue;
-              ing=x[i].getElementsByTagName("INGREDIENT");
-              //sni=x[i].getElementsByTagName("SNIPPET")[0].firstChild.nodeValue;
-              xml=xml+'<li class="media">'+'<a class="pull-left" href="#">'+
-                      '<img class="media-object" src="Resources/icons/64x64/images.jpg">'+
-                        '</a><div class="media-body"><h4 class="media-heading">'+att+'</h4><h5>'+ing+'</h5></div></li>';
-             
-         }//for
-         xml=xml+'</ul>';
-         document.getElementById("misrecetas").innerHTML=xml;
+          resultados(xmlhttp.responseXML.getElementsByTagName("RECIPE"),file,div);
          }//if status
     }//if state
 }//function
 
-function getRecipe(url) {
+
+function getRelated(url) {
     initRequest();
-    xmlhttp.onreadystatechange=bla2;
+    xmlhttp.onreadystatechange=showRecipes("related.html","misrelacionadas");
     xmlhttp.open("GET",url,true);
     xmlhttp.send();
+}
+
+function getRecommended(url) {
+    initRequest();
+    xmlhttp.onreadystatechange=showRecipes("recommended.html","misrecomendaciones");
+    xmlhttp.open("GET",url,true);
+    xmlhttp.send();
+}
+
+function getRecipe(url) {
+    initRequest();
+    xmlhttp.onreadystatechange=showRecipes("recetas.html","misrecetas");
+    xmlhttp.open("GET",url,true);
+    xmlhttp.send();
+}
+
+function putRecipe(url) {
+    if (xmlhttp.readyState===4) {
+        if(xmlhttp.status===200) //PUT returning a response
+          {
+          getRecipe(url);
+          getRecommended("http://localhost:8080/web-tech/webresources/lookandcook/recommendations/"+user);
+          getRelated("http://localhost:8080/web-tech/webresources/lookandcook/related/"+user);
+          }
+    }
 }
 
 function searchRecipes(url) { 
     var xml = formatUser(products);
     initRequest();
-    xmlhttp.onreadystatechange=bla;
+    xmlhttp.onreadystatechange=putRecipe(url);
     xmlhttp.open("PUT",url,true);
     xmlhttp.setRequestHeader("Content-type","application/xml");
     xmlhttp.send(xml);
@@ -334,10 +381,7 @@ var ingredients = ["almonds",
 "nectarines",
 "nigella seeds",
 "nopales",
-"nori",
-"meat",
-"curry",
-"rice"
+"nori"
 ];
 
 function getHint(input) {
@@ -370,47 +414,4 @@ function getHint(input) {
     }
     document.getElementById("txtHint").innerHTML=hint;
 }
-
-function loadXMLFile(url) {
-    initRequest();
-    xmlhttp.onreadystatechange=showXMLFile;
-    xmlhttp.open("GET",url,true);
-    xmlhttp.send();
-}
-
-function showXMLFile(url) {
-    var att,img,ing,sni,xml;
-    var incs = "";
-    var red = '<a href="recetilla.html"';
-    var red2 = 'onclick="return hs.htmlExpand(this, { objectType:';
-    var red3 = "'ajax'}";
-    var red4 = ')">';
-                               
-    
-    if (xmlhttp.readyState===4) {
-        if(xmlhttp.status===200) //GET returning a response
-          {
-          x=xmlhttp.responseXML.getElementsByTagName("RECIPE");
-          xml='<ul class="media-list">';
-          for(var i=0;i<x.length;i++) {
-               att=x[i].getAttribute("NAME");
-              img=x[i].getElementsByTagName("IMG")[0].firstChild.nodeValue;
-              ing=x[i].getElementsByTagName("INGREDIENT")[0].getElementsByTagName("PRODUCT");
-              for(var j=0;j<ing.length;j++) {
-                  incs = incs + " " + ing[j].firstChild.nodeValue;
-              }
-              //sni=x[i].getElementsByTagName("SNIPPET")[0].firstChild.nodeValue;
-              xml=xml+'<li class="media">'+'<a class="pull-left" href="'+img+'">'+
-                      '<img class="media-object" src="' + img + '">'+
-                        '</a><div class="media-body"><h4 class="media-heading">'
-                        +red+red2+red3+red4
-                        +att+' </a></h4><h5>'+incs+'</h5></div></li>';
-             
-         }//for
-         xml=xml+'</ul>';
-         document.getElementById("misrecetas").innerHTML=xml;
-         
-         }//if status
-    }//if state
-}//function
 
