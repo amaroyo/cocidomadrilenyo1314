@@ -34,43 +34,40 @@ function getUser(url) {
     xmlhttp.send(null);
 }
 
-function addIngredient() {
+function addIngredient(entrada) {
     var x,xx;
     
-    if (xmlhttp.readyState===4) {
-        if(xmlhttp.status===200) {//PUT returning a response
-          x=xmlhttp.responseXML.getElementsByTagName("INGREDIENT")[0];
-          xx=x.getElementsByTagName("PRODUCT")[0].firstChild.nodeValue;
-          if(xx === "invalid") {
+    
+          if(entrada === "invalid") {
               document.getElementById("InvalidIngredient").innerHTML = invalido;
           }
           else {
-                var li=formatLi(xx);
+                var li=formatLi(entrada);
                 if(document.getElementById('Choices_0').checked) {
                     //Like radio button is checked
                     megusta = megusta.concat(li);
                     document.getElementById("meGustaUL").innerHTML=megusta;
-                    products = products.concat(formatIngredientRated(formatProduct(xx),1));
+                    products = products.concat(formatIngredientRated(formatProduct(entrada),1));
                 }
                 else {
                     if(document.getElementById('Choices_1').checked) {
                         //Maybe radio button is checked
                         quiza = quiza.concat(li);
                         document.getElementById("puedeUL").innerHTML=quiza;
-                        products = products.concat(formatIngredientRated(formatProduct(xx),0));
+                        products = products.concat(formatIngredientRated(formatProduct(entrada),0));
                     }
                     else {
                         if(document.getElementById('Choices_2').checked) {
                             //Dislike radio button is checked
                             nomegusta = nomegusta.concat(li);
                             document.getElementById("noMeGustaUL").innerHTML=nomegusta;
-                            products = products.concat(formatIngredientRated(formatProduct(xx),-1));
+                            products = products.concat(formatIngredientRated(formatProduct(entrada),-1));
                         }
                     }//else
                 }//else
           }//else valid ingredient
-        }//if status
-    }//if ready
+       
+   
 }//function
 
 function putIngredient(url,ing) { 
@@ -337,7 +334,10 @@ var ingredients = ["almonds",
 "nectarines",
 "nigella seeds",
 "nopales",
-"nori"
+"nori",
+"meat",
+"curry",
+"rice"
 ];
 
 function getHint(input) {
@@ -370,4 +370,47 @@ function getHint(input) {
     }
     document.getElementById("txtHint").innerHTML=hint;
 }
+
+function loadXMLFile(url) {
+    initRequest();
+    xmlhttp.onreadystatechange=showXMLFile;
+    xmlhttp.open("GET",url,true);
+    xmlhttp.send();
+}
+
+function showXMLFile(url) {
+    var att,img,ing,sni,xml;
+    var incs = "";
+    var red = '<a href="recetilla.html"';
+    var red2 = 'onclick="return hs.htmlExpand(this, { objectType:';
+    var red3 = "'ajax'}";
+    var red4 = ')">';
+                               
+    
+    if (xmlhttp.readyState===4) {
+        if(xmlhttp.status===200) //GET returning a response
+          {
+          x=xmlhttp.responseXML.getElementsByTagName("RECIPE");
+          xml='<ul class="media-list">';
+          for(var i=0;i<x.length;i++) {
+               att=x[i].getAttribute("NAME");
+              img=x[i].getElementsByTagName("IMG")[0].firstChild.nodeValue;
+              ing=x[i].getElementsByTagName("INGREDIENT")[0].getElementsByTagName("PRODUCT");
+              for(var j=0;j<ing.length;j++) {
+                  incs = incs + " " + ing[j].firstChild.nodeValue;
+              }
+              //sni=x[i].getElementsByTagName("SNIPPET")[0].firstChild.nodeValue;
+              xml=xml+'<li class="media">'+'<a class="pull-left" href="'+img+'">'+
+                      '<img class="media-object" src="' + img + '">'+
+                        '</a><div class="media-body"><h4 class="media-heading">'
+                        +red+red2+red3+red4
+                        +att+' </a></h4><h5>'+incs+'</h5></div></li>';
+             
+         }//for
+         xml=xml+'</ul>';
+         document.getElementById("misrecetas").innerHTML=xml;
+         
+         }//if status
+    }//if state
+}//function
 
