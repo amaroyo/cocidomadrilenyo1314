@@ -43,16 +43,16 @@
         <p><center><b>Last searches</b></center></p> 
         <br />
     	<ul>
-            <li><p>Búsqueda1</p></li>
-            <li><p>Búsqueda2</p></li>
-            <li><p>Búsqueda3</p></li>
-            <li><p>Búsqueda4</p></li>
-            <li><p>Búsqueda4</p></li>
-            <li><p>Búsqueda4</p></li>
-            <li><p>Búsqueda4</p></li>
-            <li><p>Búsqueda4</p></li>
-            <li><p>Búsqueda4</p></li>
-            <li><p>Búsqueda4</p></li>
+            <li><p>LastSearch1</p></li>
+            <li><p>LastSearch2</p></li>
+            <li><p>LastSearch3</p></li>
+            <li><p>LastSearch4</p></li>
+            <li><p>LastSearch5</p></li>
+            <li><p>LastSearch6</p></li>
+            <li><p>LastSearch7</p></li>
+            <li><p>LastSearch8</p></li>
+            <li><p>LastSearch9</p></li>
+            <li><p>LastSearch10</p></li>
     	</ul>
 	</div>
     
@@ -73,20 +73,24 @@
           	<div class="carousel-inner">
                 <div class="item active">
                   <img src="Resources/images/carousel 300x200/carousel1.jpg" alt="300x200" />
-                  <h3>Cocidito madrileño</h3>
-                  <p>rico,rico...</p>
+                  <h3>Salmon with wine</h3>
+                  <p>12 baby artichokes
+                    1 cup extra virgin olive oil
+                    3 garlic cloves, peeled and crushed
+                    2 tablespoons flat-leaf parsley (keep stems)
+                    1 yellow onion, sliced...</p>
                   <div class="carousel-caption"></div>
                 </div>
                 <div class="item">
                   <img src="Resources/images/carousel 300x200/carousel2.jpg" alt="300x200" />
-                  <h3>Otra receta</h3>
-                  <p>descripción...</p>
+                  <h3>Hamburger</h3>
+                  <p>Hamburguer with lettuce, bacon, tomato, onion, pickles, cheese... </p>
                   <div class="carousel-caption"></div>
                 </div>
-                <div class="item">
+                <!--<div class="item">
                   <img src="Resources/images/carousel 300x200/carousel3.jpg" alt="300x200" />
-                  <h3>Tortilla de patatas</h3>
-                  <p>con cebolla...</p>
+                  <h3>Tortilla de Patata</h3>
+                  <p>Patatoes, eggs &  onion</p>
                   <div class="carousel-caption"></div>
                 </div>
                 <div class="item">
@@ -124,11 +128,11 @@
                   <h3>Otra receta</h3>
                   <p>descripción...</p>
                   <div class="carousel-caption"></div>
-                </div>
+                </div>-->
                 <div class="item">
                   <img src="Resources/images/carousel 300x200/carousel10.jpg" alt="300x200" />
-                  <h3>Otra receta</h3>
-                  <p>descripción...</p>
+                  <h3>Chinese chicken</h3>
+                  <p>A delicious Chinese citrus chicken recipe with flavours reminiscent of the orange chicken from your favourite Chinese. Serve with... </p>
                   <div class="carousel-caption"></div>
                 </div>
 			</div><!-- end carousel-inner -->
@@ -183,7 +187,7 @@
                         	<input type="radio" name="Choices" value="radio" id="Choices_2" />I hate it!
                         </label>                  
                     </p>
-                    <input type="button" id="ingredientButton" onclick="putIngredient('http://localhost:8080/web-tech/webresources/lookandcook/ingredient/'+user,ingredientInput.value)" value="Search ingredient"></input>
+                    <input type="button" id="ingredientButton" onclick="addIngredient(ingredientInput.value)" value="Search ingredient"></input>
 				</form> <!-- end formIngredient -->
               
               
@@ -212,20 +216,15 @@
              
            		<hr style="display: block; border:solid #000 1px; box-shadow: 3px 3px 6px #000; background-color: #000"/>  
              
-                <div id="results"><p><strong>Recipe search</strong></p>
-                    <br />
+                <div id="results"><p><strong>Recipe Search</strong></p><br />
+                    
 		<div id="txtRecetas">
-                    <input type="button" id="recipes" onclick="searchRecipes('http://localhost:8080/web-tech/webresources/lookandcook/recipe/'+user)" value="Get Recipes"></input>
+                    <input type="button" id="recipes" onclick="loadXMLFile('xml/rec.xml')" value="Get Recipes"></input>
+                    <br /><br />
                     <span id="misrecetas"></span>
                 </div> <!-- end div txtRecetas -->
                     
-                        <div id="NoLoToQues">
                         
-                            AJAX requesting a specific id in an external HTML page,
-                            <a href="recetilla.html" onclick="return hs.htmlExpand(this, { objectType: 'ajax'} )">
-                                intro</a>,
-
-                        </div>
                     
                     
                    <!-- <div id="pruebaAjaxDinamico">
@@ -241,11 +240,11 @@
         
             <hr style="display: block; border:solid #000 1px; box-shadow: 3px 3px 6px #000; background-color: #000"/>
             
-            <div id="recommended"><p><strong>Recomendadas</strong></p></div>
+            <div id="recommended"><p><strong>Recommended Meals</strong></p></div>
             
             <hr style="display: block; border:solid #000 1px; box-shadow: 3px 3px 6px #000; background-color: #000"/>
             
-            <div id="related"><p><strong>Relacionadas</strong></p></div>
+            <div id="related"><p><strong>Related Meals</strong></p></div>
 		</div> <!-- end div search -->
     
 		<hr style="display: block; border:solid #000 1px; box-shadow: 3px 3px 6px #000; background-color: #000"/>    

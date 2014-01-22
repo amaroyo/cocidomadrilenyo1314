@@ -1,0 +1,30 @@
+<USER>
+	<RECIPE NAME="Meatballs">
+		<INGREDIENT>
+			<PRODUCT>meat</PRODUCT>
+			<PRODUCT>curry</PRODUCT>
+		</INGREDIENT>
+		<SNIPPET>A meatball is made from an amount of ground meat rolled into...</SNIPPET>
+                <IMG>Resources/images/MB.jpg</IMG>
+		
+	</RECIPE>
+	<RECIPE NAME="curry chicken with rice">
+		<INGREDIENT>
+			<PRODUCT>chicken</PRODUCT>
+			<PRODUCT>rice</PRODUCT>
+		</INGREDIENT>
+		<SNIPPET>With thisis curry chicken... </SNIPPET>
+                <IMG>Resources/images/CK.jpg</IMG>
+		
+	</RECIPE>
+	<RECIPE NAME="meat pie">
+		<INGREDIENT>
+			<PRODUCT>meat</PRODUCT>
+			<PRODUCT>flour</PRODUCT>
+			<PRODUCT>eggs</PRODUCT>
+		</INGREDIENT>
+		<SNIPPET>A meat pie is a pie with a filling of meat and...</SNIPPET>
+                <IMG>Resources/images/mmeat.png</IMG>
+		
+	</RECIPE>
+</USER>
