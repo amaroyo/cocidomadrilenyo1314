@@ -48,8 +48,8 @@ public class Query {
         ArrayList <String> mandatory = getIByP(ingredients,MUST);
         recipes.clear();
         
-        String query=PREFIXES+"select ?recipe ?name_of_recipe where{";
-        for (Ingredient ing : ingredients) {
+    String query=PREFIXES+"select ?recipe ?name_of_recipe where{";
+    for (Ingredient ing : ingredients) {
             i=ing.getIngredientName();
             if(ing.getPriority() != NOT){
                 query += "?recipe dbo:ingredient dbres:" + i + ".\n";
@@ -116,19 +116,20 @@ public class Query {
      * @param recipe is a dbresource
      * @return an arrayList of Strings (ingredient names)
      */
-    public static ArrayList <String> ingredientsOfRecipe(Resource recipe){
+    public static ArrayList <String> ingredientsOfRecipe(Resource resRecipe){
+        String recipe = resRecipe.toString().substring(28);
         ArrayList <String> ingredients = new ArrayList<>();
         ingredients.clear();
         String query=PREFIXES+"select ?ingredient_names where{";
-        query += recipe.toString()+" dbo:ingredient ?ingredients.\n"
-                    + "?ingredients dbpprop:name ?ingredient_names.\n";
+        query +="dbres:"+recipe+" dbo:ingredient ?ingredients."
+                    + "?ingredients dbpprop:name ?ingredient_names.";
         query+="}";
         QueryExecution qe=QueryExecutionFactory.sparqlService(SERVICE, query);
         ResultSet rs=qe.execSelect();
         while(rs.hasNext()){
             QuerySolution s=rs.nextSolution();
             Literal name=s.getLiteral("?ingredient_names");
-            ingredients.add(name.getString());            
+            ingredients.add(name.getString().replaceAll("[\"<>ºª|·$%&/()=~€¬`^¨çÇ_+*;:\\-\\[\\]\\\\]", ""));            
         }
         return ingredients;
             
@@ -138,10 +139,11 @@ public class Query {
      * @param recipe
      * @return the description in a String form.
      */
-    public static String snippetOfRecipe(Resource recipe){
+    public static String snippetOfRecipe(Resource resRecipe){
+        String recipe = resRecipe.toString().substring(28);
         String snippet = "No description available.";
         String query=PREFIXES+"select ?snippet where{"
-                + recipe.toString() + "dbo:abstract ?snippet.\n"
+                +"dbres:"+recipe+" dbo:abstract ?snippet.\n"
                 + "FILTER (langMatches(lang(?snippet),\"en\"))\n"
                 + "}";
         QueryExecution qe=QueryExecutionFactory.sparqlService(SERVICE, query);
@@ -151,6 +153,8 @@ public class Query {
             Literal snipLiteral = s.getLiteral("?snippet");
             snippet = snipLiteral.getString();
         }
+        snippet = snippet.replaceAll("[\"<>ºª|·$%&/()=~€¬`^¨çÇ_+*;:\\-\\[\\]\\\\]", "");
+        
         return snippet;
     }
     /**
@@ -158,21 +162,42 @@ public class Query {
      * @param recipe
      * @return the image link in a String form.
      */    
-    public static String imageOfRecipe(Resource recipe){
+    public static String imageOfRecipe(Resource resRecipe){
+        String recipe = resRecipe.toString().substring(28);
         String image = "No image available.";
         String query=PREFIXES+"select ?image where{"
-                + recipe.toString() + "dbo:thumbnail ?image.\n"
+                +"dbres:"+recipe+" dbo:thumbnail ?image.\n"
                 + "}";
         QueryExecution qe=QueryExecutionFactory.sparqlService(SERVICE, query);
         ResultSet rs=qe.execSelect();
         while(rs.hasNext()){
             QuerySolution s=rs.nextSolution();
-            Literal imLiteral = s.getLiteral("?image");
-            image = imLiteral.getString();
+            Resource imLiteral = s.getResource("?image");
+            image = imLiteral.toString();
         }
         return image;
     }
-    
+    /**
+     * Returns the image of the requested recipe.
+     * @param recipe
+     * @return the image link in a String form.
+     */    
+    public static String nameOfRecipe(Resource resRecipe){
+        String recipe = resRecipe.toString().substring(28);
+        String name = "No name available.";
+        String query=PREFIXES+"select ?name where{"
+                +"dbres:"+recipe+" dbpprop:name ?name.\n"
+                + "}";
+        QueryExecution qe=QueryExecutionFactory.sparqlService(SERVICE, query);
+        ResultSet rs=qe.execSelect();
+        while(rs.hasNext()){
+            QuerySolution s=rs.nextSolution();
+            Literal imLiteral = s.getLiteral("?name");
+            name = imLiteral.getString();
+        }
+        name = name.replaceAll("[\"<>ºª|·$%&/()=~€¬`^¨çÇ_+*;:\\-\\[\\]\\\\]", "");
+        return name;
+    }
     
     /**
      * getIByP stands for Get ingredients by priority.
