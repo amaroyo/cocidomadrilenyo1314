@@ -45,6 +45,7 @@ public class Interface {
     @Path("/recipe/{id}")
     @Produces(XML_MIME)
     public String getRecipe (@PathParam ("id") String userID) {
+        System.out.println("HA LLEGADO A PEDIR RECETAS getrecipes"+userID);
         return controller.getRecipe(userID);
     }
     
@@ -54,6 +55,7 @@ public class Interface {
     public void putRecipe (@PathParam ("id") String userID,
                            String content) {
         controller.putRecipe(userID, content);
+                System.out.println("he guardado las recetas");
     }
     
     @GET

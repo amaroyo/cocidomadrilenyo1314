@@ -34,10 +34,12 @@ public class Controller {
         int id = Integer.parseInt(userID);
         boolean existence = user.get(id).ingredientExists(ingr);
         //marshal ingredient
+        System.out.println("returning");
         return parser.marshalIngredient(ingr.getIngredientName(), existence);
     }
     
     public void putRecipe (String userID, String content) {
+        System.out.println(content);
         ArrayList <Ingredient> ingrList;
         ingrList = parser.unmarshal(content, true);
         int id = Integer.parseInt(userID);
@@ -49,7 +51,9 @@ public class Controller {
         ArrayList <Recipe> recipes;
         recipes = user.get(id).getRecipes();
         
-        return parser.marshalRecipe(recipes);
+        String s = parser.marshalRecipe(recipes);
+        System.out.println("\n\n\nRECIPES:\n"+s);
+        return s;
     }
     
     public String getRecommendations (String userID) {

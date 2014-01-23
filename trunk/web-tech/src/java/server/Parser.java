@@ -47,7 +47,7 @@ public class Parser {
             }
             return ingrList;
         } catch(Exception ex) {
-            
+            ex.printStackTrace();
         }
         
         return null;
