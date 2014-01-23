@@ -92,10 +92,9 @@ public class Interface {
     }
     
     @PUT
-    @Path("/db/{id}")
+    @Path("/recipe/like")
     @Consumes(XML_MIME)
-    public void doSomethingWithDB (@PathParam ("id") String userID,
-                                   String content) {
+    public void putRecipeTop (String content) {
         controller.likedRecipe(content);
     }
     
