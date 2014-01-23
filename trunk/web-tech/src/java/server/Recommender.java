@@ -60,7 +60,6 @@ public class Recommender {
      */
     private void addNewIngredient(String newIngredient){
         boolean exists = false;
-        System.out.println("Tamaño ingredients recom: "+ingredients.size());
         for(int i = 0; i < this.ingredients.size(); i++){
             if(ingredients.get(i).getIngredientName().equals(newIngredient)){
                 ingredients.get(i).increment();
