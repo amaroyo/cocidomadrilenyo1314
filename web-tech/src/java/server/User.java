@@ -98,7 +98,6 @@ public class User {
         temp.clear();
         temp.add(ing);
         ArrayList<Recipe> recipes = Query.recipes(temp);
-        System.out.println("COMPROBANDO RECETAS VACIO? "+recipes.isEmpty());
         //return true;
         return !recipes.isEmpty();
     }

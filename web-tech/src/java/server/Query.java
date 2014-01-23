@@ -50,6 +50,7 @@ public class Query {
         ArrayList <String> mandatory = new ArrayList<>();
         mandatory.clear();
         mandatory = getIByP(ingredients,MUST);
+        
         recipes.clear();
        
     String query=PREFIXES+"select ?recipe ?name_of_recipe where{";
@@ -62,8 +63,7 @@ public class Query {
         query+="?recipe dbpprop:name ?name_of_recipe.\n";
         query+="}LIMIT 100";
         QueryExecution qe=QueryExecutionFactory.sparqlService(SERVICE, query);
-      
-        
+        System.out.println("antes del exec select");
             ResultSet rs=qe.execSelect();
             Recipe auxRec;
             while(rs.hasNext()){
@@ -73,27 +73,21 @@ public class Query {
                 System.out.println(recipeFound.toString().substring(28));
                 try{
                     if(!recipeFound.toString().substring(28).contains("'") && !recipeFound.toString().substring(28).contains("(")){
-                        //System.out.println("NOT CONTAINS!!!!!");
+                        System.out.println("NOT CONTAINS!");
                         auxRec = new Recipe(nameOfRecipe.getString(), ingredientsOfRecipe(recipeFound), snippetOfRecipe(recipeFound), imageOfRecipe(recipeFound));
                         if(mandatory.isEmpty() && nonDesired.isEmpty()){
-                            System.out.println("Hace add!!!!!!!!!!!!!!!!!!!!!!! Bieeeeeen :D");
-                            System.out.println("Tamaño recetas: "+recipes.size());
+                            System.out.println("Recipe Size: "+recipes.size());
                             recipes.add(auxRec);
                         }else if(!auxRec.hasIngredients(nonDesired) && auxRec.hasIngredients(mandatory)){
-                            System.out.println("Hace add en else!!!!!!!!!!!!!!!!!!!!!!! Bieeeeeen :D");
-                            System.out.println("Tamaño recetas: "+recipes.size());
+                            System.out.println("Recipe Size: "+recipes.size());
                             recipes.add(auxRec);
                         }
-                        System.out.println("Terminó de buscar recetas!!");
                     }
                 }catch(Exception ex){
-                    System.out.println("Tamaño recetas: "+recipes.size());
                 }
-                
-            
-       
-           
         }
+        System.out.println("Finished looking recipes.");
+
         return recipes;
     }
     /**
@@ -152,11 +146,11 @@ public class Query {
             Literal name=s.getLiteral("?ingredient_names");
             ingredients.add(name.getString().replaceAll("[\"<>ºª|·$%&/()=~€¬`^¨çÇ_+*;:\\-\\[\\]\\\\]", ""));            
         }
-//        System.out.print("Ingredients: ");
-//        for(int i=0;i<ingredients.size();i++){
-//            System.out.print(ingredients.get(i));
-//        }
-//        System.out.println("");
+        System.out.print("Ingredients: ");
+        for(int i=0;i<ingredients.size();i++){
+            System.out.print(ingredients.get(i));
+        }
+        System.out.println("");
         return ingredients;
            
     }
@@ -181,7 +175,7 @@ public class Query {
         }
         snippet = snippet.replaceAll("[\"<>ºª|·$%&/()=~€¬`^¨çÇ_+*;:\\-\\[\\]\\\\]", "");
        
-        //System.out.println("Snippet: "+snippet);
+        System.out.println("Snippet: "+snippet);
         return snippet;
     }
     /**
@@ -202,7 +196,7 @@ public class Query {
             Resource imLiteral = s.getResource("?image");
             image = imLiteral.toString();
         }
-        //System.out.println("Image: "+image);
+        System.out.println("Image: "+image);
         return image;
     }
     /**
