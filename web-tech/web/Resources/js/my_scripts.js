@@ -117,13 +117,6 @@ function resultados(recipes,file,div) {
    document.getElementById("resultadosRecetas").innerHTML=html;
 }
 
-function likeRecipe() {
-    initRequest();
-    xmlhttp.open("PUT",url,true);
-    xmlhttp.setRequestHeader("Content-type","application/xml");
-    xmlhttp.send(xml);
-}
-
 function showRecipes(file,div) {
     if (xmlhttp.readyState===4) {
         if(xmlhttp.status===200) //GET returning a response
@@ -134,43 +127,43 @@ function showRecipes(file,div) {
 }//function
 
 
-function getRelated(url) {
+function getRelated() {
     initRequest();
     xmlhttp.onreadystatechange=showRecipes("related.html","misrelacionadas");
-    xmlhttp.open("GET",url,true);
+    xmlhttp.open("GET","http://localhost:8080/web-tech/webresources/lookandcook/related/"+user,true);
     xmlhttp.send();
 }
 
-function getRecommended(url) {
+function getRecommended() {
     initRequest();
     xmlhttp.onreadystatechange=showRecipes("recommended.html","misrecomendaciones");
-    xmlhttp.open("GET",url,true);
+    xmlhttp.open("GET","http://localhost:8080/web-tech/webresources/lookandcook/recommendations/"+user,true);
     xmlhttp.send();
 }
 
-function getRecipe(url) {
+function getRecipe() {
     initRequest();
     xmlhttp.onreadystatechange=showRecipes("recetas.html","misrecetas");
-    xmlhttp.open("GET",url,true);
+    xmlhttp.open("GET",'http://localhost:8080/web-tech/webresources/lookandcook/recipe/'+user,true);
     xmlhttp.send();
 }
 
-function putRecipe(url) {
+function putRecipe() {
     if (xmlhttp.readyState===4) {
         if(xmlhttp.status===200) //PUT returning a response
           {
-          getRecipe(url);
-          getRecommended("http://localhost:8080/web-tech/webresources/lookandcook/recommendations/"+user);
-          getRelated("http://localhost:8080/web-tech/webresources/lookandcook/related/"+user);
+          getRecipe();
+          getRecommended();
+          getRelated();
           }
     }
 }
 
-function searchRecipes(url) { 
+function searchRecipes() { 
     var xml = formatUser(products);
     initRequest();
-    xmlhttp.onreadystatechange=putRecipe(url);
-    xmlhttp.open("PUT",url,true);
+    xmlhttp.onreadystatechange=putRecipe();
+    xmlhttp.open("PUT",'http://localhost:8080/web-tech/webresources/lookandcook/recipe/'+user,true);
     xmlhttp.setRequestHeader("Content-type","application/xml");
     xmlhttp.send(xml);
 }
@@ -198,6 +191,20 @@ function formatLi(ing) {
 function formatUser(something) {
     var xml="<USER>"+something+"</USER>";
     return xml;
+}
+
+function likeRecipe(url) {
+    initRequest();
+    xmlhttp.open("PUT",url,true);
+    xmlhttp.setRequestHeader("Content-type","application/xml");
+    xmlhttp.send(xml);
+}
+
+function topRecipes(url) {
+    initRequest();
+    xmlhttp.onreadystatechange=showTop();
+    xmlhttp.open("GET",url,true);
+    xmlhttp.send();
 }
 
 var ingredients = ["almonds",

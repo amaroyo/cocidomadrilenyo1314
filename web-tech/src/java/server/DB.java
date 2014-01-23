@@ -85,7 +85,6 @@ public class DB {
                         int i = 0;
                         if(rs.next() && i != 10) {
                             tops.add(rs.getString("recipeName"));
-                            i++;
                         }
                         rs.close(); // close result set
                         s.close(); // close statement
