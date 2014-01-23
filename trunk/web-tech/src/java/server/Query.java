@@ -18,7 +18,7 @@ import java.util.List;
 
 /**
  * Class to use all the query methods from all the project.
- * 
+ *
  * @author Plasavall
  */
 public class Query {
@@ -29,78 +29,68 @@ public class Query {
     static String PREFIXES = "PREFIX dbo:<http://dbpedia.org/ontology/> "
                       +"PREFIX dbres: <http://dbpedia.org/resource/> "
                       +"PREFIX dbpprop: <http://dbpedia.org/property/> ";
-    
-    
+   
+   
     private static Combination combination = new Combination();
-    
-    
-    public static ArrayList <Recipe> recipes(ArrayList <Ingredient> ingredients){
-        ArrayList <Recipe> recipesFound = new ArrayList<>();
-        ArrayList <String> aux = new ArrayList<>();
-        recipesFound.clear();
-        aux.clear();
-        for(int j=0; j<ingredients.size();j++){
-            aux.add(ingredients.get(j).getIngredientName());
-        }
-        for(int i=0;i<Controller.dbpedia.size();i++){
-            if(Controller.dbpedia.get(i).hasIngredients(aux))
-                recipesFound.add(Controller.dbpedia.get(i));
-        }
-        return recipesFound;
-    }
-    
+   
+   
     /**
      * Queries a list of recipes given a list of ingredients.
-     * It's exclusive (Only the recipes containing at least that exact 
+     * It's exclusive (Only the recipes containing at least that exact
      * ingredients are retrieved.
      * @param ingredients
      * @return a ResultSet of recipes containing the given list of ingredients
      */
-//    public static ArrayList <Recipe> recipes(ArrayList<Ingredient> ingredients){
-//        String i;
-//        ArrayList <Recipe> recipes = new ArrayList<>();
-//        ArrayList <String> nonDesired = getIByP(ingredients,NOT);
-//        ArrayList <String> mandatory = getIByP(ingredients,MUST);
-//        recipes.clear();
-//        
-//    String query=PREFIXES+"select ?recipe ?name_of_recipe where{";
-//    for (Ingredient ing : ingredients) {
-//            i=ing.getIngredientName();
-//            if(ing.getPriority() != NOT){
-//                query += "?recipe dbo:ingredient dbres:" + i + ".\n";
-//            }
-//        }
-//        query+="?recipe dbpprop:name ?name_of_recipe.\n";
-//        query+="}";
-//        QueryExecution qe=QueryExecutionFactory.sparqlService(SERVICE, query);
-//        System.out.println("antes de query exec select");
-//        try {
-//            ResultSet rs=qe.execSelect();
-//            Recipe auxRec;
-//            while(rs.hasNext()){
-//                QuerySolution s=rs.nextSolution();
-//                Resource recipeFound = s.getResource("?recipe");
-//                Literal nameOfRecipe = s.getLiteral("?name_of_recipe");
-//                auxRec = new Recipe(nameOfRecipe.getString(), ingredientsOfRecipe(recipeFound), snippetOfRecipe(recipeFound), imageOfRecipe(recipeFound));
-//                if(!auxRec.hasIngredients(nonDesired) && auxRec.hasIngredients(mandatory)){
-//                    recipes.add(auxRec);
-//                }
-//            }
-//        } catch(Exception ex) { //ex.printStackTrace();
-//            
-//        }
-//        return recipes;
-//    }
+    public static ArrayList <Recipe> recipes(ArrayList<Ingredient> ingredients){
+        String i;
+        ArrayList <Recipe> recipes = new ArrayList<>();
+        ArrayList <String> nonDesired = getIByP(ingredients,NOT);
+        ArrayList <String> mandatory = getIByP(ingredients,MUST);
+        recipes.clear();
+       
+    String query=PREFIXES+"select ?recipe ?name_of_recipe where{";
+    for (Ingredient ing : ingredients) {
+            i=ing.getIngredientName();
+            if(ing.getPriority() != NOT){
+                query += "?recipe dbo:ingredient dbres:" + i + ".\n";
+            }
+        }
+        query+="?recipe dbpprop:name ?name_of_recipe.\n";
+        query+="}";
+        QueryExecution qe=QueryExecutionFactory.sparqlService(SERVICE, query);
+        System.out.println("antes de query exec select");
+      
+            ResultSet rs=qe.execSelect();
+            Recipe auxRec;
+            while(rs.hasNext()){
+                QuerySolution s=rs.nextSolution();
+                Resource recipeFound = s.getResource("?recipe");
+                Literal nameOfRecipe = s.getLiteral("?name_of_recipe");
+                System.out.println(recipeFound.toString().substring(28));
+                if(!recipeFound.toString().substring(28).contains("'") && !recipeFound.toString().substring(28).contains("(")){
+                    System.out.println("NOT CONTAINS!!!!!");
+                    auxRec = new Recipe(nameOfRecipe.getString(), ingredientsOfRecipe(recipeFound), snippetOfRecipe(recipeFound), imageOfRecipe(recipeFound));
+                    if(!auxRec.hasIngredients(nonDesired) && auxRec.hasIngredients(mandatory)){
+                        recipes.add(auxRec);
+                    }
+                }
+                
+            
+       
+           
+        }
+        return recipes;
+    }
     /**
      * This method returns the recipes of the result of querying with the combinations
      * of 'hits' ingredients.
-     * 
+     *
      * @param ingredients
      * @param hits
-     * @return 
+     * @return
      */
     public static ArrayList <Recipe> recipes(ArrayList<Ingredient> ingredients, int hits){
-        
+       
         if(hits > ingredients.size()) return null;
         if(hits == ingredients.size()) return recipes(ingredients);
         ArrayList <Recipe> recipesFound = new ArrayList<>();
@@ -127,12 +117,13 @@ public class Query {
         }
     }
     /**
-     * 
+     *
      * @param recipe is a dbresource
      * @return an arrayList of Strings (ingredient names)
      */
     public static ArrayList <String> ingredientsOfRecipe(Resource resRecipe){
         String recipe = resRecipe.toString().substring(28);
+        System.out.println("dbres:"+recipe);
         ArrayList <String> ingredients = new ArrayList<>();
         ingredients.clear();
         String query=PREFIXES+"select ?ingredient_names where{";
@@ -146,8 +137,13 @@ public class Query {
             Literal name=s.getLiteral("?ingredient_names");
             ingredients.add(name.getString().replaceAll("[\"<>ºª|·$%&/()=~€¬`^¨çÇ_+*;:\\-\\[\\]\\\\]", ""));            
         }
+        System.out.print("Ingredients: ");
+        for(int i=0;i<ingredients.size();i++){
+            System.out.print(ingredients.get(i));
+        }
+        System.out.println("");
         return ingredients;
-            
+           
     }
     /**
      * Returns the description (in english) of the requested recipe.
@@ -169,7 +165,8 @@ public class Query {
             snippet = snipLiteral.getString();
         }
         snippet = snippet.replaceAll("[\"<>ºª|·$%&/()=~€¬`^¨çÇ_+*;:\\-\\[\\]\\\\]", "");
-        
+       
+        System.out.println("Snippet: "+snippet);
         return snippet;
     }
     /**
@@ -190,6 +187,7 @@ public class Query {
             Resource imLiteral = s.getResource("?image");
             image = imLiteral.toString();
         }
+        System.out.println("Image: "+image);
         return image;
     }
     /**
@@ -213,14 +211,14 @@ public class Query {
         name = name.replaceAll("[\"<>ºª|·$%&/()=~€¬`^¨çÇ_+*;:\\-\\[\\]\\\\]", "");
         return name;
     }
-    
+   
     /**
      * getIByP stands for Get ingredients by priority.
      * It returns a list of the ingredient names in that list that have the
      * given priority
      * @param ingredients
      * @param priority
-     * @return 
+     * @return
      */
     private static ArrayList <String> getIByP(ArrayList<Ingredient> ingredients, int priority){
         ArrayList <String> result = new ArrayList<>();
@@ -233,16 +231,16 @@ public class Query {
 
     /**
      * It returns the indexes of the ingredients in each combination.
-     * 
+     *
      * @param elements number of ingredients
      * @param hits number of elements per combination
-     * @return 
+     * @return
      */
     private static ArrayList<int[]> giveCombinations(int elements, int hits) {
         ArrayList <String> temp = new ArrayList <> ();
         for(int i = 0; i < hits; i++)
             temp.add(i+"");
-        
+       
         combination.setter(temp, hits);
         Iterator s = combination.iterator();  
         ArrayList<List<String>>  l2 = new ArrayList();  
@@ -251,15 +249,15 @@ public class Query {
             List<String> listares = (List<String>) s.next();  
             l2.add(listares);
         }
-        
+       
         ArrayList <int[]> al = new ArrayList <> ();
-		  for(int i = 0; i < l2.size(); i++) {
-			  int[] pos = new int[l2.get(i).size()];
-			  for(int j = 0; j < l2.get(i).size(); j++) {
-				  pos[j] = Integer.parseInt(l2.get(i).get(j));
-			  }
-			  al.add(pos);
-		  }
+                  for(int i = 0; i < l2.size(); i++) {
+                          int[] pos = new int[l2.get(i).size()];
+                          for(int j = 0; j < l2.get(i).size(); j++) {
+                                  pos[j] = Integer.parseInt(l2.get(i).get(j));
+                          }
+                          al.add(pos);
+                  }
         return al;
     }
 

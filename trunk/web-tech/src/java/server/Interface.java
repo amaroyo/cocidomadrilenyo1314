@@ -94,7 +94,7 @@ public class Interface {
     @PUT
     @Path("/recipe/like")
     @Consumes(XML_MIME)
-    public void putRecipeTop (String content) {
+    public void doSomethingWithDB (String content) {
         controller.likedRecipe(content);
     }
     

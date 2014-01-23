@@ -6,7 +6,7 @@
 
 package server;
 
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -61,16 +61,25 @@ public class Recommender {
         if(!exists) ingredients.add(new Ingredient(newIngredient, 0));
     }
   
-    public class CustomComparator implements Comparator<Ingredient> {
-        public int compare(Ingredient o1, Ingredient o2) {
-            return o1.getCount()-o2.getCount();
-        }
-    }
     /**
      * Sorts the list of ingredients by the value of their counters.
      */
     private void sortList(){
-        Collections.sort(ingredients, new CustomComparator());
+        ArrayList <Ingredient> newList = new ArrayList<>();
+        newList.clear();
+        Ingredient mostCommon = ingredients.get(0);
+        for(int i=0;i<ingredients.size()-1;i++){
+            for(int j=i+1;j<ingredients.size();j++){ 
+                if(i != j) {
+                    if(ingredients.get(j).getCount()>mostCommon.getCount()){
+                        mostCommon=ingredients.get(j);
+                    }
+                }
+            }
+            newList.add(mostCommon);
+            ingredients.remove(mostCommon);
+        }
+        ingredients=newList;
     }
     
     private void recommend(){
