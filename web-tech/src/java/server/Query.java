@@ -60,7 +60,7 @@ public class Query {
             }
         }
         query+="?recipe dbpprop:name ?name_of_recipe.\n";
-        query+="}";
+        query+="}LIMIT 100";
         QueryExecution qe=QueryExecutionFactory.sparqlService(SERVICE, query);
       
         
@@ -70,7 +70,7 @@ public class Query {
                 QuerySolution s=rs.nextSolution();
                 Resource recipeFound = s.getResource("?recipe");
                 Literal nameOfRecipe = s.getLiteral("?name_of_recipe");
-                //System.out.println(recipeFound.toString().substring(28));
+                System.out.println(recipeFound.toString().substring(28));
                 try{
                     if(!recipeFound.toString().substring(28).contains("'") && !recipeFound.toString().substring(28).contains("(")){
                         //System.out.println("NOT CONTAINS!!!!!");
@@ -256,6 +256,9 @@ public class Query {
      * @return
      */
     private static ArrayList<int[]> giveCombinations(int elements, int hits) {
+        if(hits == 0) {
+            
+        }
         ArrayList <String> temp = new ArrayList <> ();
         for(int i = 0; i < hits; i++)
             temp.add(i+"");

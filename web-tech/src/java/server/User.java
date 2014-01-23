@@ -69,7 +69,7 @@ public class User {
         //requested ingredients possible.
         int hits = clientIngredients.size()-1;
         if(recipesFound.isEmpty()){
-            while(recipesFound.isEmpty()){
+            while(recipesFound.isEmpty() && hits>0){
                 recipesFound = Query.recipes(clientIngredients, hits);
                 hits--;
                 if(recipesFound == null){
