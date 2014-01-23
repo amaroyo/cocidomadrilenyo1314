@@ -56,6 +56,7 @@ public class Interface {
                            String content) {
         controller.putRecipe(userID, content);
                 System.out.println("he guardado las recetas");
+                return;
     }
     
     @GET

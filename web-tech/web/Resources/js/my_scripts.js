@@ -45,7 +45,6 @@ function addIngredient() {
               document.getElementById("InvalidIngredient").innerHTML = invalido;
           }
           else {
-              alert("valido");
                 var li=formatLi(ing);
                 if(document.getElementById('Choices_0').checked) {
                     //Like radio button is checked
@@ -120,6 +119,8 @@ function resultados(recipes,file,div) {
 
 function showRecipes(file,div) {
     if (xmlhttp.readyState===4) {
+        
+          alert(xmlhttp.status);
         if(xmlhttp.status===200) //GET returning a response
           {
           resultados(xmlhttp.responseXML.getElementsByTagName("RECIPE"),file,div);
@@ -144,18 +145,16 @@ function getRecommended() {
 
 function getRecipe() {
     initRequest();
+    alert(xmlhttp.readyState);
     xmlhttp.onreadystatechange=showRecipes("recetas.html","misrecetas");
     xmlhttp.open("GET",'http://localhost:8080/web-tech/webresources/lookandcook/recipe/'+user,true);
     xmlhttp.send();
 }
 
 function putRecipe() {
-    alert(xmlhttp.readyState);
     if (xmlhttp.readyState===4) {
-        alert("ready");
-        if(xmlhttp.status===200) //PUT returning a response
+        if(xmlhttp.status===204) //PUT returning a response
           {
-              alert("envio get recipe");
           getRecipe();
           getRecommended();
           getRelated();
@@ -166,10 +165,11 @@ function putRecipe() {
 function searchRecipes() { 
     var xml = formatUser(products);
     initRequest();
-    xmlhttp.onreadystatechange=putRecipe();
+    xmlhttp.onreadystatechange=putRecipe;
     xmlhttp.open("PUT",'http://localhost:8080/web-tech/webresources/lookandcook/recipe/'+user,true);
     xmlhttp.setRequestHeader("Content-type","application/xml");
     xmlhttp.send(xml);
+    
 }
 
 function formatIngredient(ings) {
@@ -206,7 +206,7 @@ function likeRecipe(url) {
 
 function topRecipes(url) {
     initRequest();
-    xmlhttp.onreadystatechange=showTop();
+    xmlhttp.onreadystatechange=showTop;
     xmlhttp.open("GET",url,true);
     xmlhttp.send();
 }

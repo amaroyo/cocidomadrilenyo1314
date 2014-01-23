@@ -16,6 +16,11 @@ public class RelatedMeals {
     
     private ArrayList <Recipe> relatedRecipes;
     
+    
+    public RelatedMeals(){
+        relatedRecipes = new ArrayList<>();
+        relatedRecipes.clear();
+    }
         /**
          * 1 Vamos a copiar y pegar las funciones de query a esta clase?
          * 
@@ -37,10 +42,11 @@ public class RelatedMeals {
      * @param startHits 
      */
     public void updateRecipes(ArrayList <Ingredient> ingredients, int startHits){ 
-//        for(int hits = startHits; hits>0;hits--){
-//            //This is supposed to concatenate both ArrayLists.
-//            relatedRecipes.addAll(Query.recipes(ingredients,hits));
-//        }
+        System.out.println("Tamaño ingredients related: "+ingredients.size());
+        for(int hits = startHits; hits>0;hits--){
+            //This is supposed to concatenate both ArrayLists.
+            relatedRecipes.addAll(Query.recipes(ingredients,hits));
+        }
     }
 
     ArrayList<Recipe> getRelatedMeals() {
