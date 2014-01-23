@@ -34,6 +34,21 @@ public class Query {
     private static Combination combination = new Combination();
     
     
+    public static ArrayList <Recipe> recipes(ArrayList <Ingredient> ingredients){
+        ArrayList <Recipe> recipesFound = new ArrayList<>();
+        ArrayList <String> aux = new ArrayList<>();
+        recipesFound.clear();
+        aux.clear();
+        for(int j=0; j<ingredients.size();j++){
+            aux.add(ingredients.get(j).getIngredientName());
+        }
+        for(int i=0;i<Controller.dbpedia.size();i++){
+            if(Controller.dbpedia.get(i).hasIngredients(aux))
+                recipesFound.add(Controller.dbpedia.get(i));
+        }
+        return recipesFound;
+    }
+    
     /**
      * Queries a list of recipes given a list of ingredients.
      * It's exclusive (Only the recipes containing at least that exact 
@@ -41,41 +56,41 @@ public class Query {
      * @param ingredients
      * @return a ResultSet of recipes containing the given list of ingredients
      */
-    public static ArrayList <Recipe> recipes(ArrayList<Ingredient> ingredients){
-        String i;
-        ArrayList <Recipe> recipes = new ArrayList<>();
-        ArrayList <String> nonDesired = getIByP(ingredients,NOT);
-        ArrayList <String> mandatory = getIByP(ingredients,MUST);
-        recipes.clear();
-        
-    String query=PREFIXES+"select ?recipe ?name_of_recipe where{";
-    for (Ingredient ing : ingredients) {
-            i=ing.getIngredientName();
-            if(ing.getPriority() != NOT){
-                query += "?recipe dbo:ingredient dbres:" + i + ".\n";
-            }
-        }
-        query+="?recipe dbpprop:name ?name_of_recipe.\n";
-        query+="}";
-        QueryExecution qe=QueryExecutionFactory.sparqlService(SERVICE, query);
-        System.out.println("antes de query exec select");
-        try {
-            ResultSet rs=qe.execSelect();
-            Recipe auxRec;
-            while(rs.hasNext()){
-                QuerySolution s=rs.nextSolution();
-                Resource recipeFound = s.getResource("?recipe");
-                Literal nameOfRecipe = s.getLiteral("?name_of_recipe");
-                auxRec = new Recipe(nameOfRecipe.getString(), ingredientsOfRecipe(recipeFound), snippetOfRecipe(recipeFound), imageOfRecipe(recipeFound));
-                if(!auxRec.hasIngredients(nonDesired) && auxRec.hasIngredients(mandatory)){
-                    recipes.add(auxRec);
-                }
-            }
-        } catch(Exception ex) { //ex.printStackTrace();
-            
-        }
-        return recipes;
-    }
+//    public static ArrayList <Recipe> recipes(ArrayList<Ingredient> ingredients){
+//        String i;
+//        ArrayList <Recipe> recipes = new ArrayList<>();
+//        ArrayList <String> nonDesired = getIByP(ingredients,NOT);
+//        ArrayList <String> mandatory = getIByP(ingredients,MUST);
+//        recipes.clear();
+//        
+//    String query=PREFIXES+"select ?recipe ?name_of_recipe where{";
+//    for (Ingredient ing : ingredients) {
+//            i=ing.getIngredientName();
+//            if(ing.getPriority() != NOT){
+//                query += "?recipe dbo:ingredient dbres:" + i + ".\n";
+//            }
+//        }
+//        query+="?recipe dbpprop:name ?name_of_recipe.\n";
+//        query+="}";
+//        QueryExecution qe=QueryExecutionFactory.sparqlService(SERVICE, query);
+//        System.out.println("antes de query exec select");
+//        try {
+//            ResultSet rs=qe.execSelect();
+//            Recipe auxRec;
+//            while(rs.hasNext()){
+//                QuerySolution s=rs.nextSolution();
+//                Resource recipeFound = s.getResource("?recipe");
+//                Literal nameOfRecipe = s.getLiteral("?name_of_recipe");
+//                auxRec = new Recipe(nameOfRecipe.getString(), ingredientsOfRecipe(recipeFound), snippetOfRecipe(recipeFound), imageOfRecipe(recipeFound));
+//                if(!auxRec.hasIngredients(nonDesired) && auxRec.hasIngredients(mandatory)){
+//                    recipes.add(auxRec);
+//                }
+//            }
+//        } catch(Exception ex) { //ex.printStackTrace();
+//            
+//        }
+//        return recipes;
+//    }
     /**
      * This method returns the recipes of the result of querying with the combinations
      * of 'hits' ingredients.
