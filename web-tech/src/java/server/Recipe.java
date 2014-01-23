@@ -64,13 +64,19 @@ public class Recipe {
     public void setRecipeName(String name){
         this.recipeName = name;
     }
-    public boolean hasIngredients(ArrayList <String> ing){
-        boolean contained = true;
+    public boolean hasIngredients(ArrayList <String> ings){
+        for(int i = 0; i<ings.size();i++){
+            if(!this.hasIngredient(ings.get(i)))
+                return false;
+        }
+        return true;
+    }
+    
+    public boolean hasIngredient(String ing){
+        boolean contained = false;
         for(int i = 0; i< this.ingredient.size(); i++){
-            for(int j=0;j<ing.size();j++){
-                if(!ing.get(j).contains(this.ingredient.get(i)) && !this.ingredient.get(i).contains(ing.get(j))){
-                    contained = false;
-                }
+                if(ing.equals(this.ingredient.get(i)) || this.ingredient.get(i).equals(ing)){
+                    contained = true;
             }
         }
         return contained;        
