@@ -1,6 +1,13 @@
 var xmlhttp;
 var isIE;
 var user;
+var megusta="";
+var nomegusta="";
+var quiza="";
+var invalido = "<div id='mialerta' class='alert alert-warning alert-danger'><button type='button'" +
+                "class='close' data-dismiss='alert' aria-hidden='true'>&times;</button><strong>Warning!</strong>"+
+                        " That ingredient does not exist in DBPedia. Please, try again."+"</div>";
+var products ="";
 
 function initRequest() {
     if (window.XMLHttpRequest) {
@@ -28,20 +35,46 @@ function getUser(url) {
 }
 
 function addIngredient() {
-    var x,xx;
+    var x,ing;
+    
     if (xmlhttp.readyState===4) {
-        alert(xmlhttp.status);
-        if(xmlhttp.status===200) //PUT returning a response
-          {
+        if(xmlhttp.status===200) {//PUT returning a response
           x=xmlhttp.responseXML.getElementsByTagName("INGREDIENT")[0];
-          xx=x.getElementsByTagName("PRODUCT")[0].firstChild.nodeValue;
-          document.getElementById("prueba").innerHTML=xx;
+          ing=x.getElementsByTagName("PRODUCT")[0].firstChild.nodeValue;
+          if(ing === "invalid") {
+              document.getElementById("InvalidIngredient").innerHTML = invalido;
           }
-    }
-}
+          else {
+                var li=formatLi(ing);
+                if(document.getElementById('Choices_0').checked) {
+                    //Like radio button is checked
+                    megusta = megusta.concat(li);
+                    document.getElementById("meGustaUL").innerHTML=megusta;
+                    products = products.concat(formatIngredientRated(formatProduct(ing),1));
+                }
+                else {
+                    if(document.getElementById('Choices_1').checked) {
+                        //Maybe radio button is checked
+                        quiza = quiza.concat(li);
+                        document.getElementById("puedeUL").innerHTML=quiza;
+                        products = products.concat(formatIngredientRated(formatProduct(ing),0));
+                    }
+                    else {
+                        if(document.getElementById('Choices_2').checked) {
+                            //Dislike radio button is checked
+                            nomegusta = nomegusta.concat(li);
+                            document.getElementById("noMeGustaUL").innerHTML=nomegusta;
+                            products = products.concat(formatIngredientRated(formatProduct(ing),-1));
+                        }
+                    }//else
+                }//else
+          }//else valid ingredient
+        }//if status
+    }//if ready
+}//function
 
 function putIngredient(url,ing) { 
-    var xml = "<USER><INGREDIENT><PRODUCT>"+ing+"</PRODUCT></INGREDIENT></USER>";
+    var xml = formatUser(formatIngredient(formatProduct(ing)));
     initRequest();
     xmlhttp.onreadystatechange=addIngredient;
     xmlhttp.open("PUT",url,true);
@@ -49,69 +82,123 @@ function putIngredient(url,ing) {
     xmlhttp.send(xml);
 }
 
+function resultados(recipes,file,div) {
+    var att,img,ing,sni,xml,html,ingsaux;
+    xml='<ul class="media-list">';
+    html="";
+    for(var i=0;i<recipes.length;i++) {
+        att=recipes[i].getAttribute("NAME");
+        img=recipes[i].getElementsByTagName("IMG")[0].firstChild.nodeValue;
+        sni=x[i].getElementsByTagName("SNIPPET")[0].firstChild.nodeValue;
+        ing=recipes[i].getElementsByTagName("INGREDIENT").getElementsByTagName("PRODUCT");
+        ingsaux="";
+        for(var j=0;j<ing.length;j++) {
+            ings=ings+' '+ing[j].firstChild.nodeValue;
+            ingsaux=ingsaux+'<li>'+ing+'</li>';
+        }//for
+        xml=xml+'<li class="media"><a class="pull-left" href="'+img+'">'+
+                '<img class="media-object" src="Resources/icons/64x64/images.jpg">'+
+                        '</a><div class="media-body"><h4 class="media-heading">'+
+                        '<a class="highslide" onclick="return hs.htmlExpand(this, { contentId:'+"'highslide-html-ajax', wrapperClassName: 'highslide-white',"+ 
+                                    "outlineType: 'rounded-white', outlineWhileAnimating: true, objectType: 'ajax', preserveContent: true } )"+'"'+ 
+                                        'href="'+file+'#receta'+i+'">'+att+'</a></h4><h5>'+ings+'</h5></div></li>'+
+                        '<img src="Resources/icons/36x36/like.png" onclick="likeRecipe()"/>I Like it!';
+        html=html+'<div id="receta'+i+'"><div><div class="highslide-gallery">'+
+                  '<div id="imgReceta"><a href='+img+' class="highslide" onclick="return hs.expand(this)"></div>'+
+                  '<img src="Resources/icons/64x64/imageLoadRecipe.png" alt="Highslide JS" title="Click to enlarge" />'+
+                  '<div class="highslide-caption"></div></div>'+
+                  '<h2><div id="titleReceta">'+att+'</div></h2><p>'+
+                  '<div id="snippetReceta">'+sni+'</div></p>'+
+                  '<div><h3>Ingredients</h3><ul><div id="ingredientsReceta">'+ingsaux+'</div></ul></div>'+
+                  '<img src="Resources/icons/36x36/like.png" onclick="likeRecipe()"/>I Like it!';
+   }//for
+   xml=xml+'</ul>';
+   document.getElementById(div).innerHTML=xml;
+   document.getElementById("resultadosRecetas").innerHTML=html;
+}
 
-/*function loadXMLDoc(url) {
-	var xmlhttp;
-	var txt,x,i;
-	if (window.XMLHttpRequest)
-	  {// code for IE7+, Firefox, Chrome, Opera, Safari
-	  xmlhttp=new XMLHttpRequest();
-	  }
-	else
-	  {// code for IE6, IE5
-	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	  }
-	xmlhttp.onreadystatechange=function()
-	  {
-	  if (xmlhttp.readyState===4 && xmlhttp.status===200)
-		{
-		
-		x=xmlhttp.responseXML.documentElement.getElementsByTagName("RECIPE");
-		txt='<ul class="media-list">';
-		for (i=0;i<x.length;i++)
-		  {
-			txt=txt + '<li class="media">';
-			txt=txt + '<a class="pull-left" href="#">' +
-					'<img class="media-object" src="Resources/icons/64x64/images.jpg">' + 
-					'</a><div class="media-body">' +
-					'<h4 class="media-heading">' +
-					x[i].getAttribute('NAME') + '</h4>' +
-					'<h5>'+ x[i].getElementsByTagName("INGREDIENT")[0].innerHTML +'</h5>'+		
-					'<p>' + x[i].getElementsByTagName("SNIPPET")[0].innerHTML + '</p>' +
-					'</div></li>';
-			
-		  }
-		txt=txt + '</ul>';
-		document.getElementById('txtRecetas').innerHTML=txt;
-		}
-	  };
-	xmlhttp.open("GET",url,true);
-	xmlhttp.send();
-}*/
+function likeRecipe() {
+    initRequest();
+    xmlhttp.open("PUT",url,true);
+    xmlhttp.setRequestHeader("Content-type","application/xml");
+    xmlhttp.send(xml);
+}
 
-/*function newUser() {
-        
-        var xmlhttp;
-	if (window.XMLHttpRequest)
-	  {// code for IE7+, Firefox, Chrome, Opera, Safari
-	  xmlhttp=new XMLHttpRequest();
-	  }
-	else
-	  {// code for IE6, IE5
-	  xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	  }
-   
-	xmlhttp.onreadystatechange=function()
-	  {
-	  if (xmlhttp.readyState===4 && xmlhttp.status===200)
-		{
-		document.getElementById("IngredientButtonResult").innerHTML=xmlhttp.responseText;
-		}
-	  };
-        xmlhttp.open("GET","http://localhost:8080/web-tech/webresources/lookandcook/user",true);
-	xmlhttp.send();
-}*/
+function showRecipes(file,div) {
+    if (xmlhttp.readyState===4) {
+        if(xmlhttp.status===200) //GET returning a response
+          {
+          resultados(xmlhttp.responseXML.getElementsByTagName("RECIPE"),file,div);
+         }//if status
+    }//if state
+}//function
 
+
+function getRelated(url) {
+    initRequest();
+    xmlhttp.onreadystatechange=showRecipes("related.html","misrelacionadas");
+    xmlhttp.open("GET",url,true);
+    xmlhttp.send();
+}
+
+function getRecommended(url) {
+    initRequest();
+    xmlhttp.onreadystatechange=showRecipes("recommended.html","misrecomendaciones");
+    xmlhttp.open("GET",url,true);
+    xmlhttp.send();
+}
+
+function getRecipe(url) {
+    initRequest();
+    xmlhttp.onreadystatechange=showRecipes("recetas.html","misrecetas");
+    xmlhttp.open("GET",url,true);
+    xmlhttp.send();
+}
+
+function putRecipe(url) {
+    if (xmlhttp.readyState===4) {
+        if(xmlhttp.status===200) //PUT returning a response
+          {
+          getRecipe(url);
+          getRecommended("http://localhost:8080/web-tech/webresources/lookandcook/recommendations/"+user);
+          getRelated("http://localhost:8080/web-tech/webresources/lookandcook/related/"+user);
+          }
+    }
+}
+
+function searchRecipes(url) { 
+    var xml = formatUser(products);
+    initRequest();
+    xmlhttp.onreadystatechange=putRecipe(url);
+    xmlhttp.open("PUT",url,true);
+    xmlhttp.setRequestHeader("Content-type","application/xml");
+    xmlhttp.send(xml);
+}
+
+function formatIngredient(ings) {
+    var xml="<INGREDIENT>"+ings+"</INGREDIENT>";
+    return xml;
+}
+
+function formatIngredientRated(ing,rate) {
+    var xml="<INGREDIENT PRIORITY="+rate+">"+ing+"</INGREDIENT>";
+    return xml;
+}
+
+function formatProduct(ing) {
+    var xml="<PRODUCT>"+ing+"</PRODUCT>";
+    return xml;
+}
+
+function formatLi(ing) {
+    var xml="<li id="+ing+">"+ing+"</li>";
+    return xml;
+}
+
+function formatUser(something) {
+    var xml="<USER>"+something+"</USER>";
+    return xml;
+}
 
 var ingredients = ["almonds",
 "apple",

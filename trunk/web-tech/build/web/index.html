@@ -146,7 +146,7 @@
     
 	<div id="content">
     	<div id="search">
-            <p><left><b>Advanced Search</b></left></p>
+            <p><left><b>Ingredient Search</b></left></p>
             <br />
             <div id="ingredients">
             
@@ -157,17 +157,14 @@
 		<form id="formIngredient" autocomplete='off'>
                 	<div class="dynamiclabel">
                         <input id="ingredientInput" placeholder="Search me" type="text" onkeyup="getHint(this.value)"/>
-                        <input type="button" id="ingredientButton" onclick="putIngredient('http://localhost:8080/web-tech/webresources/lookandcook/ingredient/'+user,ingredientInput.value)" value="Search ingredient"></input>
-                    	<label for="searchLabel"><p><strong>Search for some ingredients!</strong></p></label>
-                        <!--<button id="ingredientButton" 
-                    onclick="putIngredient(document.getElementById('ingredientInput').value)">Search ingredient</button>-->
-               
-                                <p id="IngredientButtonResult"></p>
-                                <p id="prueba">A</p>
-
+                        <label for="searchLabel"><p><strong>Search for some ingredients!</strong></p></label>
                   	</div> <!-- end div dynamiclabel -->
-                    
+                        
+                       
+                
+                        <p><span id="InvalidIngredient"></span></p>                       
                   	<p><span id="txtHint"></span></p>
+                        
                     
                     <p>
                     	<label style="margin-left:20px">
@@ -180,35 +177,26 @@
                         	<input type="radio" name="Choices" value="radio" id="Choices_2" />I hate it!
                         </label>                  
                     </p>
-                 
+                    <input type="button" id="ingredientButton" onclick="putIngredient('http://localhost:8080/web-tech/webresources/lookandcook/ingredient/'+user,ingredientInput.value)" value="Search ingredient"></input>
 				</form> <!-- end formIngredient -->
               
               
               	<div class="row" id="ingredientesValidos">
                 	<div id="gusta" class="col-xs-4">
-                        <ul>
-                        	<li>Presentacion</li>
-                            <li>Galería de Imágenes</li>
-                            <li>Detalles</li>
-                            <li>Encargo</li>
+                         <ul>
+                             <span id="meGustaUL"></span>
                         </ul>
-                  	</div> <!-- end div gusta -->
+                        </div> <!-- end div gusta -->
                   
                     <div id="puede" class="col-xs-4">
                         <ul>
-                            <li>Presentacion</li>
-                            <li>Galería de Imágenes</li>
-                            <li>Detalles</li>
-                            <li>Encargo</li>
+                             <span id="puedeUL"></span>
                         </ul>
                     </div> <!-- end div puede -->
                
                     <div id="noGusta" class="col-xs-4">
                         <ul>
-                            <li>Presentacion</li>
-                            <li>Galería de Imágenes</li>
-                            <li>Detalles</li>
-                            <li>Encargo</li>
+                             <span id="noMeGustaUL"></span>
                         </ul>
                     </div> <!-- end div noGusta -->
                     
@@ -218,42 +206,41 @@
              
            		<hr style="display: block; border:solid #000 1px; box-shadow: 3px 3px 6px #000; background-color: #000"/>  
              
-                <div id="results"><p><strong>Resultados de recetas</strong></p>
-					<div id="txtRecetas">
-						<button id="recipes" onclick="loadXMLDoc('xml/receta.xml')">Get Recipes</button>
-                	</div> <!-- end div txtRecetas -->
+                <div id="results"><p><strong>Recipe Search</strong></p>
+                    <br />
+		<div id="txtRecetas">
+                    <input type="button" id="recipes" onclick="searchRecipes('http://localhost:8080/web-tech/webresources/lookandcook/recipe/'+user)" value="Get Recipes"></input>
+                    <br />
+                    <span id="misrecetas"></span>
+                </div> <!-- end div txtRecetas -->
                     
-                        <div id="NoLoToQues">
-                        
+                        <!--<div id="NoLoToQues">
+                            <br />
                             AJAX requesting a specific id in an external HTML page,
                             <a href="recetilla.html" onclick="return hs.htmlExpand(this, { objectType: 'ajax'} )">
                                 intro</a>,
 
-                        </div>
+                        </div><!-- div no lo toques-->
                     
                     
-                   <!-- <div id="pruebaAjaxDinamico">
+                    <!--<div id="pruebaAjaxDinamico">
                     	<button id="aj" onclick="">PruebaMe</button>
                         <a class="highslide " onclick="return hs.htmlExpand(this, { contentId: 'highslide-html-ajax', wrapperClassName: 'highslide-white', 
                                     outlineType: 'rounded-white', outlineWhileAnimating: true, objectType: 'ajax', preserveContent: true } )" 
                                         href="highslide/examples/includes/ajax.htm#dynamic"> Dynamic AJAX content </a>
                     </div>-->
-                    
-                    
-                    
-                    
-                    
+               
                     
 				</div> <!-- end div results -->
-			</div> <!-- end div ingreients -->
+			</div> <!-- end div ingredients -->
         
             <hr style="display: block; border:solid #000 1px; box-shadow: 3px 3px 6px #000; background-color: #000"/>
             
-            <div id="recommended"><p><strong>Recomendadas</strong></p></div>
+            <div id="recommended"><p><strong>Recommended for you</strong></p><span id="misrecomendaciones"></span></div>
             
             <hr style="display: block; border:solid #000 1px; box-shadow: 3px 3px 6px #000; background-color: #000"/>
             
-            <div id="related"><p><strong>Relacionadas</strong></p></div>
+            <div id="related"><p><strong>Related</strong></p><span id="misrelacionadas"></span></div>
 		</div> <!-- end div search -->
     
 		<hr style="display: block; border:solid #000 1px; box-shadow: 3px 3px 6px #000; background-color: #000"/>    
@@ -284,6 +271,12 @@
                 </a>
                 <a href="http://www.youtube.com/">
                 	<img border="0" src="Resources/icons/48x48/youtube.png" />
+                </a>
+                <a href="http://www.instagram.com/">
+                	<img border="0" src="Resources/icons/48x48/instagram.png" />
+                </a>
+                <a href="">
+                	<img border="0" src="Resources/icons/48x48/rss.png" />
                 </a>
 			</p>    
                   

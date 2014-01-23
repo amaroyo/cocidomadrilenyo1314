@@ -52,7 +52,7 @@ padToMinWidth : false, // pad the popup width to make room for wide caption
 fullExpandPosition : 'bottom right',
 fullExpandOpacity : 1,
 showCredits : true, // you can set this to false if you want
-creditsHref : 'http://www.lookandcook.com',
+creditsHref : 'http://www.lookandcook.uni.me',
 creditsTarget : '_self',
 enableKeyListener : true,
 openerTagNames : ['a'], // Add more to allow slideshow indexing
@@ -63,8 +63,8 @@ preserveContent : true, // Preserve changes made to the content and position of 
 objectLoadTime : 'before', // Load iframes 'before' or 'after' expansion.
 cacheAjax : true, // Cache ajax popups for instant display. Can be overridden for each popup.
 dragByHeading: true,
-minWidth: 200,
-minHeight: 200,
+minWidth: 500,
+minHeight: 500,
 allowSizeReduction: true, // allow the image to reduce to fit client size. If false, this overrides minWidth and minHeight
 outlineType : 'drop-shadow', // set null to disable outlines
 skin : {

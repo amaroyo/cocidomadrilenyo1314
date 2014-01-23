@@ -6,6 +6,8 @@
 
 package server;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
 
 /**
@@ -18,7 +20,14 @@ public class Controller {
     private Parser parser;
     private DB db;
     
+    public static ArrayList <Recipe> dbpedia;
+    
     public Controller () {
+        dbpedia = new ArrayList <> ();
+        dbpedia.clear();
+        
+        readFromFile ();
+        
         user = new ArrayList ();
         user.clear ();
         
@@ -26,6 +35,7 @@ public class Controller {
         
         db = new DB ();
     }
+    
     
     public String putIngredient (String userID, String content) {
         Ingredient ingr;
@@ -96,5 +106,27 @@ public class Controller {
         String a = input.substring(0, 1).toUpperCase();
         String b = input.substring(1);
         return a.concat(b);
+    }
+
+    private void readFromFile() {
+        try {
+            BufferedReader br = new BufferedReader (new FileReader ("db.csv"));
+            String line;
+            while((line = br.readLine()) != null) {
+                String[] split = line.split("\";\"");
+                String name = split[0].replace("\"", "");
+                String image = split[1].replace("\"", "");
+                String snippet = split[2].replace("\"", "");
+                split[3] = split[3].replace("\"", "");
+                String[] ingr = split[3].split(",");
+                ArrayList <String> tmpIngr = new ArrayList <> ();
+                for(String ingred: ingr) 
+                    tmpIngr.add(ingred);
+                
+                dbpedia.add(new Recipe(name, tmpIngr, snippet, image));
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }

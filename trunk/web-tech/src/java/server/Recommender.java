@@ -70,7 +70,7 @@ public class Recommender {
      * Sorts the list of ingredients by the value of their counters.
      */
     private void sortList(){
-        Collections.sort(recipes, new CustomComparator());
+        Collections.sort(ingredients, new CustomComparator());
     }
     
     private void recommend(){

@@ -263,10 +263,14 @@ p{
 	text-align: center;
 }
 
-#IngredientButtonResult{
+#InvalidIngredient{
     font-style: italic;
     font-weight: bold;
     color: #F00;
+}
+
+.alert {
+   width:40%;    
 }
 
 

@@ -65,14 +65,15 @@ public class Recipe {
         this.recipeName = name;
     }
     public boolean hasIngredients(ArrayList <String> ing){
+        boolean contained = true;
         for(int i = 0; i< this.ingredient.size(); i++){
             for(int j=0;j<ing.size();j++){
-                if(ing.get(j).equals(this.ingredient.get(i))){
-                return true;
+                if(!ing.get(j).contains(this.ingredient.get(i)) && !this.ingredient.get(i).contains(ing.get(j))){
+                    contained = false;
                 }
             }
         }
-        return false;        
+        return contained;        
     }
     
     
