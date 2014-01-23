@@ -64,15 +64,22 @@ public class Recipe {
     public void setRecipeName(String name){
         this.recipeName = name;
     }
-    public boolean hasIngredients(ArrayList <String> ing){
+    public boolean hasIngredients(ArrayList <String> ings){
+        for(int i = 0; i<ings.size();i++){
+            if(!this.hasIngredient(ings.get(i)))
+                return false;
+        }
+        return true;
+    }
+    
+    public boolean hasIngredient(String ing){
+        boolean contained = false;
         for(int i = 0; i< this.ingredient.size(); i++){
-            for(int j=0;j<ing.size();j++){
-                if(ing.get(j).equals(this.ingredient.get(i))){
-                return true;
-                }
+                if(ing.equals(this.ingredient.get(i)) || this.ingredient.get(i).equals(ing)){
+                    contained = true;
             }
         }
-        return false;        
+        return contained;        
     }
     
     

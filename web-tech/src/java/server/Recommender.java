@@ -37,13 +37,13 @@ public class Recommender {
      * @seeAlso addNewIngredient
      */
     public void updateIngredients(ArrayList <Ingredient> ingredients){
-        for(int i = 0; i<ingredients.size(); i++){
-            if(ingredients.get(i).getPriority() != NOT){
-                addNewIngredient(ingredients.get(i).getIngredientName());
-            }
-        }
-        sortList();
-        recommend();
+//        for(int i = 0; i<ingredients.size(); i++){
+//            if(ingredients.get(i).getPriority() != NOT){
+//                addNewIngredient(ingredients.get(i).getIngredientName());
+//            }
+//        }
+//        sortList();
+//        recommend();
     }
     /**
      * Adds one ingredient to user's personal list of most used ingredients

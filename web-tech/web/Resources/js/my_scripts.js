@@ -45,6 +45,7 @@ function addIngredient() {
               document.getElementById("InvalidIngredient").innerHTML = invalido;
           }
           else {
+              alert("valido");
                 var li=formatLi(ing);
                 if(document.getElementById('Choices_0').checked) {
                     //Like radio button is checked
@@ -149,9 +150,12 @@ function getRecipe() {
 }
 
 function putRecipe() {
+    alert(xmlhttp.readyState);
     if (xmlhttp.readyState===4) {
+        alert("ready");
         if(xmlhttp.status===200) //PUT returning a response
           {
+              alert("envio get recipe");
           getRecipe();
           getRecommended();
           getRelated();
@@ -174,7 +178,7 @@ function formatIngredient(ings) {
 }
 
 function formatIngredientRated(ing,rate) {
-    var xml="<INGREDIENT PRIORITY="+rate+">"+ing+"</INGREDIENT>";
+    var xml='<INGREDIENT PRIORITY="'+rate+'">'+ing+"</INGREDIENT>";
     return xml;
 }
 

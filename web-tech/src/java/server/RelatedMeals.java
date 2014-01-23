@@ -37,10 +37,10 @@ public class RelatedMeals {
      * @param startHits 
      */
     public void updateRecipes(ArrayList <Ingredient> ingredients, int startHits){ 
-        for(int hits = startHits; hits>0;hits--){
-            //This is supposed to concatenate both ArrayLists.
-            relatedRecipes.addAll(Query.recipes(ingredients,hits));
-        }
+//        for(int hits = startHits; hits>0;hits--){
+//            //This is supposed to concatenate both ArrayLists.
+//            relatedRecipes.addAll(Query.recipes(ingredients,hits));
+//        }
     }
 
     ArrayList<Recipe> getRelatedMeals() {
